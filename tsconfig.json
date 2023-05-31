@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"jsx": "react",
+    "sourceMap": true,
+    "noImplicitAny": true,
+		"allowSyntheticDefaultImports": true,
+	}
+}
