@@ -24,28 +24,30 @@ const authController = {
       await newUser.save();
 
       return next();
-    } catch (error) {
-      console.log(error, 'Error in registration');
-      return next(error);
+    } 
+    catch (error) {
+      return next({ log: `Error in registration: ${error}` });
     }
   },
 
   login: (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) {
-        console.log('Error during auth', err);
-        return res.json({ message: 'Internal server error' });
+        return next({ log: `Error in auth(login): ${err}` });
       }
 
       // Auth failed, user not found, or password incorrect
       if (!user) {
-        return res.json({ message: info.message });
+        return next({ 
+          log: `Error in auth(userSearch): ${err}`,
+          status: 400,
+          message: info.message
+        });
       }
 
       req.logIn(user, (err) => {
         if (err) {
-          console.log('Error during login', err);
-          return res.json({ message: 'Internal server error' });
+          return next({ log: `Error in login: ${err}` });
         }
 
         // Auth success , user logged in
@@ -56,7 +58,7 @@ const authController = {
 
   // Provided by Passport.js and is responsible
   // For clearing the user's login session and removing the user's authenticated state.
-  logout: (req, res, next) => {
+  logout: (req, res, next) => { /* eslint-disable-line */
     req.logout(() => {
       res.json({ message: 'logout successful' });
     });
