@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "eisodos",
   "version": "1.0.0",
   "description": "",
   "main": "./client/index.js",
@@ -7,7 +7,7 @@
     "start": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack-dev-server --open",
     "build": "NODE_ENV=production webpack"
   },
-  "author": "",
+  "author": "James Adler, Pearl Chang, Ron Liu, Mahir Mohtasin, Aalayah Olaes",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
