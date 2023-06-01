@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 
-// Define route handlers for user routes
 router.post('/register', authController.register, (req, res) => {
   res.status(200).send({ message: 'Registration successful.' });
 });

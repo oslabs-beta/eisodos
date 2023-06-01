@@ -6,19 +6,23 @@ const authController = {
   register: async (req, res, next) => {
     try {
       const { username, password } = req.body;
+
       // Check if username already exists
       const existingUser = await User.findOne({ username });
       if (existingUser) {
-        return res.status(400).json({ message: 'Username already exists' });
+        return res.json({ message: 'Username already exists' });
       }
-      //hash the pass
+
+      // Hash the pass
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
 
       // Create a new user instance with the hashed password
       const newUser = new User({ username, password: hashedPassword });
+
       // Save the new user to the database
       await newUser.save();
+
       return next();
     } catch (error) {
       console.log(error, 'Error in registration');
@@ -30,28 +34,31 @@ const authController = {
     passport.authenticate('local', (err, user, info) => {
       if (err) {
         console.log('Error during auth', err);
-        return res.status(500).json({ message: 'Internal server error' });
+        return res.json({ message: 'Internal server error' });
       }
+
+      // Auth failed, user not found, or password incorrect
       if (!user) {
-        //auth failed user not found or password incorrect
-        return res.status(401).json({ message: info.message });
+        return res.json({ message: info.message });
       }
+
       req.logIn(user, (err) => {
         if (err) {
           console.log('Error during login', err);
-          return res.status(500).json({ message: 'Internal server error' });
+          return res.json({ message: 'Internal server error' });
         }
-        //auth success , user logged in
-        return res.status(200).json({ message: 'Login successful.' });
+
+        // Auth success , user logged in
+        return next();
       });
     })(req, res, next);
   },
 
-  //provided by Passport.js and is responsible
-  //for clearing the user's login session and removing the user's authenticated state.
+  // Provided by Passport.js and is responsible
+  // For clearing the user's login session and removing the user's authenticated state.
   logout: (req, res, next) => {
     req.logout(() => {
-      res.status(200).json({ message: 'logout successful' });
+      res.json({ message: 'logout successful' });
     });
   },
 };
