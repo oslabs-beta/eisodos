@@ -6,27 +6,27 @@ import { createSlice } from '@redux/toolkit';
 
 // initial state is set to empty/null until onChange happens
 export const userReducer = createSlice({
-   name: 'userReducer',
-   initialState: {
-       currentUser: null,
-       errorMessage: [],
-   },
+  name: 'userReducer',
+  initialState: {
+    currentUser: null,
+    errorMessage: [],
+  },
 
 
-   reducers: {
-       setCurrentUser: (state, action) => {
-           state.currentUser = action.payload;
-       },
-       setErrorMessage: (state, action) => {
-           state.errorMessage = action.payload;
-       }
-   }
-})
+  reducers: {
+    setCurrentUser: (state, action) => {
+      state.currentUser = action.payload;
+    },
+    setErrorMessage: (state, action) => {
+      state.errorMessage = action.payload;
+    }
+  }
+});
 
 
 export const {
-   setCurrentUser,
-   setErrorMessage,
+  setCurrentUser,
+  setErrorMessage,
 } = userReducer.actions;
 
 
