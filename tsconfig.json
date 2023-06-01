@@ -1,9 +1,22 @@
 {
 	"compilerOptions": {
+		/* language and environment */
 		"target": "ES6",
 		"jsx": "react",
+
+		/* emit */
     "sourceMap": true,
-    "noImplicitAny": true,
-		"allowSyntheticDefaultImports": true,
+		"removeComments": true,
+
+		/* modules */
+		"module": "CommonJS",
+		"moduleResolution": "node",
+
+		/* interop constraints */
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/* type checking */
+		"strict": true,
 	}
 }
