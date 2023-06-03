@@ -5,7 +5,7 @@ import session from 'express-session';
 import passport from 'passport';
 
 // Import routers
-import userRouter from './routes/user';
+import usersRouter from './routes/users';
 
 // Assign constants
 const app = express();
@@ -35,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Route handlers
-app.use('/api/users', userRouter);
+app.use('/api/users', usersRouter);
 
 // Unknown route handler
 app.use('*', (req: Request, res: Response) => {
