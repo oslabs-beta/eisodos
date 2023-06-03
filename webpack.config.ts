@@ -1,9 +1,9 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './client/index.ts',
+  entry: './client/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),

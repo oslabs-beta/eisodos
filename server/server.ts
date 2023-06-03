@@ -1,23 +1,19 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const passport = require('passport');
-const userRouter = require('./routes/user');
-const app = express();
+import express, { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
+
+// Import routers
+import userRouter from './routes/user';
 
 // Assign constants
+const app = express();
 const PORT = 3000;
 const mongoURI = 'mongodb+srv://mmohtasin93:ospproject1@cluster0.7yyq5ou.mongodb.net/?retryWrites=true&w=majority';
 
 // Connect to mongo database
-mongoose.connect(mongoURI, {
-  dbName: 'test',
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// Require routers
+mongoose.connect(mongoURI, { dbName: 'test' });
 
 // Parse request body
 app.use(express.json());
@@ -27,7 +23,7 @@ app.use(cookieParser());
 // Setup session middleware
 app.use(
   session({
-    secret: 'testKey', //TODO: need to add to a env file
+    secret: 'testKey', //TODO: need to add to an env file
     resave: false,
     saveUninitialized: false,
   })
@@ -42,12 +38,19 @@ app.use(passport.session());
 app.use('/api/users', userRouter);
 
 // Unknown route handler
-app.use('*', (req, res) => {
+app.use('*', (req: Request, res: Response) => {
   return res.status(404).send('404 Not Found');
 });
 
-// global error handler
-app.use((err, req, res, next) => { /* eslint-disable-line */
+// TODO: move this to a separate type declaration file?
+interface CustomError {
+  log?: string;
+  status?: number;
+  message?: string;
+}
+
+// Global error handler
+app.use((err: Error | CustomError, req: Request, res: Response, next: NextFunction) => { /* eslint-disable-line */
   const defaultErr = {
     log: `Express caught an unknown middleware error: ${err}`,
     status: 500,

@@ -3,10 +3,12 @@
 		/* language and environment */
 		"target": "ES6",
 		"jsx": "react",
+		"experimentalDecorators": true, // needed for typegoose
 
 		/* emit */
     "sourceMap": true,
 		"removeComments": true,
+		"emitDecoratorMetadata": true, // needed for typegoose
 
 		/* modules */
 		"module": "CommonJS",

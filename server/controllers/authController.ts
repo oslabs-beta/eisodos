@@ -1,9 +1,11 @@
-const passport = require('passport');
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
+import { Request, Response, NextFunction } from 'express';
+import passport from 'passport';
+import bcrypt from 'bcryptjs';
+
+import User, { UserDocument } from '../models/User';
 
 const authController = {
-  register: async (req, res, next) => {
+  register: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { username, password } = req.body;
 
@@ -13,7 +15,7 @@ const authController = {
         return res.json({ message: 'Username already exists' });
       }
 
-      // Hash the pass
+      // Hash password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -30,8 +32,8 @@ const authController = {
     }
   },
 
-  login: (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+  login: (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate('local', (err: Error, user: UserDocument) => {
       if (err) {
         return next({ log: `Error in auth(login): ${err}` });
       }
@@ -41,7 +43,7 @@ const authController = {
         return next({ 
           log: `Error in auth(userSearch): ${err}`,
           status: 400,
-          message: info.message
+          message: 'Help'
         });
       }
 
@@ -50,19 +52,19 @@ const authController = {
           return next({ log: `Error in login: ${err}` });
         }
 
-        // Auth success , user logged in
+        // Auth success, user logged in
         return next();
       });
     })(req, res, next);
   },
 
-  // Provided by Passport.js and is responsible
-  // For clearing the user's login session and removing the user's authenticated state.
-  logout: (req, res, next) => { /* eslint-disable-line */
+  // This is provided by Passport.js
+  // Responsible for clearing the user's login session and removing the user's authenticated state
+  logout: (req: Request, res: Response, next: NextFunction) => { /* eslint-disable-line */
     req.logout(() => {
       res.json({ message: 'logout successful' });
     });
   },
 };
 
-module.exports = authController;
+export default authController;
