@@ -33,12 +33,12 @@ passport.use(
 // This identifier allows Passport.js to recognize the user and retrieve their data when needed
 
 // TODO: put this in @types/Express?
-type User = {
+interface User {
   id?: string;
 }
 
 passport.serializeUser((user: User, done) => {
-  done(null, user.id); 
+  done(null, user.id);
 });
 
 // Deserialize the user object from the session

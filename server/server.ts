@@ -38,7 +38,7 @@ app.use(passport.session());
 app.use('/api/users', usersRouter);
 
 // Unknown route handler
-app.use('*', (req: Request, res: Response) => {
+app.use('*', (req, res) => {
   return res.status(404).send('404 Not Found');
 });
 
