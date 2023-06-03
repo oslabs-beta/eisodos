@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import authController from '../controllers/authController';
+
 const router = express.Router();
-const authController = require('../controllers/authController');
 
 router.post('/register', authController.register, (req, res) => {
   res.status(200).send({ message: 'Registration successful.' });
@@ -14,4 +15,4 @@ router.post('/logout', authController.logout, (req, res) => {
   res.status(200).send({ message: 'Logout successful.' });
 });
 
-module.exports = router;
+export default router;
