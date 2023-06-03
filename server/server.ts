@@ -5,7 +5,7 @@ import session from 'express-session';
 import passport from 'passport';
 
 // Import routers
-import userRouter from './routes/user';
+import usersRouter from './routes/users';
 
 // Assign constants
 const app = express();
@@ -35,10 +35,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Route handlers
-app.use('/api/users', userRouter);
+app.use('/api/users', usersRouter);
 
 // Unknown route handler
-app.use('*', (req: Request, res: Response) => {
+app.use('*', (req, res) => {
   return res.status(404).send('404 Not Found');
 });
 
@@ -50,6 +50,7 @@ interface CustomError {
 }
 
 // Global error handler
+// TODO: is there a better type to use for Express middleware errors?
 app.use((err: Error | CustomError, req: Request, res: Response, next: NextFunction) => { /* eslint-disable-line */
   const defaultErr = {
     log: `Express caught an unknown middleware error: ${err}`,

@@ -3,6 +3,8 @@ import authController from '../controllers/authController';
 
 const router = express.Router();
 
+// TODO: auth routes have to be protected
+
 router.post('/register', authController.register, (req, res) => {
   res.status(200).send({ message: 'Registration successful.' });
 });
