@@ -32,7 +32,7 @@ passport.use(
 // Used to extract a unique identifier from the user object and store it in the session
 // This identifier allows Passport.js to recognize the user and retrieve their data when needed
 
-// TODO: put this in @types/Express?
+// TODO: extend Express.User in @types/Express?
 interface User {
   id?: string;
 }

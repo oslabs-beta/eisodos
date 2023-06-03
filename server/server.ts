@@ -50,6 +50,7 @@ interface CustomError {
 }
 
 // Global error handler
+// TODO: is there a better type to use for Express middleware errors?
 app.use((err: Error | CustomError, req: Request, res: Response, next: NextFunction) => { /* eslint-disable-line */
   const defaultErr = {
     log: `Express caught an unknown middleware error: ${err}`,

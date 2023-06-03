@@ -32,8 +32,9 @@ const authController = {
     }
   },
 
+  // TODO: use async/await and try/catch here?
   login: (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('local', (err: Error, user: UserDocument) => {
+    passport.authenticate('local', (err: Error, user: UserDocument) => { // TODO: is Error the correct type to use?
       if (err) {
         return next({ log: `Error in auth(login): ${err}` });
       }
