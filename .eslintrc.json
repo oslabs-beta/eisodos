@@ -15,8 +15,6 @@
     "react"
   ],
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended"
   ],
@@ -25,7 +23,6 @@
     "quotes": ["warn", "single"],
     "semi": ["warn", "always"],
     "space-infix-ops": "warn",
-    "no-unused-vars": "warn",
     "react/prop-types": "off"
   }
 }
