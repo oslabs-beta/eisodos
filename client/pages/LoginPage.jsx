@@ -68,7 +68,7 @@ function LoginPage() {
         </button>
 
         <div>
-          <Link to='/register'>
+          <Link to='/api/users/register'>
             <p>Not a member? Sign up here</p>
           </Link>
         </div>

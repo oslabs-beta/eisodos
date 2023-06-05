@@ -1,13 +1,15 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './client/index.js',
+  entry: './client/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
   },
+  // generate source map
+  devtool: 'source-map',
   plugins: [
     // bundle html files
     new HTMLWebpackPlugin({
@@ -25,6 +27,10 @@ module.exports = {
       '/api': 'http://localhost:3000'
     }
   },
+  resolve: {
+    // add ts and tsx as resolvable extensions
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  },
   module: {
     rules: [
       // babel loaders
@@ -40,9 +46,14 @@ module.exports = {
       },
       // css loaders
       {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"]
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      // typescript loader
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
       }
     ]
   }
-}
+};

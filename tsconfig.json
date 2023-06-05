@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"jsx": "react",
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"strict": true,
+		"esModuleInterop": true,
+
+		// optional config
+    "sourceMap": true,
+		"removeComments": true,
+		"forceConsistentCasingInFileNames": true,
+
+		// needed for typegoose
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+	}
+}

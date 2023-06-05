@@ -24,7 +24,7 @@ function SignUpPage() {
       );
     } else {
       try {
-        const response = await fetch('/login/signupRequest', {
+        const response = await fetch('/api/users/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ function SignUpPage() {
 
       <div>
         <p>Already a member?</p>
-        <Link to="/loginpage">
+        <Link to="/api/users/login">
           <button>Login</button>
         </Link>
       </div>
