@@ -10,6 +10,7 @@
   "author": "James Adler, Pearl Chang, Ron Liu, Mahir Mohtasin, Aalayah Olaes",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -22,6 +23,7 @@
     "passport-local-mongoose": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
