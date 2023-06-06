@@ -1,4 +1,4 @@
-import { createSlice } from '@redux/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 
 // userReducer sets the state by sending the action payload

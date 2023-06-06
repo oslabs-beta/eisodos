@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
+import  userReducer  from '../store/userReducer';
+
 
 // import reducers
-import counterReducer from '../features/counter/counterSlice';
+// import counterReducer from '../features/counter/counterSlice';
 
 export const store = configureStore({
-  reducer: { 
-    counter: counterReducer 
-  }
+  reducer: {
+    userReducer: userReducer,
+  },
 });
 
 // infer types from the store
