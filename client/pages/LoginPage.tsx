@@ -6,9 +6,15 @@ import {
   setErrorMessage,
 } from '../store/userReducer';
 
+interface RootState {
+  userReducer: {
+    errorMessage: React.ReactNode;
+  };
+}
+
 function LoginPage() {
   const dispatch = useDispatch();
-  const errorMessage = useSelector((state: any) => state.userReducer.errorMessage);
+  const errorMessage = useSelector((state: RootState) => state.userReducer.errorMessage);
   const navigate = useNavigate();
 
   async function loginUser(username: string, password: string) {

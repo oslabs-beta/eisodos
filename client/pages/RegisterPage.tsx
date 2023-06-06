@@ -13,7 +13,7 @@ interface RootState {
   };
 }
 
-function SignUpPage() {
+function RegisterPage() {
   const dispatch = useDispatch();
   const errorMessage = useSelector((state: RootState) => state.userReducer.errorMessage);
   const navigate = useNavigate();
@@ -98,4 +98,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default RegisterPage;

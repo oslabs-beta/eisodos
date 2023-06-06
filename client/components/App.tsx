@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser } from '../store/userReducer';
 import LoginPage from '../pages/LoginPage';
-import SignUpPage from '../pages/RegisterPage';
+import RegisterPage from '../pages/RegisterPage';
 import WelcomePage from '../pages/WelcomePage';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -24,12 +25,18 @@ function App() {
       });
   }, []);
 
+  // /regsiter endpoint is not working neither is /login 
   return (
-    <Routes>
-      <Route path={'/'} element={<WelcomePage/>}></Route>
-      <Route path={'/loginpage'} element={<LoginPage/>}></Route>
-      <Route path={'/signuppage'} element={<SignUpPage/>}></Route>
-    </Routes>
+    <div>
+      <Link to='/'> Home Page </Link>
+      <Link to='/login'> Login Page </Link>
+      <Link to='/register'> Register Page </Link>
+      <Routes>
+        <Route path={'/'} element={<WelcomePage/>}></Route>
+        <Route path={'/login'} element={<LoginPage/>}></Route>
+        <Route path={'/register'} element={<RegisterPage/>}></Route>
+      </Routes>
+    </div>
   );
 }
 
