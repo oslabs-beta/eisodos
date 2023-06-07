@@ -10,7 +10,9 @@
   "author": "James Adler, Pearl Chang, Ron Liu, Mahir Mohtasin, Aalayah Olaes",
   "license": "ISC",
   "dependencies": {
+    "@kubernetes/client-node": "^0.18.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
