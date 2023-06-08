@@ -6,7 +6,7 @@ import passport from 'passport';
 
 // Import routers
 import usersRouter from './routes/users';
-import dashboardRouter from './routes/dash';
+import dashboardRouter from './routes/dashboard';
 // import clusterRouter from './routes/clusterRoutes';
 // import nodeRouter from './routes/nodesRoutes';
 // import podRouter from './routes/podsRoutes';
