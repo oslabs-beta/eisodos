@@ -10,7 +10,10 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  async function loginUser(username: string, password: string) {
+  async function loginUser(e: React.MouseEvent, username: string, password: string) {
+    
+    e.preventDefault();
+    
     try {
       const response = await fetch('/api/users/login', {
         method: 'POST',
@@ -22,9 +25,11 @@ const LoginPage = () => {
           password: password,
         }),
       });
+      console.log(await response);
       if (response.status === 200) {
+        
         // need to navigate to dashboard
-        navigate('/:username/dashboard');
+        navigate('/dashboard'); // TODO: change this to ':username/dashboard' later
       } else {
         dispatch(setErrorMessage('Invalid Username or Password.'));
       }
@@ -52,7 +57,7 @@ const LoginPage = () => {
         <button 
           type='submit'
           className='submitButton'
-          onClick={()=> {loginUser}}
+          onClick={(e) => { loginUser(e, username, password); }}
         >Log in </button>
         {/* <p> {setErrorMessage} </p> */}
         <Link to='/register'>Dont have an account? Signup Here</Link>
