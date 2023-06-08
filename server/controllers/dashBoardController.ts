@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
-
+// Interfaces define the structure and types of the data received from the API response
 interface PromResult {
   metric: Record<string, string>;
   value: [number, string];
@@ -23,36 +23,23 @@ const dashboardController = {
     next?: NextFunction
   ): Promise<void> => {
     try {
+      // Retrieve CPU usage data
       const responseCpuUsage = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{job="kubelet", namespace="default", node="minikube"}[2m])'
+        'http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{job="kubelet", namespace="default", node="minikube"}[5m])'
       );
-      console.log(
-        'Individual CPU Usage Result:',
-        responseCpuUsage.data.data.result[0]
-      );
-
+      // Retrieve Mem usage
       const responseMemUsage = await axios.get<QueryResponse>(
         'http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{job="kubelet", namespace="default", node="minikube"}'
       );
-      console.log(
-        'Individual MEM Usage Result:',
-        responseMemUsage.data.data.result[0]
-      );
+      // Retrieve network transmit
       const responseTransmit = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(node_network_transmit_bytes_total{job="node-exporter"}[2m])'
+        'http://localhost:9090/api/v1/query?query=rate(node_network_transmit_bytes_total{job="node-exporter"}[5m])'
       );
-      console.log(
-        'Network Transmit Result:',
-        responseTransmit.data.data.result[0]
-      );
-
+      // Retrieve network receive
       const responseReceive = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total{job="node-exporter"}[2m])'
+        'http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total{job="node-exporter"}[5m])'
       );
-      console.log(
-        'Network Receive Result:',
-        responseReceive.data.data.result[0]
-      );
+      // Extract data from API reqs
       const cpuUsage = responseCpuUsage.data.data.result.map(
         (item: PromResult) => item.value
       );
@@ -65,7 +52,7 @@ const dashboardController = {
       const networkReceiveUsage = responseReceive.data.data.result.map(
         (item: PromResult) => item.value
       );
-
+      // Format the extracted data
       const formattedData = {
         cpuTimestamps: cpuUsage.map((item: any[]) => item[0]),
         cpuValues: cpuUsage.map((item: any[]) => item[1]),
@@ -82,7 +69,7 @@ const dashboardController = {
         ),
         networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1]),
       };
-
+      // Return the formattedData
       res.locals.data = formattedData;
 
       if (next) {
