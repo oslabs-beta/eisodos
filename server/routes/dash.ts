@@ -4,13 +4,8 @@ import dashboardController from '../controllers/dashBoardController';
 
 const router = express.Router();
 
-router.get(
-  '/dashboard',
-  isAuthenticated,
-  dashboardController.getClusterData,
-  (req, res) => {
-    res.status(200).json(res.locals.data);
-  }
-);
+router.get('/metrics', dashboardController.getClusterData, (req, res) => {
+  res.status(200).json(res.locals.data);
+});
 
 export default router;

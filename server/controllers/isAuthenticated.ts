@@ -7,4 +7,4 @@ function isAuthenticated(req: Request, res: Response, next: NextFunction) {
   res.status(401).json({ message: 'Not authenticated' });
 }
 
-module.exports = isAuthenticated;
+export default isAuthenticated;
