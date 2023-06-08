@@ -1,50 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { Link, useNavigate,  } from 'react-router-dom';
-import { setErrorMessage } from '../features/slices/errorSlice';
-
 
 const RegisterPage = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  async function signUpUser(username: string, password: string) {
-    if (!username || !password) {
-      dispatch(
-        setErrorMessage(
-          'You have some incomplete fields, please complete form'
-        )
-      );
-    } else {
-      try {
-        const response = await fetch('/api/users/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: username,
-            password: password,
-          }),
-        });
-        if (response.ok) {
-          navigate('/:username/onBoarding');
-          setUsername('');
-          setPassword('');
-        } else {
-          console.log('Sign up request failed:', response);
-        }
-      } catch (error) {
-        console.log('Error occurred while making sign up request:', error);
+  async function registerUser(event: React.MouseEvent, username: string, password: string) {
+    event.preventDefault();
+    
+    try {
+      const response = await fetch('/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+      
+      if (response.ok) {
+        navigate('/dashboard'); // TODO: change this to ':username/:my-cluster' once ConnectClusterPage is done
+        setUsername('');
+        setPassword('');
       }
+      else {
+        console.log('Sign up request failed:', response);
+      }
+    }
+    catch (error) {
+      console.log('Error occurred while making sign up request:', error);
     }
   }
 
   return (
     <div>
+      <Link to='/'>Home</Link>
       <form>
         <label>Username:</label>
         <input 
@@ -62,11 +56,10 @@ const RegisterPage = () => {
         <button 
           type='submit'
           className='submitButton'
-          onClick={()=> {signUpUser}}
-        >Signup </button>
-        {/* <p> {setErrorMessage} </p> */}
-        <Link to='/register'>Already a member? Login Here</Link>
+          onClick={(e) => registerUser(e, username, password)}
+        >Register</button>
       </form>
+      <Link to='/login'>Already have an account? Login here</Link>
     </div>
   );
 };

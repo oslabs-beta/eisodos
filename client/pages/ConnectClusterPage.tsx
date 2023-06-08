@@ -14,7 +14,8 @@ const ConnectClusterPage = () => {
           cluster: cluster, 
         }),
       });
-    } catch (error) {
+    } 
+    catch (error) {
       console.error('An error occurred:', error);
     }
   }

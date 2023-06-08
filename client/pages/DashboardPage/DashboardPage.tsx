@@ -1,20 +1,18 @@
 import React from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Health from './Health';
 
 const DashboardPage = () => {
   return (
-    <>
+    <div>
       <nav>
-        <ul>
-          <li><Link to="">Health</Link></li>
-          <li><Link to="">Apps</Link></li>
-          <li><Link to="">Nodes</Link></li>
-        </ul>
+        <Link to="">Health</Link>
+        <Link to="">Apps</Link>
+        <Link to="">Nodes</Link>
       </nav>
       <Health />
-    </>
+    </div>
   );
 };
 

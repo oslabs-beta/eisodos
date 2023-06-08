@@ -2,7 +2,7 @@ import React from 'react';
 import { ResponsiveLine, Serie } from '@nivo/line';
 import { generateDrinkStats } from '@nivo/generators';
 
-export type Props = NonNullable<unknown>;
+export type Props = NonNullable<unknown>;  // TODO: figure out better type for this
 
 const data: Serie[] = generateDrinkStats(18);
 

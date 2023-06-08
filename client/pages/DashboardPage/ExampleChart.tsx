@@ -1,15 +1,14 @@
-import * as React from 'react';
-
+import React from 'react';
 import { ResponsiveLine, Serie } from '@nivo/line';
 import { generateDrinkStats } from '@nivo/generators';
 
 // import { makeCustomLayer } from './CustomLayer';
 
-export type Props = NonNullable<unknown>;
+export type Props = NonNullable<unknown>; // TODO: figure out better type for this
 
 const data: Serie[] = generateDrinkStats(18);
 
-export default function LineChart() {
+const ExampleChart = () => {
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
@@ -55,3 +54,5 @@ export default function LineChart() {
     </div>
   );
 }
+
+export default ExampleChart;
