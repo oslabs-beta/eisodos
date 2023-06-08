@@ -1,16 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ResponsiveLine, Serie } from '@nivo/line';
-import { generateDrinkStats } from '@nivo/generators';
 
-export type Props = NonNullable<unknown>;  // TODO: figure out better type for this
-
-const data: Serie[] = generateDrinkStats(18);
+export type Props = NonNullable<unknown>; // TODO: figure out better type for this
 
 const LineChart = () => {
+  interface Metrics {
+    cpuValues: string[];
+  }
+
+  interface DataPoint {
+    x: number;
+    y: number | string;
+  }
+
+  interface DataObj {
+    id: string;
+    data: DataPoint[];
+  }
+
+  const [data, setData] = useState<DataObj[]>([{ id: 'cpuUsage', data: [] }]);
+
+  async function getData(): Promise<void> {
+    const res = await fetch('/api/dashboard/metrics');
+    const metrics: Promise<Metrics> = res.json();
+
+    const cpuValues = (await metrics).cpuValues;
+    const values: DataPoint[] = [];
+
+    for (let i = 0; i < cpuValues.length; i++) {
+      const dataPoint = {
+        x: i,
+        y: parseFloat(cpuValues[i]) // change this to number? or can we leave as string?
+      };
+
+      values.push(dataPoint);
+    }
+
+    const data = [{
+      id: 'cpuUsage',
+      data: values
+    }];
+
+    setData(data); // why is this not working
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
-        data={data.filter((d) => d.id === 'rhum')}
+        data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{
@@ -18,7 +59,7 @@ const LineChart = () => {
           min: 'auto',
           max: 'auto',
           stacked: true,
-          reverse: false
+          reverse: false,
         }}
         yFormat=' >-.2f'
         axisTop={null}
@@ -27,17 +68,17 @@ const LineChart = () => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'transportation',
+          legend: 'Time',
           legendOffset: 36,
-          legendPosition: 'middle'
+          legendPosition: 'middle',
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'count',
+          legend: 'CPU Usage',
           legendOffset: -40,
-          legendPosition: 'middle'
+          legendPosition: 'middle',
         }}
         pointSize={2}
         pointColor={{ theme: 'background' }}
@@ -65,11 +106,11 @@ const LineChart = () => {
                 on: 'hover',
                 style: {
                   itemBackground: 'rgba(0, 0, 0, .03)',
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
         ]}
       />
     </div>
