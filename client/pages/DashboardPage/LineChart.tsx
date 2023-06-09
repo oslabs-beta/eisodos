@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ResponsiveLine, Serie } from '@nivo/line';
+import { ResponsiveLine } from '@nivo/line';
 
 export type Props = NonNullable<unknown>; // TODO: figure out better type for this
 
 const LineChart = () => {
+  const [data, setData] = useState<DataObj[]>([{ id: 'cpuUsage', data: [] }]);
+
+  // TODO: move these out into a d.ts file?
   interface Metrics {
     cpuValues: string[];
   }
@@ -17,8 +20,6 @@ const LineChart = () => {
     id: string;
     data: DataPoint[];
   }
-
-  const [data, setData] = useState<DataObj[]>([{ id: 'cpuUsage', data: [] }]);
 
   async function getData(): Promise<void> {
     const res = await fetch('/api/dashboard/metrics');
@@ -41,7 +42,7 @@ const LineChart = () => {
       data: values
     }];
 
-    setData(data); // why is this not working
+    setData(data);
   }
 
   useEffect(() => {
