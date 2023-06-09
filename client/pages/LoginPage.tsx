@@ -22,7 +22,7 @@ const LoginPage = () => {
         }),
       });
 
-      if (response.status === 200) {
+      if (response.status === 200) { // TODO: change this to response.ok?
         navigate('/dashboard'); // TODO: change this to ':username/dashboard' later
       }
     }
