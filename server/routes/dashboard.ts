@@ -9,7 +9,7 @@ router.get('/metrics', isAuthenticated, dashboardController.getClusterData, (req
 });
 
 router.get('/count', isAuthenticated, dashboardController.getCount, (req, res) => {
-  return res.status(200).json(res.locals.count)
-})
+  return res.status(200).json(res.locals.count);
+});
 
 export default router;
