@@ -18,11 +18,8 @@ module.exports = {
     })
   ],
   devServer: {
-    // serve static files
-    static: {
-      publicPath: '/dist',
-      directory: path.join(__dirname, 'dist'),
-    },
+    // watch for changes to source files
+    watchFiles: ['client/**/*'],
     // proxy for express server
     proxy: {
       '/api': 'http://localhost:3000'
