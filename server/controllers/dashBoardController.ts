@@ -68,17 +68,16 @@ const dashboardController = {
         networkReceiveTimestamps: networkReceiveUsage.map(
           (item: any[]) => item[0]
         ),
-        networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1]),
+        networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1])
       };
       // Return the formattedData
       res.locals.data = formattedData;
 
       return next();
-    } 
-    catch (err) {
+    } catch (err) {
       return next({ log: `Error in dash ${err}` });
     }
-  },
+  }
 };
 
 export default dashboardController;

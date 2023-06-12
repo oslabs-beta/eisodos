@@ -53,5 +53,5 @@ export default {
   connectToCluster,
   listNodes,
   listPods,
-  getNamespaces,
+  getNamespaces
 };

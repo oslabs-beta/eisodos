@@ -7,7 +7,7 @@ interface ErrorSliceState {
 
 const initialState: ErrorSliceState = {
   currentUser: null,
-  errorMessage: null,
+  errorMessage: null
 };
 
 const errorSlice = createSlice({
@@ -20,9 +20,9 @@ const errorSlice = createSlice({
       },
       prepare: (errorMessage: string) => {
         return { payload: errorMessage };
-      },
-    },
-  },
+      }
+    }
+  }
 });
 
 export const { setErrorMessage } = errorSlice.actions;

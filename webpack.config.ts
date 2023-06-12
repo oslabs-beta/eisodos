@@ -24,7 +24,7 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3000'
     },
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   resolve: {
     // add ts and tsx as resolvable extensions
@@ -51,7 +51,7 @@ module.exports = {
       // typescript loader
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: 'ts-loader'
       }
     ]
   }

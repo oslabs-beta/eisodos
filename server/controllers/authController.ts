@@ -26,22 +26,22 @@ const authController = {
       await newUser.save();
 
       return next();
-    } 
-    catch (error) {
+    } catch (error) {
       return next({ log: `Error in registration: ${error}` });
     }
   },
 
   // TODO: use async/await and try/catch here?
   login: (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('local', (err: Error, user: UserDocument) => { // TODO: is Error the correct type to use?
+    passport.authenticate('local', (err: Error, user: UserDocument) => {
+      // TODO: is Error the correct type to use?
       if (err) {
         return next({ log: `Error in auth(login): ${err}` });
       }
 
       // Auth failed, user not found, or password incorrect
       if (!user) {
-        return next({ 
+        return next({
           log: `Error in auth(userSearch): ${err}`,
           status: 400,
           message: 'Help'
@@ -61,11 +61,12 @@ const authController = {
 
   // This is provided by Passport.js
   // Responsible for clearing the user's login session and removing the user's authenticated state
-  logout: (req: Request, res: Response, next: NextFunction) => { /* eslint-disable-line */
+  logout: (req: Request, res: Response, next: NextFunction) => {
+    /* eslint-disable-line */
     req.logout(() => {
       res.json({ message: 'logout successful' });
     });
-  },
+  }
 };
 
 export default authController;
