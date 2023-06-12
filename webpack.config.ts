@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
+    clean: true
   },
   // generate source map
   devtool: 'source-map',
@@ -36,19 +37,19 @@ module.exports = {
     rules: [
       // babel loaders
       {
-        test: /\.jsx?/, 
+        test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: { 
+          options: {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
-      // css loaders
+      // css and tailwind loaders
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       // typescript loader
       {
