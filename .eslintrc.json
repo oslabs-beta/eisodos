@@ -8,23 +8,23 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "tailwindcss"
-  ],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "tailwindcss"],
   "extends": [
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:tailwindcss/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
   ],
-  "rules": {
-    "indent": ["warn", 2],
-    "quotes": ["warn", "single"],
-    "semi": ["warn", "always"],
-    "space-infix-ops": "warn",
-    "react/prop-types": "off"
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
