@@ -12,11 +12,13 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "react"
+    "react",
+    "tailwindcss"
   ],
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:tailwindcss/recommended"
   ],
   "rules": {
     "indent": ["warn", 2],
