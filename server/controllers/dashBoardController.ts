@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
+import kube from '../service/kubeServ'; 
 
 // Interfaces define the structure and types of the data received from the API response
 interface PromResult {
@@ -79,6 +80,16 @@ const dashboardController = {
       return next({ log: `Error in dash ${err}` });
     }
   },
+  getCount: async (res: Response, req: Request, next: NextFunction): Promise<void> => {
+    try {
+      const { apiUrl } = req.body; 
+      const k8sApi = await kube.connectToCluster(apiUrl);
+      
+      
+    } catch (error) {
+      
+    }
+  }
 };
 
 export default dashboardController;
