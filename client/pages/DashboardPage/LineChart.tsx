@@ -37,10 +37,12 @@ const LineChart = () => {
       values.push(dataPoint);
     }
 
-    const data = [{
-      id: 'cpuUsage',
-      data: values
-    }];
+    const data = [
+      {
+        id: 'cpuUsage',
+        data: values
+      }
+    ];
 
     setData(data);
   }
@@ -60,9 +62,9 @@ const LineChart = () => {
           min: 'auto',
           max: 'auto',
           stacked: true,
-          reverse: false,
+          reverse: false
         }}
-        yFormat=' >-.2f'
+        yFormat=" >-.2f"
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -71,7 +73,7 @@ const LineChart = () => {
           tickRotation: 0,
           legend: 'Time',
           legendOffset: 36,
-          legendPosition: 'middle',
+          legendPosition: 'middle'
         }}
         axisLeft={{
           tickSize: 5,
@@ -79,7 +81,7 @@ const LineChart = () => {
           tickRotation: 0,
           legend: 'CPU Usage',
           legendOffset: -40,
-          legendPosition: 'middle',
+          legendPosition: 'middle'
         }}
         pointSize={2}
         pointColor={{ theme: 'background' }}
@@ -107,11 +109,11 @@ const LineChart = () => {
                 on: 'hover',
                 style: {
                   itemBackground: 'rgba(0, 0, 0, .03)',
-                  itemOpacity: 1,
-                },
-              },
-            ],
-          },
+                  itemOpacity: 1
+                }
+              }
+            ]
+          }
         ]}
       />
     </div>

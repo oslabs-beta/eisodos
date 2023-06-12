@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
+    clean: true
   },
   // generate source map
   devtool: 'source-map',
@@ -17,16 +18,13 @@ module.exports = {
     })
   ],
   devServer: {
-    // serve static files
-    static: {
-      publicPath: '/dist',
-      directory: path.join(__dirname, 'dist'),
-    },
+    // watch for changes to source files
+    watchFiles: ['client/**/*'],
     // proxy for express server
     proxy: {
       '/api': 'http://localhost:3000'
     },
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   resolve: {
     // add ts and tsx as resolvable extensions
@@ -36,24 +34,24 @@ module.exports = {
     rules: [
       // babel loaders
       {
-        test: /\.jsx?/, 
+        test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: { 
+          options: {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
-      // css loaders
+      // css and tailwind loaders
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       // typescript loader
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: 'ts-loader'
       }
     ]
   }

@@ -21,8 +21,7 @@ passport.use(
 
       // Auth success, pass user to done callback
       return done(null, user);
-    }
-    catch (err) {
+    } catch (err) {
       return done(err);
     }
   })
@@ -44,17 +43,16 @@ passport.serializeUser((user: User, done) => {
 // Deserialize the user object from the session
 // Needed to fetch the user's information from the database based on the serialized ID stored in the session
 // It ensures the user's data is available for auth
-passport.deserializeUser(async (id:string, done) => {
+passport.deserializeUser(async (id: string, done) => {
   try {
     const user: UserDocument | null = await UserModel.findById(id);
     if (!user) {
       return done(null, false);
     }
     return done(null, user);
-  } 
-  catch (err) {
+  } catch (err) {
     return done(err);
   }
 });
 
-export default passport; 
+export default passport;

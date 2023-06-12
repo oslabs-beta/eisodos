@@ -11,7 +11,7 @@ import { prop, getModelForClass, ReturnModelType } from '@typegoose/typegoose';
 
 // TODO: need to figure out what this schema should look like
 class User {
-  @prop ({ required: true, unique: true })
+  @prop({ required: true, unique: true })
   public username!: string;
 
   @prop({ required: true })
