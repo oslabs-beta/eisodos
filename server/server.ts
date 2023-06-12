@@ -13,7 +13,7 @@ import dashboardRouter from './routes/dashboard';
 
 // Assign constants
 const app = express();
-const PORT = 3000;
+const PORT = 3010;
 const mongoURI =
   'mongodb+srv://mmohtasin93:ospproject1@cluster0.7yyq5ou.mongodb.net/?retryWrites=true&w=majority';
 

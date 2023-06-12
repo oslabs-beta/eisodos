@@ -22,7 +22,7 @@ module.exports = {
     watchFiles: ['client/**/*'],
     // proxy for express server
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': 'http://localhost:3010'
     },
     historyApiFallback: true
   },
