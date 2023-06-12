@@ -27,11 +27,11 @@ const dashboardController = {
     try {
       // Retrieve CPU usage data
       const responseCpuUsage = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{job="kubelet", namespace="default", node="minikube"}[10m])'
+        'http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{job="kubelet", namespace="default"}[10m])'
       );
       // Retrieve Mem usage
       const responseMemUsage = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{job="kubelet", namespace="default", node="minikube"}'
+        'http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{job="kubelet", namespace="default"}'
       );
       // Retrieve network transmit
       const responseTransmit = await axios.get<QueryResponse>(
@@ -80,16 +80,48 @@ const dashboardController = {
       return next({ log: `Error in dash ${err}` });
     }
   },
-  getCount: async (res: Response, req: Request, next: NextFunction): Promise<void> => {
+  getCount: async (req: Request,res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { apiUrl } = req.body; 
+      const { apiUrl } = req.body;
+
+      // Connect to the Kubernetes cluster
       const k8sApi = await kube.connectToCluster(apiUrl);
-      
-      
+
+      // List pods
+      const podList = await kube.listPods(apiUrl);
+
+      // Count pods
+      const podCount = podList.items.length;
+
+      // List nodes
+      const nodeList = await kube.listNodes(apiUrl);
+
+      // Count the nodes
+      const nodeCount = nodeList.items.length;
+
+      // Get AppsV1ApiClient
+      const appsV1Api = kube.getAppsV1ApiClient(apiUrl);
+
+      // List deployments
+      const deploymentList = await appsV1Api.listDeploymentForAllNamespaces();
+      const deploymentCount = deploymentList.body.items.length;
+
+      // List services
+      const serviceList = await k8sApi.listServiceForAllNamespaces();
+      const serviceCount = serviceList.body.items.length;
+
+      res.locals.counts = {
+        pods: podCount,
+        nodes: nodeCount,
+        deployments: deploymentCount,
+        services: serviceCount,
+      };
+
+      return next();
     } catch (error) {
-      
+      return next({ log: `Error in getCount: ${error}` });
     }
-  }
+  },
 };
 
 export default dashboardController;
