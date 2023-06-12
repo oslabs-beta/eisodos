@@ -7,8 +7,8 @@ const HomePage = () => {
   return (
     // TODO: add login/register links
     <div>
-      <Link to='/login'>Login</Link>
-      <Link to='/register'>Register</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

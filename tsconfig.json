@@ -1,19 +1,20 @@
 {
-	"compilerOptions": {
-		"target": "ES6",
-		"jsx": "react",
-		"module": "CommonJS",
-		"moduleResolution": "node",
-		"strict": true,
-		"esModuleInterop": true,
+  "compilerOptions": {
+    "target": "ES6",
+    "jsx": "react",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
 
-		// optional config
+    // optional config
     "sourceMap": true,
-		"removeComments": true,
-		"forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
 
-		// needed for typegoose
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-	}
+    // needed for typegoose
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
 }

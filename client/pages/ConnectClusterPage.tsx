@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ConnectClusterPage = () => {
   async function connectCluster(cluster: string) {
     try {
@@ -8,14 +7,13 @@ const ConnectClusterPage = () => {
       const response = await fetch('', {
         method: 'POST',
         headers: {
-          'Content-Type': 'Application/JSON',
+          'Content-Type': 'Application/JSON'
         },
         body: JSON.stringify({
-          cluster: cluster, 
-        }),
+          cluster: cluster
+        })
       });
-    } 
-    catch (error) {
+    } catch (error) {
       console.error('An error occurred:', error);
     }
   }
@@ -23,7 +21,7 @@ const ConnectClusterPage = () => {
   return (
     <div>
       <h1> Connect to cluster </h1>
-      <input id='clusterInput' placeholder='my-cluster'/>
+      <input id="clusterInput" placeholder="my-cluster" />
       <button>Connect</button>
     </div>
   );

@@ -26,11 +26,11 @@ const dashboardController = {
     try {
       // Retrieve CPU usage data
       const responseCpuUsage = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{job="kubelet", namespace="default", node="minikube"}[10m])'
+        'http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{job="kubelet", namespace="default"}[10m])'
       );
       // Retrieve Mem usage
       const responseMemUsage = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{job="kubelet", namespace="default", node="minikube"}'
+        'http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{job="kubelet", namespace="default"}'
       );
       // Retrieve network transmit
       const responseTransmit = await axios.get<QueryResponse>(
@@ -68,17 +68,16 @@ const dashboardController = {
         networkReceiveTimestamps: networkReceiveUsage.map(
           (item: any[]) => item[0]
         ),
-        networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1]),
+        networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1])
       };
       // Return the formattedData
       res.locals.data = formattedData;
 
       return next();
-    } 
-    catch (err) {
+    } catch (err) {
       return next({ log: `Error in dash ${err}` });
     }
-  },
+  }
 };
 
 export default dashboardController;
