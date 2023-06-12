@@ -7,7 +7,6 @@ const HomePage = () => {
   return (
     // TODO: add login/register links
     <div>
-      <h1 className="text-3xl underline">Test</h1>
       <Link to='/login'>Login</Link>
       <Link to='/register'>Register</Link>
       <Routes>
