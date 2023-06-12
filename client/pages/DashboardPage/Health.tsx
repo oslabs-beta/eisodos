@@ -40,8 +40,8 @@ const Health = () => {
     
     setCpuData(processChartData(cpuValues, 'cpuUsage'));
     setMemData(processChartData(memValues, 'memUsage'));
-    setNetworkTransmitData(processChartData(networkTransmitValues, 'cpuUsage'));
-    setNetworkReceiveData(processChartData(networkReceiveValues, 'cpuUsage'));
+    setNetworkTransmitData(processChartData(networkTransmitValues, 'networdTransmitUsage'));
+    setNetworkReceiveData(processChartData(networkReceiveValues, 'networkReceiveUsage'));
   }
 
   function processChartData(values: string[], id: string): DataObj[] {
