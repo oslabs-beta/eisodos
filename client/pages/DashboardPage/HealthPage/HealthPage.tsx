@@ -3,21 +3,14 @@ import CPUUsageChart from './CPUUsageChart';
 import MemChart from './MemUsageChart';
 import NetworkTransmitChart from './NetworkTransmitChart';
 import NetworkReceiveChart from './NetworkReceiveChart';
+import { DataPoint, DataObj } from './charts';
 
-const Health = () => {
+const HealthPage = () => {
   interface Metrics {
     cpuValues: string[];
     memValues: string[];
     networkTransmitValues: string[];
     networkReceiveValues: string[];
-  }
-  interface DataPoint {
-    x: number;
-    y: number | string;
-  }
-  interface DataObj {
-    id: string;
-    data: DataPoint[];
   }
 
   const [cpuData, setCpuData] = useState<DataObj[]>([{ id: 'cpuUsage', data: [] }]);
@@ -66,4 +59,4 @@ const Health = () => {
   );
 };
 
-export default Health;
+export default HealthPage;

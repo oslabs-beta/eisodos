@@ -1,22 +1,12 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
+import type { DataObj } from './charts';
 
-export type Props = NonNullable<unknown>; // TODO: figure out better type for this
-
-interface DataPoint {
-  x: number;
-  y: number | string;
-}
-interface DataObj {
-  id: string;
-  data: DataPoint[];
-}
-
-interface NetworkReceiveProps {
+interface MemChartProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
+const MemChart = ({ chartData }: MemChartProps) => {
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
@@ -86,4 +76,4 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
   );
 };
 
-export default NetworkReceiveChart;
+export default MemChart;

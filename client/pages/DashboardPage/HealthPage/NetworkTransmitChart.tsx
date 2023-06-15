@@ -1,24 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { ResponsiveLine, Serie } from '@nivo/line';
-import Health from './Health';
+import React from 'react';
+import { ResponsiveLine } from '@nivo/line';
+import type { DataObj } from './charts';
 
-export type Props = NonNullable<unknown>; // TODO: figure out better type for this
-
-interface DataPoint {
-  x: number;
-  y: number | string;
-}
-interface DataObj {
-  id: string;
-  data: DataPoint[];
-}
-
-interface CPUUsageChartProps {
+interface NetworkTransmitProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
-
+const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
@@ -88,4 +76,4 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
   );
 };
 
-export default CPUUsageChart;
+export default NetworkTransmitChart;

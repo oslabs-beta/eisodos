@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import Health from './Health';
+import HealthPage from './HealthPage/HealthPage';
 
 const DashboardPage = () => {
   return (
@@ -11,7 +10,7 @@ const DashboardPage = () => {
         <Link to="">Apps</Link>
         <Link to="">Nodes</Link>
       </nav>
-      <Health />
+      <HealthPage />
     </div>
   );
 };
