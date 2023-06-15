@@ -1,12 +1,19 @@
-import { KubeConfig, CoreV1Api, V1PodList, V1NodeList, V1NamespaceList, AppsV1Api } from '@kubernetes/client-node';
+import {
+  KubeConfig,
+  CoreV1Api,
+  V1PodList,
+  V1NodeList,
+  V1NamespaceList,
+  AppsV1Api,
+} from '@kubernetes/client-node';
 
-// Connect to the Kube cluster using the API URL
-const connectToCluster = async (apiUrl: string): Promise<CoreV1Api> => {
+// Connect to the local Kube cluster
+const connectToCluster = async (): Promise<CoreV1Api> => {
   // Create instance of KubeConfig
   const kubeConfig = new KubeConfig();
 
-  // Load the cluster configuration from URL
-  kubeConfig.loadFromCluster(apiUrl);
+  // Load the default cluster configuration
+  kubeConfig.loadFromDefault();
 
   // Create instance of CoreV1Api using config
   const k8sApi = kubeConfig.makeApiClient(CoreV1Api);
@@ -15,10 +22,10 @@ const connectToCluster = async (apiUrl: string): Promise<CoreV1Api> => {
   return k8sApi;
 };
 
-// List pods in the default namespaces
-const listPods = async (apiUrl: string): Promise<V1PodList> => {
-  // Connect to the Kube cluster URL
-  const k8sApi = await connectToCluster(apiUrl);
+// List pods in the default namespace
+const listPods = async (): Promise<V1PodList> => {
+  // Connect to the local Kube cluster
+  const k8sApi = await connectToCluster();
 
   // Use listNamespacedPod to list pods in the 'default' namespace
   const res = await k8sApi.listNamespacedPod('default');
@@ -28,9 +35,9 @@ const listPods = async (apiUrl: string): Promise<V1PodList> => {
 };
 
 // List nodes in the cluster
-const listNodes = async (apiUrl: string): Promise<V1NodeList> => {
-  // Connect to the Kube cluster with URL
-  const k8sApi = await connectToCluster(apiUrl);
+const listNodes = async (): Promise<V1NodeList> => {
+  // Connect to the local Kube cluster
+  const k8sApi = await connectToCluster();
 
   // Use listNode method to list all nodes
   const res = await k8sApi.listNode();
@@ -39,20 +46,20 @@ const listNodes = async (apiUrl: string): Promise<V1NodeList> => {
   return res.body;
 };
 
-const getNamespaces = async (apiUrl: string): Promise<V1NamespaceList> => {
-  // Connect to the Kube cluster URL
-  const k8sApi = await connectToCluster(apiUrl);
+const getNamespaces = async (): Promise<V1NamespaceList> => {
+  // Connect to the local Kube cluster
+  const k8sApi = await connectToCluster();
 
   // Use listNamespace method to get all namespaces in the cluster
   const res = await k8sApi.listNamespace();
 
-  // Return  list of namespaces
+  // Return list of namespaces
   return res.body;
 };
 
-const getAppsV1ApiClient = (apiUrl: string): AppsV1Api => {
+const getAppsV1ApiClient = (): AppsV1Api => {
   const kubeConfig = new KubeConfig();
-  kubeConfig.loadFromCluster(apiUrl);
+  kubeConfig.loadFromDefault();
   return kubeConfig.makeApiClient(AppsV1Api);
 };
 
@@ -63,4 +70,3 @@ export default {
   getNamespaces,
   getAppsV1ApiClient,
 };
-

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
-import kube from '../service/kubeServ';
+import * as k8s from '@kubernetes/client-node';
 
 // Interfaces define the structure and types of the data received from the API response
 interface PromResult {
@@ -16,6 +16,13 @@ interface QueryResult {
 interface QueryResponse {
   status: string;
   data: QueryResult;
+}
+interface DashboardData {
+  nodes: number;
+  pods: number;
+  namespaces: number;
+  deployments: number;
+  services: number;
 }
 
 const dashboardController = {
@@ -79,50 +86,43 @@ const dashboardController = {
       return next({ log: `Error in dash ${err}` });
     }
   },
-  getCount: async (
+  getNumberOf: async (
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
     try {
-      const { apiUrl } = req.body;
+      const kc = new k8s.KubeConfig();
+      kc.loadFromDefault();
+      const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+      const k8sApi1 = kc.makeApiClient(k8s.AppsV1Api);
 
-      // Connect to the Kubernetes cluster
-      const k8sApi = await kube.connectToCluster(apiUrl);
+      const [
+        { body: nodeList },
+        { body: podList },
+        { body: namespaceList },
+        { body: deploymentList },
+        { body: serviceList },
+      ] = await Promise.all([
+        k8sApi.listNode(),
+        k8sApi.listPodForAllNamespaces(),
+        k8sApi.listNamespace(),
+        k8sApi1.listDeploymentForAllNamespaces(),
+        k8sApi.listServiceForAllNamespaces(),
+      ]);
 
-      // List pods
-      const podList = await kube.listPods(apiUrl);
-
-      // Count pods
-      const podCount = podList.items.length;
-
-      // List nodes
-      const nodeList = await kube.listNodes(apiUrl);
-
-      // Count the nodes
-      const nodeCount = nodeList.items.length;
-
-      // Get AppsV1ApiClient
-      const appsV1Api = kube.getAppsV1ApiClient(apiUrl);
-
-      // List deployments
-      const deploymentList = await appsV1Api.listDeploymentForAllNamespaces();
-      const deploymentCount = deploymentList.body.items.length;
-
-      // List services
-      const serviceList = await k8sApi.listServiceForAllNamespaces();
-      const serviceCount = serviceList.body.items.length;
-
-      res.locals.counts = {
-        pods: podCount,
-        nodes: nodeCount,
-        deployments: deploymentCount,
-        services: serviceCount,
+      const numOfData: DashboardData = {
+        nodes: nodeList.items.length,
+        pods: podList.items.length,
+        namespaces: namespaceList.items.length,
+        deployments: deploymentList.items.length,
+        services: serviceList.items.length,
       };
 
+      res.locals.count = numOfData;
       return next();
     } catch (error) {
-      return next({ log: `Error in getCount: ${error}` });
+      return next({ log: `Error in getNumberOf: ${error}` });
     }
   },
 };

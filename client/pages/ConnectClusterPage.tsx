@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 const ConnectClusterPage = () => {
   const [cluster, setCluster] = useState('');
@@ -21,7 +21,7 @@ const ConnectClusterPage = () => {
   function handleConnectClick() {
     connectCluster(cluster);
   }
-  function handleClusterChange(event) {
+  function handleClusterChange(event: ChangeEvent<HTMLInputElement>) {
     setCluster(event.target.value);
   }
   return (
