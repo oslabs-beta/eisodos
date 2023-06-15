@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
+import * as k8s from '@kubernetes/client-node';
 
 // Interfaces define the structure and types of the data received from the API response
 interface PromResult {
@@ -15,6 +16,13 @@ interface QueryResult {
 interface QueryResponse {
   status: string;
   data: QueryResult;
+}
+interface DashboardData {
+  nodes: number;
+  pods: number;
+  namespaces: number;
+  deployments: number;
+  services: number;
 }
 
 const dashboardController = {
@@ -59,7 +67,49 @@ const dashboardController = {
     } catch (err) {
       return next({ log: `Error in dash ${err}` });
     }
-  }
+  },
+  getNumberOf: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    try {
+      // Create a new KubeConfig
+      const kc = new k8s.KubeConfig();
+      // Load the config from default location
+      kc.loadFromDefault();
+      // Create instance of Corev1api and AppsV1api using the loaded config
+      const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+      const k8sApi1 = kc.makeApiClient(k8s.AppsV1Api);
+      // Get all required info for each resource using Promise all
+      const [
+        { body: nodeList },
+        { body: podList },
+        { body: namespaceList },
+        { body: deploymentList },
+        { body: serviceList },
+      ] = await Promise.all([
+        k8sApi.listNode(),
+        k8sApi.listPodForAllNamespaces(),
+        k8sApi.listNamespace(),
+        k8sApi1.listDeploymentForAllNamespaces(),
+        k8sApi.listServiceForAllNamespaces(),
+      ]);
+      // Create an obj and fill with the counts
+      const numOfData: DashboardData = {
+        nodes: nodeList.items.length,
+        pods: podList.items.length,
+        namespaces: namespaceList.items.length,
+        deployments: deploymentList.items.length,
+        services: serviceList.items.length,
+      };
+      // return the counts object in res.locals
+      res.locals.count = numOfData;
+      return next();
+    } catch (error) {
+      return next({ log: `Error in getNumberOf: ${error}` });
+    }
+  },
 };
 
 export default dashboardController;

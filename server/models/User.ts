@@ -17,10 +17,10 @@ class User {
   @prop({ required: true })
   public password!: string;
 
-  @prop()
-  public cluster?: {
-    name?: string;
-  };
+  // @prop()
+  // public cluster?: {
+  //   name?: string;
+  // };
 }
 
 const UserModel = getModelForClass(User);
