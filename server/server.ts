@@ -14,8 +14,7 @@ import dashboardRouter from './routes/dashboard';
 // Assign constants
 const app = express();
 const PORT = 3010;
-const mongoURI =
-  'mongodb+srv://mmohtasin93:ospproject1@cluster0.7yyq5ou.mongodb.net/?retryWrites=true&w=majority';
+const mongoURI = 'mongodb+srv://mmohtasin93:ospproject1@cluster0.7yyq5ou.mongodb.net/?retryWrites=true&w=majority';
 
 // Connect to mongo database
 mongoose.connect(mongoURI, { dbName: 'test' });
@@ -57,26 +56,19 @@ interface CustomError {
 
 // Global error handler
 // TODO: is there a better type to use for Express middleware errors?
-app.use(
-  (
-    err: Error | CustomError,
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    /* eslint-disable-line */
-    const defaultErr = {
-      log: `Express caught an unknown middleware error: ${err}`,
-      status: 500,
-      message: 'Internal Server Error'
-    };
+app.use((err: Error | CustomError, req: Request, res: Response, next: NextFunction) => {
+  /* eslint-disable-line */
+  const defaultErr = {
+    log: `Express caught an unknown middleware error: ${err}`,
+    status: 500,
+    message: 'Internal Server Error'
+  };
 
-    const { log, status, message } = Object.assign({}, defaultErr, err);
+  const { log, status, message } = Object.assign({}, defaultErr, err);
 
-    console.log(log);
-    return res.status(status).send(message);
-  }
-);
+  console.log(log);
+  return res.status(status).send(message);
+});
 
 // Start server
 app.listen(PORT, () => {

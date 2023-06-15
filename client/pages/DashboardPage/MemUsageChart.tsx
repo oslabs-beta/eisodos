@@ -17,7 +17,6 @@ interface MemChartProps {
 }
 
 const MemChart = ({ chartData }: MemChartProps) => {
-
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
@@ -29,9 +28,9 @@ const MemChart = ({ chartData }: MemChartProps) => {
           min: 'auto',
           max: 'auto',
           stacked: true,
-          reverse: false,
+          reverse: false
         }}
-        yFormat=' >-.2f'
+        yFormat=" >-.2f"
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -40,7 +39,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
           tickRotation: 0,
           legend: 'Time',
           legendOffset: 36,
-          legendPosition: 'middle',
+          legendPosition: 'middle'
         }}
         axisLeft={{
           tickSize: 5,
@@ -48,7 +47,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
           tickRotation: 0,
           legend: 'CPU Usage',
           legendOffset: -40,
-          legendPosition: 'middle',
+          legendPosition: 'middle'
         }}
         pointSize={2}
         pointColor={{ theme: 'background' }}
@@ -76,11 +75,11 @@ const MemChart = ({ chartData }: MemChartProps) => {
                 on: 'hover',
                 style: {
                   itemBackground: 'rgba(0, 0, 0, .03)',
-                  itemOpacity: 1,
-                },
-              },
-            ],
-          },
+                  itemOpacity: 1
+                }
+              }
+            ]
+          }
         ]}
       />
     </div>

@@ -21,15 +21,11 @@ const Health = () => {
   }
 
   const [cpuData, setCpuData] = useState<DataObj[]>([{ id: 'cpuUsage', data: [] }]);
-  
   const [memData, setMemData] = useState<DataObj[]>([{ id: 'memUsage', data: [] }]);
-  
   const [networkTransmitData, setNetworkTransmitData] = useState<DataObj[]>([{ id: 'networkTransmitInfo', data: [] }]);
-
   const [networkReceiveData, setNetworkReceiveData] = useState<DataObj[]>([{ id: 'networkReceiveInfo', data: [] }]);
 
   async function getData(): Promise<void> {
-
     const res = await fetch('/api/dashboard/metrics');
     const metrics: Promise<Metrics> = res.json();
 
@@ -37,7 +33,7 @@ const Health = () => {
     const memValues = (await metrics).memValues;
     const networkTransmitValues = (await metrics).networkTransmitValues;
     const networkReceiveValues = (await metrics).networkReceiveValues;
-    
+
     setCpuData(processChartData(cpuValues, 'cpuUsage'));
     setMemData(processChartData(memValues, 'memUsage'));
     setNetworkTransmitData(processChartData(networkTransmitValues, 'networdTransmitUsage'));
@@ -48,14 +44,14 @@ const Health = () => {
     const dataPoints: DataPoint[] = [];
     for (let i = 0; i < values.length; i++) {
       const dataPoint = {
-        x: i, 
-        y: parseFloat(values[i]),
+        x: i,
+        y: parseFloat(values[i])
       };
       dataPoints.push(dataPoint);
     }
     return [{ id, data: dataPoints }];
   }
-  
+
   useEffect(() => {
     getData();
   }, []);
