@@ -1,60 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
+import type { DataObj } from './charts';
 
-export type Props = NonNullable<unknown>; // TODO: figure out better type for this
+interface NetworkReceiveProps {
+  chartData: DataObj[]; // Update the type of chartData according to your data structure
+}
 
-const LineChart = () => {
-  const [data, setData] = useState<DataObj[]>([{ id: 'cpuUsage', data: [] }]);
-
-  // TODO: move these out into a d.ts file?
-  interface Metrics {
-    cpuValues: string[];
-  }
-
-  interface DataPoint {
-    x: number;
-    y: number | string;
-  }
-
-  interface DataObj {
-    id: string;
-    data: DataPoint[];
-  }
-
-  async function getData(): Promise<void> {
-    const res = await fetch('/api/dashboard/metrics');
-    const metrics: Promise<Metrics> = res.json();
-
-    const cpuValues = (await metrics).cpuValues;
-    const values: DataPoint[] = [];
-
-    for (let i = 0; i < cpuValues.length; i++) {
-      const dataPoint = {
-        x: i,
-        y: parseFloat(cpuValues[i]) // change this to number? or can we leave as string?
-      };
-
-      values.push(dataPoint);
-    }
-
-    const data = [
-      {
-        id: 'cpuUsage',
-        data: values
-      }
-    ];
-
-    setData(data);
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
-
+const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
-        data={data}
+        data={chartData}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{
@@ -120,4 +76,4 @@ const LineChart = () => {
   );
 };
 
-export default LineChart;
+export default NetworkReceiveChart;

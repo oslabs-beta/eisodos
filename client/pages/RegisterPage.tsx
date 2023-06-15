@@ -7,11 +7,7 @@ const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  async function registerUser(
-    event: React.MouseEvent,
-    username: string,
-    password: string
-  ) {
+  async function registerUser(event: React.MouseEvent, username: string, password: string) {
     event.preventDefault();
 
     try {
@@ -43,22 +39,10 @@ const RegisterPage = () => {
       <Link to="/">Home</Link>
       <form>
         <label>Username:</label>
-        <input
-          id="loginUsername"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <input id="loginUsername" value={username} onChange={(e) => setUsername(e.target.value)} />
         <label>Password:</label>
-        <input
-          id="loginPassword"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="submitButton"
-          onClick={(e) => registerUser(e, username, password)}>
+        <input id="loginPassword" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit" className="submitButton" onClick={(e) => registerUser(e, username, password)}>
           Register
         </button>
       </form>
