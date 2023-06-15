@@ -92,11 +92,14 @@ const dashboardController = {
     next: NextFunction
   ): Promise<void> => {
     try {
+      // Create a new KubeConfig
       const kc = new k8s.KubeConfig();
+      // Load the config from default location
       kc.loadFromDefault();
+      // Create instance of Corev1api and AppsV1api using the loaded config
       const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
       const k8sApi1 = kc.makeApiClient(k8s.AppsV1Api);
-
+      // Get all required info for each resource using Promise all
       const [
         { body: nodeList },
         { body: podList },
@@ -110,7 +113,7 @@ const dashboardController = {
         k8sApi1.listDeploymentForAllNamespaces(),
         k8sApi.listServiceForAllNamespaces(),
       ]);
-
+      // Create an obj and fill with the counts
       const numOfData: DashboardData = {
         nodes: nodeList.items.length,
         pods: podList.items.length,
@@ -118,7 +121,7 @@ const dashboardController = {
         deployments: deploymentList.items.length,
         services: serviceList.items.length,
       };
-
+      // return the counts object in res.locals
       res.locals.count = numOfData;
       return next();
     } catch (error) {
