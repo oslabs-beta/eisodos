@@ -15,7 +15,7 @@ const ConnectClusterPage = () => {
         }),
       });
     } catch (error) {
-      console.log(error, 'connectclusterpage');
+      console.error('An error occurred:', error);
     }
   }
   function handleConnectClick() {
@@ -67,3 +67,4 @@ const ConnectClusterPage = () => {
 // };
 
 export default ConnectClusterPage;
+

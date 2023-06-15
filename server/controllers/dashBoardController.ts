@@ -76,7 +76,7 @@ const dashboardController = {
         networkReceiveTimestamps: networkReceiveUsage.map(
           (item: any[]) => item[0]
         ),
-        networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1]),
+        networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1])
       };
       // Return the formattedData
       res.locals.data = formattedData;

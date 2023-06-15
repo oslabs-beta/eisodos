@@ -30,7 +30,7 @@ app.use(
   session({
     secret: 'testKey', //TODO: need to add to an env file
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
   })
 );
 
@@ -58,12 +58,17 @@ interface CustomError {
 // Global error handler
 // TODO: is there a better type to use for Express middleware errors?
 app.use(
-  ( err: Error | CustomError, req: Request, res: Response, next:NextFunction) => {
+  (
+    err: Error | CustomError,
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     /* eslint-disable-line */
     const defaultErr = {
       log: `Express caught an unknown middleware error: ${err}`,
       status: 500,
-      message: 'Internal Server Error',
+      message: 'Internal Server Error'
     };
 
     const { log, status, message } = Object.assign({}, defaultErr, err);

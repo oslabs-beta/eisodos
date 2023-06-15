@@ -23,11 +23,11 @@ const ExampleChart = () => {
           max: 1000
         }}
         lineWidth={3}
-        curve='linear'
+        curve="linear"
         colors={['#028ee6', '#774dd7']}
         enableGridX={false}
         pointSize={12}
-        pointColor='white'
+        pointColor="white"
         pointBorderWidth={2}
         pointBorderColor={{ from: 'serieColor' }}
         layers={[
@@ -53,6 +53,6 @@ const ExampleChart = () => {
       />
     </div>
   );
-}
+};
 
 export default ExampleChart;
