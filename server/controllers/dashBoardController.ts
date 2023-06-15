@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Request, Response, NextFunction } from 'express';
-import kube from '../service/kubeServ'; 
+import kube from '../service/kubeServ';
 
 // Interfaces define the structure and types of the data received from the API response
 interface PromResult {
@@ -75,12 +75,15 @@ const dashboardController = {
       res.locals.data = formattedData;
 
       return next();
-    } 
-    catch (err) {
+    } catch (err) {
       return next({ log: `Error in dash ${err}` });
     }
   },
-  getCount: async (req: Request,res: Response, next: NextFunction): Promise<void> => {
+  getCount: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const { apiUrl } = req.body;
 

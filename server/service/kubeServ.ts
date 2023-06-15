@@ -23,7 +23,7 @@ const listPods = async (apiUrl: string): Promise<V1PodList> => {
   // Use listNamespacedPod to list pods in the 'default' namespace
   const res = await k8sApi.listNamespacedPod('default');
 
-  // Return the response containing the list of pods
+  // Return list of pods
   return res.body;
 };
 
@@ -32,10 +32,10 @@ const listNodes = async (apiUrl: string): Promise<V1NodeList> => {
   // Connect to the Kube cluster with URL
   const k8sApi = await connectToCluster(apiUrl);
 
-  // Use the listNode method to list all nodes in the cluster
+  // Use listNode method to list all nodes
   const res = await k8sApi.listNode();
 
-  // Return the response containing the list of nodes
+  // Return response containing list of nodes
   return res.body;
 };
 
@@ -46,7 +46,7 @@ const getNamespaces = async (apiUrl: string): Promise<V1NamespaceList> => {
   // Use listNamespace method to get all namespaces in the cluster
   const res = await k8sApi.listNamespace();
 
-  // Return the response containing the list of namespaces
+  // Return  list of namespaces
   return res.body;
 };
 
