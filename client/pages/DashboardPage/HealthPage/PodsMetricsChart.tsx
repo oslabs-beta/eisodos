@@ -24,7 +24,7 @@ const PodsMetricsTable: FC<MetricProps> = (props) => {
         }
         setMetricDivs(newMetricDivs);
       } catch (error) {
-        console.log('Error fetching data: ', error);
+        console.log('Error fetching data:', error);
       }
     };
     fetchData();

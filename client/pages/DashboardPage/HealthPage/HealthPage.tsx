@@ -4,6 +4,7 @@ import MemChart from './MemUsageChart';
 import NetworkTransmitChart from './NetworkTransmitChart';
 import NetworkReceiveChart from './NetworkReceiveChart';
 import { DataPoint, DataObj } from './charts';
+import PodsMetricsTable from './PodsMetricsChart';
 
 const HealthPage = () => {
   interface Metrics {
@@ -51,6 +52,7 @@ const HealthPage = () => {
 
   return (
     <div>
+      <PodsMetricsTable label="Pod Metrics" />
       <CPUUsageChart chartData={cpuData} />
       <MemChart chartData={memData} />
       <NetworkTransmitChart chartData={networkTransmitData} />
