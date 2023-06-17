@@ -38,10 +38,10 @@ const RegisterPage = () => {
     <div>
       <Link to="/">Home</Link>
       <form>
-        <label>Username:</label>
-        <input id="loginUsername" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <label>Password:</label>
-        <input id="loginPassword" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <label htmlFor="registerUsername">Username:</label>
+        <input id="registerUsername" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <label htmlFor="registerPassword">Password:</label>
+        <input id="registerPassword" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <button type="submit" className="submitButton" onClick={(e) => registerUser(e, username, password)}>
           Register
         </button>
