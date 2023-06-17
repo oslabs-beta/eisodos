@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes,  BrowserRouter as Router } from 'react-router-dom';
 
 // import pages
 import HomePage from './pages/HomePage';
@@ -12,14 +12,14 @@ import { useAppDispatch, useAppSelector } from './app/hooks';
 
 const App = () => {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-      </Routes>
-    </div>
+      <div>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Routes>
+      </div>
   );
 };
 

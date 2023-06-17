@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //throwing an error in test?
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -35,12 +35,12 @@ const LoginPage = () => {
     <div>
       <Link to="/">Home</Link>
       <form>
-        <label>Username:</label>
+        <label htmlFor="loginUsername">Username:</label>
         <input id="loginUsername" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <label>Password:</label>
+        <label htmlFor="loginPassword">Password:</label>
         <input id="loginPassword" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <button type="submit" className="submitButton" onClick={(e) => loginUser(e, username, password)}>
-          Log in
+          Log In
         </button>
       </form>
       <Link to="/register">Don&apos;t have an account? Register here</Link>
