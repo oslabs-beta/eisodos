@@ -75,10 +75,12 @@ describe('Dashboard routes', () => {
   test('responds to /api/dashboard/metrics', async () => {
     const response = await request(app).get('/api/dashboard/metrics');
     expect(response.statusCode).toBe(200);
+    expect(response.body).toBeInstanceOf(Object);
   });
 
   test('responds to /api/dashboard/count', async () => {
     const response = await request(app).get('/api/dashboard/count');
     expect(response.statusCode).toBe(200);
+    expect(response.body).toBeInstanceOf(Object);
   });
 });
