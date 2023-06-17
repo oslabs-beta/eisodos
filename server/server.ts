@@ -7,9 +7,7 @@ import passport from 'passport';
 // Import routers
 import usersRouter from './routes/users';
 import dashboardRouter from './routes/dashboard';
-// import clusterRouter from './routes/clusterRoutes';
-// import nodeRouter from './routes/nodesRoutes';
-// import podRouter from './routes/podsRoutes';
+import hierarchyRouter from './routes/hierarchy';
 
 // Assign constants
 const app = express();
@@ -41,6 +39,7 @@ app.use(passport.session());
 // Route handlers
 app.use('/api/users', usersRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/hierarchy', hierarchyRouter);
 
 // Unknown route handler
 app.use('*', (req, res) => {
