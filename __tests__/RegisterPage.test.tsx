@@ -40,5 +40,4 @@ describe('Register Page - Rendering', () => {
     );
     expect(screen.getByText('Already have an account? Login here')).toBeInTheDocument();
   });
-
 });

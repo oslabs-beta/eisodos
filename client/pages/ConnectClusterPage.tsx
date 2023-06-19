@@ -26,7 +26,7 @@ const ConnectClusterPage = () => {
   }
   return (
     <div>
-      <h1> Connect to cluster </h1>
+      <h1> Connect to Cluster </h1>
       <input
         id='clusterInput'
         placeholder='my-cluster'
