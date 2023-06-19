@@ -1,7 +1,5 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event'
-import { render, screen, waitFor, cleanup } from '@testing-library/react';
-import regeneratorRuntime from 'regenerator-runtime';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '@testing-library/jest-dom/extend-expect';
 
