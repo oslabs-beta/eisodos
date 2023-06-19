@@ -6,6 +6,14 @@ import '@testing-library/jest-dom/extend-expect';
 import RegisterPage from '../client/pages/RegisterPage';
 
 describe('Register Page - Rendering', () => {
+  it ('should have "Home" text', () => {
+    render(
+      <Router>
+        <RegisterPage />
+      </Router>
+    );
+    expect(screen.getByText('Home')).toBeInTheDocument();
+  });
   it('should have input field with label Username', () => {
     render(
       <Router>
