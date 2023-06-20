@@ -16,9 +16,9 @@ const PodsMetricsTable: FC<MetricProps> = (props) => {
         const newMetricDivs: JSX.Element[] = [];
         for (const prop in data) {
           newMetricDivs.push(
-            <div id='metric-box'>
-              <div id='metric-label'>{prop}</div>
-              <div id='metric-value'>{data[prop]}</div>
+            <div className='metric-box'>
+              <div className='metric-label'>{prop}</div>
+              <div className='metric-value'>{data[prop]}</div>
             </div>
           )
         }

@@ -11,12 +11,12 @@ const MemChart = ({ chartData }: MemChartProps) => {
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 110, bottom: 50, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 'auto',
+          max: 400000000,
           stacked: true,
           reverse: false
         }}
@@ -36,7 +36,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
           tickPadding: 5,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -40,
+          legendOffset: -80,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -45,6 +45,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
+        enableArea={true}
         legends={[
           {
             anchor: 'bottom-right',
@@ -71,6 +72,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
             ]
           }
         ]}
+        colors={['#1B9C85']}
       />
     </div>
   );

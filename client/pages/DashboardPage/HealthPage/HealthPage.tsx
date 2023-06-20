@@ -5,6 +5,7 @@ import NetworkTransmitChart from './NetworkTransmitChart';
 import NetworkReceiveChart from './NetworkReceiveChart';
 import { DataPoint, DataObj } from './charts';
 import PodsMetricsTable from './PodsMetricsChart';
+import CPUResponsiveBar from './CPUBar';
 
 const HealthPage = () => {
   interface Metrics {
@@ -30,7 +31,7 @@ const HealthPage = () => {
 
     setCpuData(processChartData(cpuValues, 'cpuUsage'));
     setMemData(processChartData(memValues, 'memUsage'));
-    setNetworkTransmitData(processChartData(networkTransmitValues, 'networdTransmitUsage'));
+    setNetworkTransmitData(processChartData(networkTransmitValues, 'networkTransmitUsage'));
     setNetworkReceiveData(processChartData(networkReceiveValues, 'networkReceiveUsage'));
   }
 
@@ -52,11 +53,27 @@ const HealthPage = () => {
 
   return (
     <div>
-      <PodsMetricsTable label="Pod Metrics" />
-      <CPUUsageChart chartData={cpuData} />
-      <MemChart chartData={memData} />
-      <NetworkTransmitChart chartData={networkTransmitData} />
-      <NetworkReceiveChart chartData={networkReceiveData} />
+      <div>
+        <CPUResponsiveBar />
+        <PodsMetricsTable label="Pod Metrics" />
+      </div>
+
+      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        
+        <div style={{flexBasis: '50%'}}> 
+          <CPUUsageChart chartData={cpuData} />
+        </div>
+        <div style={{flexBasis: '50%'}}> 
+          <MemChart chartData={memData} />
+        </div>
+        <div style={{flexBasis: '50%'}}> 
+          <NetworkTransmitChart chartData={networkTransmitData} />
+        </div>
+        <div style={{flexBasis: '50%'}}> 
+          <NetworkReceiveChart chartData={networkReceiveData} />
+        </div>
+
+      </div>
     </div>
   );
 };
