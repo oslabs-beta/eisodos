@@ -11,7 +11,7 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 110, bottom: 50, left: 90 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -36,7 +36,7 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
           tickPadding: 5,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -40,
+          legendOffset: -60,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -45,6 +45,7 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
+        enableArea={true}
         legends={[
           {
             anchor: 'bottom-right',
@@ -71,6 +72,7 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
             ]
           }
         ]}
+        colors={['#116A7B']}
       />
     </div>
   );

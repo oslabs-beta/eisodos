@@ -11,12 +11,12 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 110, bottom: 50, left: 80 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 'auto',
+          max: 0.005,
           stacked: true,
           reverse: false
         }}
@@ -33,10 +33,10 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         }}
         axisLeft={{
           tickSize: 5,
-          tickPadding: 5,
+          tickPadding: -10,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -40,
+          legendOffset: -50,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -45,6 +45,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
+        enableArea={true}
         legends={[
           {
             anchor: 'bottom-right',
@@ -64,13 +65,14 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
               {
                 on: 'hover',
                 style: {
-                  itemBackground: 'rgba(0, 0, 0, .03)',
+                  itemBackground: 'rgba(10, 2, 6, .51)',
                   itemOpacity: 1
                 }
               }
             ]
           }
         ]}
+        colors={['#002B5B']}
       />
     </div>
   );
