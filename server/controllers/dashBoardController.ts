@@ -27,23 +27,44 @@ interface DashboardData {
 
 const dashboardController = {
   getClusterData: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    
+    let { time, namespace }: { time?: string | undefined; namespace?: string | undefined} = req.query;
+    if (!time) time = '';
+    else time = '['+time+']'
+    
+    if (!namespace) namespace = '';
+    else namespace = ',namespace ='+namespace
+
     try {
+
+
       // Retrieve CPU usage data
       const responseCpuUsage = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(container_cpu_usage_seconds_total{job="kubelet", namespace="default"}[10m])'
+        `http://localhost:9090/api/v1/query?query=container_cpu_usage_seconds_total{container!=""${namespace}}${time}`
       );
+      
+
       // Retrieve Mem usage
       const responseMemUsage = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{job="kubelet", namespace="default"}'
-      );
+        `http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{container!=""${namespace}}${time}`
+      ); 
+
       // Retrieve network transmit
       const responseTransmit = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(node_network_transmit_bytes_total{job="node-exporter"}[10m])'
+        `http://localhost:9090/api/v1/query?query=node_network_transmit_bytes_total{container!=""${namespace}}${time}`
       );
+
       // Retrieve network receive
       const responseReceive = await axios.get<QueryResponse>(
-        'http://localhost:9090/api/v1/query?query=rate(node_network_receive_bytes_total{job="node-exporter"}[10m])'
+        `http://localhost:9090/api/v1/query?query=node_network_receive_bytes_total{container!=""${namespace}}${time}`
       );
+
+      const test = await axios.get<QueryResponse>(
+        `http://localhost:9090/api/v1/query?query=container_cpu_usage_seconds_total{container!=""${namespace}}${time}`
+      );
+
+      test.data.data.result.map((item: PromResult) => console.log(item));
+
       // Extract data from API reqs
       const cpuUsage = responseCpuUsage.data.data.result.map((item: PromResult) => item.value);
       const memUsage = responseMemUsage.data.data.result.map((item: PromResult) => item.value);
@@ -68,11 +89,7 @@ const dashboardController = {
       return next({ log: `Error in dash ${err}` });
     }
   },
-  getNumberOf: async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> => {
+  getNumberOf: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       // Create a new KubeConfig
       const kc = new k8s.KubeConfig();
@@ -87,13 +104,13 @@ const dashboardController = {
         { body: podList },
         { body: namespaceList },
         { body: deploymentList },
-        { body: serviceList },
+        { body: serviceList }
       ] = await Promise.all([
         k8sApi.listNode(),
         k8sApi.listPodForAllNamespaces(),
         k8sApi.listNamespace(),
         k8sApi1.listDeploymentForAllNamespaces(),
-        k8sApi.listServiceForAllNamespaces(),
+        k8sApi.listServiceForAllNamespaces()
       ]);
       // Create an obj and fill with the counts
       const numOfData: DashboardData = {
@@ -101,7 +118,7 @@ const dashboardController = {
         pods: podList.items.length,
         namespaces: namespaceList.items.length,
         deployments: deploymentList.items.length,
-        services: serviceList.items.length,
+        services: serviceList.items.length
       };
       // return the counts object in res.locals
       res.locals.count = numOfData;
@@ -109,7 +126,7 @@ const dashboardController = {
     } catch (error) {
       return next({ log: `Error in getNumberOf: ${error}` });
     }
-  },
+  }
 };
 
 export default dashboardController;
