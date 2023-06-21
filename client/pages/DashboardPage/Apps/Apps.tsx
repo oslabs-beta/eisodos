@@ -1,36 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import NamespaceBox from './NamespaceBox';
-import { Pod } from './pod.types';
+import Namespace from './containers/Namespace';
 
 interface AppsData {
-  [appName: string]: Pod[];
+  [namespace: string]: string[];
 }
 
-interface NamespaceData {
-  [key: string]: AppsData;
-}
-
-const Apps: React.FC = () => {
-  const [data, setData] = useState<NamespaceData>({});
+const Apps = () => {
+  const [data, setData] = useState<AppsData>({});
 
   useEffect(() => {
-    axios
-      .get('/api/cluster/apps')
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching cluster data:', error);
-      });
+    // TODO: fetch data from server
+    // axios.get('/api/cluster/apps').then((res) => {
+    //   console.log(res.data);
+    //   setData(res.data);
+    // });
+
+    setData({
+      default: ['example-deploy'],
+      monitoring: [
+        'alertmanager-main',
+        'blackbox-exporter',
+        'grafana',
+        'kube-statemetrics',
+        'node-exporter',
+        'prometheus-adapter',
+        'prometheus-applications',
+        'prometheus-k8s',
+        'prometheus-operator'
+      ],
+      'kube-system': [
+        'coredns',
+        'etcd-monitoring-control-plane',
+        'kindnet',
+        'kube-apiserver-monitoring-control-plane',
+        'kube-controller-manager-monitoring-control-plane',
+        'kube-proxy',
+        'kube-scheduler-monitoring-control-plane'
+      ],
+      'local-path-storage': ['local-path-provisioner']
+    });
   }, []);
 
   return (
-    <>
-      {Object.entries(data).map(([namespace, appsData]) => (
-        <NamespaceBox key={namespace} namespace={namespace} appsData={appsData} />
+    <div className="mx-auto w-fit">
+      {Object.entries(data).map(([namespace, apps]) => (
+        <Namespace key={namespace} namespace={namespace} apps={apps} />
       ))}
-    </>
+    </div>
   );
 };
 
