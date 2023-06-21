@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
+    publicPath: '/',
     clean: true
   },
   // generate source map
@@ -25,6 +26,7 @@ module.exports = {
       '/api': 'http://localhost:3010'
     },
     historyApiFallback: true,
+    // serves static files
     static: {
       directory: path.resolve(__dirname, './client/assets'),
       publicPath: '/assets'

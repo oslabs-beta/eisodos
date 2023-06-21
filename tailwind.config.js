@@ -8,10 +8,9 @@ module.exports = {
       colors: {
         black: {
           DEFAULT: colors.black,
-          1: 'rgb(15,15,20)',
-          2: 'rgb(35,35,35)',
-          3: 'rgb(18,18,23)',
-          4: 'rgb(39,39,41)'
+          1: 'rgb(30,30,35)',
+          2: 'rgb(35,35,40)',
+          3: 'rgb(50,50,50)'
         },
         white: {
           DEFAULT: colors.white,
@@ -23,6 +22,7 @@ module.exports = {
         shadow: '#0D2F4F'
       },
       fontFamily: {
+        inter: ['Inter var', 'sans-serif'],
         lato: ['Lato', 'sans-serif']
       },
       boxShadow: {
