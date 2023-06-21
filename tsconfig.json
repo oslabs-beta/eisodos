@@ -6,6 +6,8 @@
     "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
+    //import error?
+    "allowSyntheticDefaultImports": true,
 
     // optional config
     "sourceMap": true,
