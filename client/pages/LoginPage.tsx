@@ -33,17 +33,46 @@ const LoginPage = () => {
 
   return (
     <div>
-      <Link to="/">Home</Link>
-      <form>
-        <label>Username:</label>
-        <input id="loginUsername" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <label>Password:</label>
-        <input id="loginPassword" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit" className="submitButton" onClick={(e) => loginUser(e, username, password)}>
-          Log in
-        </button>
-      </form>
-      <Link to="/register">Don&apos;t have an account? Register here</Link>
+      <Link to="/">
+        <img src="./assets/logo.png" className="h-32 w-32" />
+      </Link>
+      <div className="mt-36 flex flex-col items-center justify-center">
+        <div className="h-2/4 w-1/4 rounded-lg bg-gradient-to-r from-green-400 via-cyan-500 to-blue-800 p-0.5">
+          <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
+            <form className="flex flex-col items-center">
+              <title className="mb-10 block text-3xl font-bold">Log in to your account</title>
+              <div className="w-full">
+                <label>Username</label>
+                <input
+                  id="loginUsername"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="mb-3 w-full rounded border border-black px-2 py-1"
+                />
+              </div>
+              <div className="w-full">
+                <label>Password</label>
+                <input
+                  id="loginPassword"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mb-4 w-full rounded border border-black px-2 py-1"
+                />
+              </div>
+              <button
+                type="submit"
+                onClick={(e) => loginUser(e, username, password)}
+                className="mb-2 mt-6 w-full rounded bg-gradient-to-r from-green-400 via-cyan-500 to-blue-800 py-2 font-bold">
+                Log in
+              </button>
+              <Link to="/register" className="hover:underline">
+                Don&apos;t have an account? Sign up here
+              </Link>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
