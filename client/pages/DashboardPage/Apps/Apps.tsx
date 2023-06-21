@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import NamespaceBox from './NamspaceBox';
-import { Pod } from './Pod';
+import NamespaceBox from './NamespaceBox';
+import { Pod } from './pod.types';
 
 interface AppsData {
   [appName: string]: Pod[];
@@ -11,7 +11,7 @@ interface NamespaceData {
   [key: string]: AppsData;
 }
 
-const HierarchyPage: React.FC = () => {
+const Apps: React.FC = () => {
   const [data, setData] = useState<NamespaceData>({});
 
   useEffect(() => {
@@ -26,12 +26,12 @@ const HierarchyPage: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {Object.entries(data).map(([namespace, appsData]) => (
         <NamespaceBox key={namespace} namespace={namespace} appsData={appsData} />
       ))}
-    </div>
+    </>
   );
 };
 
-export default HierarchyPage;
+export default Apps;

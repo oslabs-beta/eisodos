@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pod } from './Pod';
+import { Pod } from './pod.types';
 
 interface AppBoxProps {
   appName: string;
