@@ -18,11 +18,15 @@ module.exports = {
           2: 'rgb(215,215,215)',
           3: 'rgb(130,130,130)'
         },
-        highlight: '#1A8BBF'
+        highlight: '#1A8BBF',
+        shadow: '#0D2F4F'
       },
       fontFamily: {
         inter: ['Inter var', 'sans-serif'],
         lato: ['Lato', 'sans-serif']
+      },
+      boxShadow: {
+        card: '1px 1px 5px 5px rgba(0, 0, 0, 0.3)'
       }
     }
   },

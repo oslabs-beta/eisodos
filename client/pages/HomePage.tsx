@@ -6,17 +6,27 @@ import RegisterPage from './RegisterPage';
 const HomePage = () => {
   return (
     <>
-      <nav className="flex justify-between">
-        <div className="flex space-x-3">
-          <Link to="/">Overview</Link>
-          <Link to="/#features">Features</Link>
-          <Link to="/#demo">Demo</Link>
-          <Link to="/#get-started">Get Started</Link>
-          <Link to="/#team">Team</Link>
+      <nav className="flex justify-between bg-gray-800 h-20">
+        <div className="flex space-x-3 items-center text-lg">
+          <Link to="/" 
+          className="hover:underline"
+          >Overview</Link>
+          <Link to="/#features"
+          className="hover:underline"
+          >Features</Link>
+          <Link to="/#demo"
+          className="hover:underline"
+          >Demo</Link>
+          <Link to="/#get-started"
+          className="hover:underline"
+          >Get Started</Link>
+          <Link to="/#team"
+          className="hover:underline"
+          >Team</Link>
         </div>
-        <div className="flex space-x-3">
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+        <div className="flex space-x-3 mr-10 items-center">
+          <Link to="/login" className="rounded border border-black bg-sky-600 hover:bg-sky-700 w-20 h-7 content-center pl-5" >Login</Link>
+          <Link to="/register" className="rounded border border-black bg-sky-600 hover:bg-sky-700 w-20 h-7 content-center pl-3">Register</Link>
         </div>
       </nav>
       <Routes>

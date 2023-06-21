@@ -24,7 +24,11 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3010'
     },
-    historyApiFallback: true
+    historyApiFallback: true,
+    static: {
+      directory: path.resolve(__dirname, './client/assets'),
+      publicPath: '/assets'
+    }
   },
   resolve: {
     // add ts and tsx as resolvable extensions
