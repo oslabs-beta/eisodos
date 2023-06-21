@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import HealthPage from './pages/DashboardPage/HealthPage/HealthPage';
 import HierarchyPage from './pages/HierarchyPage';
+import AppsPage from './pages/AppsPage/AppPage';
 
 // import redux hooks and action creators
 import { useAppDispatch, useAppSelector } from './app/hooks';
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="nodes" element={<div></div>} />
         </Route>
         <Route path="/hierarchy" element={<HierarchyPage />} />
+        <Route path="/apps" element={<AppsPage />} />
       </Routes>
     </>
   );
