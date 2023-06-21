@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from './app/hooks';
 
 const App = () => {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/hierarchy" element={<HierarchyPage />} />
       </Routes>
-    </div>
+    </>
   );
 };
 

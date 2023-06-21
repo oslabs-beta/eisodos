@@ -3,14 +3,16 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
+import { CustomError } from './CustomError';
 
 // Import routers
 import usersRouter from './routes/users';
 import dashboardRouter from './routes/dashboard';
 import hierarchyRouter from './routes/hierarchy';
+import appsRouter from './routes/apps';
 
 // Assign constants
-const app = express();
+export const app = express();
 const PORT = 3010;
 const mongoURI = 'mongodb+srv://mmohtasin93:ospproject1@cluster0.7yyq5ou.mongodb.net/?retryWrites=true&w=majority';
 
@@ -40,18 +42,13 @@ app.use(passport.session());
 app.use('/api/users', usersRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/hierarchy', hierarchyRouter);
+app.use('/api/cluster', appsRouter);
+
 
 // Unknown route handler
 app.use('*', (req, res) => {
   return res.status(404).send('404 Not Found');
 });
-
-// TODO: move this to a separate type declaration file?
-interface CustomError {
-  log?: string;
-  status?: number;
-  message?: string;
-}
 
 // Global error handler
 // TODO: is there a better type to use for Express middleware errors?
@@ -73,5 +70,3 @@ app.use((err: Error | CustomError, req: Request, res: Response, next: NextFuncti
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}!`);
 });
-
-module.exports = app;
