@@ -18,17 +18,21 @@ const appsController = {
     try {
       // Initialize Kube config
       const kc = new k8s.KubeConfig();
+      // Load config from default
       kc.loadFromDefault();
+      // Create coreV1api instance using the config
       const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+      // Retrieve pod list using method
       const { body: podList } = await k8sApi.listPodForAllNamespaces();
+      // Initialize an empty object to store pod info
       const namespaceGroupedPods: GroupedPods = {};
-
+      // Iterate over each pod
       for (const pod of podList.items) {
         const namespace = pod.metadata?.namespace;
         const fullName = pod.metadata?.name;
         const status = pod.status?.phase;
 
-        if (!namespace || !fullName || !status) continue;
+        if (!namespace || !fullName || !status) continue; // Skip pods with undefined or unknown namespaces, names
 
         let baseName = fullName.replace(/-\d.*$/, ''); // String that starts with a hyphen - followed by any digit
 
