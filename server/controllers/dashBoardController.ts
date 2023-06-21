@@ -50,7 +50,7 @@ const dashboardController = {
     else time = '[' + time + ']';
 
     if (!namespace) namespace = '';
-    else namespace = ',namespace =' + namespace;
+    else namespace = ',namespace ="' + namespace+'"'
 
     try {
       // Retrieve CPU usage data
