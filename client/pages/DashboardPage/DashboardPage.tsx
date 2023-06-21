@@ -22,7 +22,7 @@ const DashboardPage = () => {
   const location = useLocation();
 
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       {/* sidebar */}
       <nav className="flex flex-col gap-y-10 px-6 pt-16">
         {/* current cluster */}
@@ -45,7 +45,7 @@ const DashboardPage = () => {
         </ul>
       </nav>
       {/* active tab */}
-      <div className="bg-black-2">
+      <div className="flex-1 bg-black-2">
         <Outlet />
       </div>
     </div>

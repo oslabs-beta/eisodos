@@ -1,22 +1,22 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import type { DataObj } from './charts';
+import type { DataObj } from './charts.types';
 
-interface CPUUsageChartProps {
+interface MemChartProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
+const MemChart = ({ chartData }: MemChartProps) => {
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 80 }}
+        margin={{ top: 50, right: 110, bottom: 50, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 0.005,
+          max: 400000000,
           stacked: true,
           reverse: false
         }}
@@ -33,10 +33,10 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         }}
         axisLeft={{
           tickSize: 5,
-          tickPadding: -10,
+          tickPadding: 5,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -50,
+          legendOffset: -80,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -65,17 +65,17 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
               {
                 on: 'hover',
                 style: {
-                  itemBackground: 'rgba(10, 2, 6, .51)',
+                  itemBackground: 'rgba(0, 0, 0, .03)',
                   itemOpacity: 1
                 }
               }
             ]
           }
         ]}
-        colors={['#002B5B']}
+        colors={['#1B9C85']}
       />
     </div>
   );
 };
 
-export default CPUUsageChart;
+export default MemChart;

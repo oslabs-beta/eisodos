@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import AppBox from './AppBox';
-import { Pod } from './Pod';
+import { Pod } from './pod.types';
 
 interface AppsData {
   [appName: string]: Pod[];
