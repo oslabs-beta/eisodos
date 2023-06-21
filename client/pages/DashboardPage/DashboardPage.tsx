@@ -4,17 +4,22 @@ import { Menu } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 const navigation = [
-  { name: 'Health', to: 'health', current: true },
-  { name: 'Apps', to: 'apps', current: false },
-  { name: 'Nodes', to: 'nodes', current: false }
+  { name: 'Health', path: 'health' },
+  { name: 'Apps', path: 'apps' },
+  { name: 'Nodes', path: 'nodes' }
 ];
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
+// this is used to highlight the active tab and gray out inactive ones
+function isActive(currentPath: string, path: string): string {
+  if (currentPath === `/dashboard/${path}`) {
+    return 'text-white-1';
+  } else {
+    return 'text-white-3 hover:text-white';
+  }
 }
 
 const DashboardPage = () => {
-  console.log(useLocation());
+  const location = useLocation();
 
   return (
     <div className="flex">
@@ -28,7 +33,7 @@ const DashboardPage = () => {
         <ul className="mx-3.5 flex flex-col gap-y-7 text-lg">
           {navigation.map((item) => (
             <li key={item.name}>
-              <Link to={item.to} className={classNames(item.current ? 'text-white' : 'text-white-3  hover:text-white')}>
+              <Link to={item.path} className={isActive(location.pathname, item.path)}>
                 {item.name}
               </Link>
             </li>
