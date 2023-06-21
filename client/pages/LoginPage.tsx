@@ -24,7 +24,7 @@ const LoginPage = () => {
 
       if (response.status === 200) {
         // TODO: change this to response.ok?
-        navigate('/dashboard'); // TODO: change this to ':username/dashboard' later
+        navigate('/dashboard/health'); // TODO: change this to ':username/dashboard' later
       }
     } catch (error) {
       console.error('An error occurred:', error);

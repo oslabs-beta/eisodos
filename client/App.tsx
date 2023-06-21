@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage/DashboardPage';
+import HealthPage from './pages/DashboardPage/HealthPage/HealthPage';
 import HierarchyPage from './pages/HierarchyPage';
 
 // import redux hooks and action creators
@@ -18,7 +19,11 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<DashboardPage />}>
+          <Route path="health" element={<HealthPage />} />
+          <Route path="apps" element={<div></div>} />
+          <Route path="nodes" element={<div></div>} />
+        </Route>
         <Route path="/hierarchy" element={<HierarchyPage />} />
       </Routes>
     </>

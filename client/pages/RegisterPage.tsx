@@ -23,7 +23,7 @@ const RegisterPage = () => {
       });
 
       if (response.ok) {
-        navigate('/dashboard'); // TODO: change this to ':username/:my-cluster' once ConnectClusterPage is done
+        navigate('/dashboard/health'); // TODO: change this to ':username/:my-cluster' once ConnectClusterPage is done
         setUsername('');
         setPassword('');
       } else {
