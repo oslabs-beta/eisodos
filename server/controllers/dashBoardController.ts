@@ -29,8 +29,6 @@ interface DashboardData {
   services: number;
 }
 
-//james added typing
-
 interface PodMetrics {
   cpu?: [number, string][];
   memory?: [number, string][];
@@ -45,7 +43,7 @@ interface Pod {
 
 const dashboardController = {
   getClusterData: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    // example request: http://localhost:8080/api/dashboard/metrics?time=10m?namespace=monitoring
+    // example request: http://localhost:8080/api/dashboard/metrics?time=10m&namespace=monitoring
     
     let { time, namespace }: { time?: string | undefined; namespace?: string | undefined } = req.query;
     if (!time) time = '';
@@ -154,6 +152,8 @@ const dashboardController = {
 };
 
 export default dashboardController;
+
+//DELETE IF UNNEEDED
 
 // // Extract data from API reqs
 // const cpuUsage = responseCpuUsage.data.data.result.map((item: PromResult) => item.value);
