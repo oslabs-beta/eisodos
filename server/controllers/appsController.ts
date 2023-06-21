@@ -18,36 +18,41 @@ const appsController = {
     try {
       // Initialize Kube config
       const kc = new k8s.KubeConfig();
-      // Load config from default
       kc.loadFromDefault();
-      // Create coreV1api instance using the config
       const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
-      // Retrieve pod list using method
       const { body: podList } = await k8sApi.listPodForAllNamespaces();
-      // Initialize an empty object to store pod info
       const namespaceGroupedPods: GroupedPods = {};
 
-      // Iterate over each pod
       for (const pod of podList.items) {
         const namespace = pod.metadata?.namespace;
-        const name = pod.metadata?.name;
+        const fullName = pod.metadata?.name;
         const status = pod.status?.phase;
 
-        // // Extract namespace, name, status, and appName from pod data
-        if (!namespace || !name || !status) continue; // Skip pods with undefined or unknown namespaces, appNames
+        if (!namespace || !fullName || !status) continue;
 
-        // If namespace doesn't exist in namespaceGroupedPods, create it
+        let baseName = fullName.replace(/-\d.*$/, ''); // String that starts with a hyphen - followed by any digit
+
+        // If baseName is a node exporter pod, strip unique identifier
+        if (baseName.startsWith('my-monitoring-prometheus-node-exporter')) {
+          baseName = 'my-monitoring-prometheus-node-exporter';
+        }
+
         if (!namespaceGroupedPods[namespace]) {
           namespaceGroupedPods[namespace] = {};
         }
 
-        // If appName doesn't exist in the namespace data, create it
-        if (!namespaceGroupedPods[namespace][name]) {
-          namespaceGroupedPods[namespace][name] = {};
-        }
+        const appKeys = Object.keys(namespaceGroupedPods[namespace]);
 
-        // Add the pod's name and status to its respective namespace and appName
-        namespaceGroupedPods[namespace][name] = { status };
+        // Check if the baseName matches the root name of any existing app keys
+        const matchingKey = appKeys.find((key) => baseName.startsWith(key));
+
+        if (matchingKey) {
+          // If a matching key is found, update its status
+          namespaceGroupedPods[namespace][matchingKey].status = status;
+        } else {
+          // If no matching key is found, create a new entry
+          namespaceGroupedPods[namespace][baseName] = { status };
+        }
       }
 
       res.locals.pods = namespaceGroupedPods;
