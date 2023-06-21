@@ -4,7 +4,7 @@ import hierarchyController from '../controllers/hierarchyController';
 
 const router = express.Router();
 
-router.get('/cluster', isAuthenticated, hierarchyController.showCluster, (req, res) => {
+router.get('/tree', isAuthenticated, hierarchyController.showCluster, (req, res) => {
   return res.status(200).json(res.locals.cluster);
 });
 
