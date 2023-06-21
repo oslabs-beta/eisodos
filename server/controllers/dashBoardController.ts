@@ -6,6 +6,8 @@ import { current } from '@reduxjs/toolkit';
 // Interfaces define the structure and types of the data received from the API response
 interface PromResult {
   metric: Record<string, string>;
+
+  //TODO: MAKE SURE THIS WORKS FOR BOTH TYPES OF RESPONSES
   values: [number, string][];
   value: [number, string][];
 }
@@ -43,6 +45,8 @@ interface Pod {
 
 const dashboardController = {
   getClusterData: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    // example request: http://localhost:8080/api/dashboard/metrics?time=10m?namespace=monitoring
+    
     let { time, namespace }: { time?: string | undefined; namespace?: string | undefined } = req.query;
     if (!time) time = '';
     else time = '[' + time + ']';
