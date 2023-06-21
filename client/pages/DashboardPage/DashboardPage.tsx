@@ -45,7 +45,7 @@ const DashboardPage = () => {
         </ul>
       </nav>
       {/* active tab */}
-      <div>
+      <div className="bg-black-2">
         <Outlet />
       </div>
     </div>
