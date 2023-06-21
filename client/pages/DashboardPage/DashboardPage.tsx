@@ -22,9 +22,9 @@ const DashboardPage = () => {
   const location = useLocation();
 
   return (
-    <div className="flex">
+    <div className="flex h-max">
       {/* sidebar */}
-      <nav className="flex flex-col gap-y-10 px-6 pt-16">
+      <nav className="sticky top-0 flex h-screen flex-col gap-y-10 px-6 pt-16">
         {/* current cluster */}
         {/* TODO: turn this into a dropdown */}
         <Menu as="div">
@@ -45,7 +45,7 @@ const DashboardPage = () => {
         </ul>
       </nav>
       {/* active tab */}
-      <div className="bg-black-2">
+      <div className="flex-1 bg-black-2 px-14 py-16">
         <Outlet />
       </div>
     </div>
