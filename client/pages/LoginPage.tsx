@@ -34,10 +34,10 @@ const LoginPage = () => {
   return (
     <div>
       <Link to="/">
-        <img src="./assets/logo.png" className="h-32 w-32" />
+        <img src="./assets/logo.png" className="h-24 w-24" />
       </Link>
       <div className="mt-36 flex flex-col items-center justify-center">
-        <div className="h-2/4 w-1/4 rounded-lg bg-gradient-to-r from-green-400 via-cyan-500 to-blue-800 p-0.5">
+        <div className="h-2/4 w-1/4 rounded-lg bg-gradient-to-r from-green-400 via-cyan-500 to-blue-600 p-0.5">
           <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
             <form className="flex flex-col items-center">
               <title className="mb-10 block text-3xl font-bold">Log in to your account</title>
@@ -63,10 +63,10 @@ const LoginPage = () => {
               <button
                 type="submit"
                 onClick={(e) => loginUser(e, username, password)}
-                className="mb-2 mt-6 w-full rounded bg-gradient-to-r from-green-400 via-cyan-500 to-blue-800 py-2 font-bold">
-                Log in
+                className="mb-2 mt-6 w-full rounded bg-gradient-to-r from-green-400 via-cyan-500 to-blue-600 py-2 font-bold">
+                Log In
               </button>
-              <Link to="/register" className="hover:underline">
+              <Link to="/register" className="mt-2 hover:underline">
                 Don&apos;t have an account? Sign up here
               </Link>
             </form>
