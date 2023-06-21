@@ -11,6 +11,8 @@
   "author": "James Adler, Pearl Chang, Ron Liu, Mahir Mohtasin, Aalayah Olaes",
   "license": "ISC",
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "@kubernetes/client-node": "^0.18.1",
     "@nivo/bar": "^0.83.0",
     "@nivo/core": "^0.83.0",
