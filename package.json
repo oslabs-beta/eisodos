@@ -31,7 +31,9 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "react": "^18.2.0",
+    "react-d3-tree": "^3.6.1",
     "react-dom": "^18.2.0",
+    "react-force-graph": "^1.43.0",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2"
   },
