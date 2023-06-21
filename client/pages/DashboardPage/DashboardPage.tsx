@@ -24,7 +24,7 @@ const DashboardPage = () => {
   return (
     <div className="flex">
       {/* sidebar */}
-      <nav className="flex flex-col gap-y-8 px-6 pt-12">
+      <nav className="flex flex-col gap-y-10 px-6 pt-16">
         {/* current cluster */}
         {/* TODO: turn this into a dropdown */}
         <Menu as="div">
