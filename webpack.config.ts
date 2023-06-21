@@ -25,6 +25,7 @@ module.exports = {
       '/api': 'http://localhost:3010'
     },
     historyApiFallback: true,
+    // serves static files
     static: {
       directory: path.resolve(__dirname, './client/assets'),
       publicPath: '/assets'
