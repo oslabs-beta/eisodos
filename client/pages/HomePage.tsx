@@ -6,7 +6,7 @@ import RegisterPage from './RegisterPage';
 const HomePage = () => {
   return (
     <>
-      <nav className="flex justify-between bg-red-500">
+      <nav className="flex justify-between">
         <div className="flex space-x-3">
           <Link to="/">Overview</Link>
           <Link to="/#features">Features</Link>
