@@ -21,6 +21,7 @@ module.exports = {
         highlight: '#1A8BBF'
       },
       fontFamily: {
+        inter: ['Inter var', 'sans-serif'],
         lato: ['Lato', 'sans-serif']
       }
     }
