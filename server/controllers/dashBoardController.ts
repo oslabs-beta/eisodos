@@ -6,6 +6,8 @@ import { current } from '@reduxjs/toolkit';
 // Interfaces define the structure and types of the data received from the API response
 interface PromResult {
   metric: Record<string, string>;
+
+  //TODO: MAKE SURE THIS WORKS FOR BOTH TYPES OF RESPONSES
   values: [number, string][];
   value: [number, string][];
 }
@@ -27,8 +29,6 @@ interface DashboardData {
   services: number;
 }
 
-//james added typing
-
 interface PodMetrics {
   cpu?: [number, string][];
   memory?: [number, string][];
@@ -43,12 +43,14 @@ interface Pod {
 
 const dashboardController = {
   getClusterData: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    // example request: http://localhost:8080/api/dashboard/metrics?time=10m&namespace=monitoring
+    
     let { time, namespace }: { time?: string | undefined; namespace?: string | undefined } = req.query;
     if (!time) time = '';
     else time = '[' + time + ']';
 
     if (!namespace) namespace = '';
-    else namespace = ',namespace =' + namespace;
+    else namespace = ',namespace ="' + namespace+'"'
 
     try {
       // Retrieve CPU usage data
@@ -150,6 +152,8 @@ const dashboardController = {
 };
 
 export default dashboardController;
+
+//DELETE IF UNNEEDED
 
 // // Extract data from API reqs
 // const cpuUsage = responseCpuUsage.data.data.result.map((item: PromResult) => item.value);
