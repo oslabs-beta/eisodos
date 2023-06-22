@@ -6,29 +6,29 @@ const HomePage = () => {
   return (
     <>
       {/* navbar */}
-      <nav className="sticky top-0 z-50 flex h-24 justify-between px-10 backdrop-blur-sm">
+      <nav className="fixed top-0 z-50 flex h-24 w-screen justify-between px-10 backdrop-blur-sm">
         {/* left side */}
         <div className="flex items-center space-x-3 text-lg">
-          <NavLink to="overview" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
+          <NavLink to="overview" spy={true} smooth={true} duration={500} className="hover:underline">
             Overview
           </NavLink>
-          <NavLink to="features" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
+          <NavLink to="features" spy={true} smooth={true} duration={500} className="hover:underline">
             Features
           </NavLink>
-          <NavLink to="demo" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
+          <NavLink to="demo" spy={true} smooth={true} duration={500} className="hover:underline">
             Demo
           </NavLink>
-          <NavLink to="get-started" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
+          <NavLink to="get-started" spy={true} smooth={true} duration={500} className="hover:underline">
             Get Started
           </NavLink>
-          <NavLink to="team" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
+          <NavLink to="team" spy={true} smooth={true} duration={500} className="hover:underline">
             Team
           </NavLink>
           <a href="https://github.com/oslabs-beta/eisodos" target="_blank" rel="noreferrer">
-            <img src="./assets/logos/github.png" className="h-6 w-6" />
+            <img src="./assets/logos/github.png" className="h-6 w-6 pb-0.5" />
           </a>
           <a href="https://linkedin.com/company/eisodos-app" target="_blank" rel="noreferrer">
-            <img src="./assets/logos/linkedin.png" className="mt-1 h-6 w-6" />
+            <img src="./assets/logos/linkedin.png" className="h-6 w-6" />
           </a>
         </div>
         {/* right side */}
