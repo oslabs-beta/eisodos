@@ -33,10 +33,12 @@ const HomePage = () => {
           </a>
         </div>
         <div className="mr-10 flex items-center space-x-3">
-          <Link to="/login" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-2 font-bold">
+          <Link to="/login" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-1 text-lg font-bold">
             Log In
           </Link>
-          <Link to="/register" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 font-bold">
+          <Link
+            to="/register"
+            className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1 text-lg font-bold">
             Sign Up
           </Link>
         </div>

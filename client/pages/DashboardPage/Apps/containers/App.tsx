@@ -15,7 +15,7 @@ const App = (props: AppProps) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 100 100"
-          fill="#4CAF50"
+          fill="#4ade80"
           className="mt-0.5 h-2 w-2 animate-pulse">
           <circle cx="50" cy="50" r="50" />
         </svg>
