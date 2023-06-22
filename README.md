@@ -37,7 +37,7 @@ This application requires you to run your kubernetes cluster locally. We suggest
 
 5. Create your cluster
    - Create a cluster with default settings `kind create cluster`
-   - if you wish to create a custom cluster please visist the quick start kind [guide](https://kind.sigs.k8s.io/docs/user/quick-start/#creating-a-cluster)
+   - if you wish to create a custom cluster please visist the quick start kind [guide](https://kind.sigs.k8s.io/docs/user/ quick-start/#creating-a-cluster). This guide will also serve to help you with configuring your cluster in Kind. 
 
 
 Now that we have our default cluster running you can set up prometheus. This guide will set up the version of prometheus that it works best with but you are free to try others as well. If you follow our guide note that you are working with [release .10](https://github.com/prometheus-operator/kube-prometheus/tree/release-0.10) of the kube prometheus repository for version 1.23 of kubernetes. 
@@ -77,22 +77,20 @@ Now that we have our default cluster running you can set up prometheus. This gui
 
    Please wait for all pods to be in a ready state before continuing (to check this run `kubectl -n monitoring get pods`)
 
-11. Finally with your CRDs created from the manifests you gathered you can configure Prometheus with a yaml file. We have provided a template for doing so with the correct versions but you can make changes if you would like.
+11. With your CRDs created from the manifests you gathered you can configure Prometheus with a yaml file. We have provided a template for doing so with the correct versions but you can make changes if you would like.
+   - if using our YAML file run `kubectl apply -n monitoring -f prometheus.yaml`
 
 12. Now that prometheus is set up, you can deploy your application to this cluster using kubectl to do so. Don't forget to add service monitors so that prometheus can scrape metrics for you! 
 
+13. One last thing! Once your app is running in the cluster and configured to your liking you will need to expose port 9090 to enable metric scraping. 
+   - `kubectl -n monitoring port-forward svc/prometheus-operated 9090`
+   
 
 
-
-
-
-### Setup Guide 
+### Eisodos Setup Guide 
 - `npm install` to install dependencies
 - Set project name, description, and authors in `package.json`
 - Add your MongoDB connection string to `mongoURI` in `server.js`
-
-Instructions:
-
 
 
 
