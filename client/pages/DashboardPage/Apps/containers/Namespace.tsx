@@ -18,9 +18,10 @@ const Namespace = (props: NamespaceProps) => {
         </div>
       </div>
       <div className="mb-10 mt-6 flex max-w-7xl flex-wrap gap-5">
-        {apps.map((name) => (
-          <App key={name} name={name} />
-        ))}
+        {/* TODO: use additional data for apps */}
+        {Object.entries(apps).map(([name, data]) => {
+          return <App key={name} name={name} />;
+        })}
       </div>
     </section>
   );
