@@ -7,11 +7,28 @@ interface CPUUsageChartProps {
 }
 
 const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
+  
+  const formatTime = (timestamp: number) => {
+    const date = new Date(timestamp * 1000); // Converting to milliseconds
+    return date.toLocaleTimeString('en-GB'); // You can use toLocaleDateString for dates
+  };
+
+   // Preprocessing the data to include formatted timestamps
+   const formattedData = useMemo(() => {
+    return chartData.map(series => ({
+      ...series,
+      data: series.data.map(point => ({
+        ...point,
+        x: formatTime(point.x)
+      }))
+    }));
+  }, [chartData]);
+ 
 
   return (
     <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
       <ResponsiveLine
-        data={chartData}
+        data={formattedData}
         margin={{ top: 50, right: 110, bottom: 100, left: 80 }}
         xScale={{ type: 'point' }}
         yScale={{

@@ -58,7 +58,7 @@ const Health = () => {
   return (
     <div className="px-14 py-16">
       <div className="grid-cols-2 rounded-lg bg-black-2">
-        <div className="flex-col flex items-center justify-center rounded-lg border border-white">
+        <div className="flex-col flex items-center justify-center rounded-lg">
           <p className="justify-self-center">CPU Usage &#37;</p>
           <CPUResponsiveBar />
         </div>
