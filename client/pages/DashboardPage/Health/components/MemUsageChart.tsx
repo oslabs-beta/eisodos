@@ -34,7 +34,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
         yScale={{
           type: 'linear',
           min: 0,
-          max: 10000,
+          max: 'auto',
           stacked: true,
           reverse: false
         }}
