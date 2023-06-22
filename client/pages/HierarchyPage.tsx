@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ForceGraph2D } from 'react-force-graph';
 import axios from 'axios';
+import Legend from './Legend';
 
 interface Pod {
   name: string;
@@ -22,6 +23,9 @@ interface ClusterHierarchy {
 
 interface ForceGraphNode {
   id: string;
+  type: string; // differentiate between different node types
+  x?: number; // x-coordinate
+  y?: number; // y-coordinate
 }
 
 interface ForceGraphLink {
@@ -52,19 +56,14 @@ const HierarchyPage: React.FC = () => {
     const links: ForceGraphLink[] = [];
     // Loop through the namespaces
     data.namespaces.forEach((namespace) => {
-      nodes.push({ id: namespace.name });
-      // Add the namespace as a node
+      nodes.push({ id: namespace.name, type: 'namespace' });
       // Loop through the nodes within the namespace
       namespace.nodes.forEach((node) => {
-        // Add the node as a node
-        nodes.push({ id: node.name });
-        // Create links between the namespace and the node
+        nodes.push({ id: node.name, type: 'node' });
         links.push({ source: namespace.name, target: node.name });
         // Loop through the pods within the node
         node.pods.forEach((pod) => {
-          // Add the pod as a node
-          nodes.push({ id: pod.name });
-          // Create links between the node and the pod
+          nodes.push({ id: pod.name, type: 'pod' });
           links.push({ source: node.name, target: pod.name });
         });
       });
@@ -83,7 +82,30 @@ const HierarchyPage: React.FC = () => {
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
-      <ForceGraph2D graphData={{ nodes, links }} />
+      <Legend />
+      <ForceGraph2D
+        graphData={{ nodes, links }}
+        nodeCanvasObject={(node, ctx) => {
+          if (typeof node.x === 'number' && typeof node.y === 'number') {
+            ctx.beginPath();
+            if (node.type === 'namespace') {
+              ctx.fillStyle = '#2563eb';
+              ctx.rect(node.x - 10, node.y - 10, 20, 20); // Draw a square
+            } else if (node.type === 'node') {
+              ctx.fillStyle = '#22d3ee';
+              ctx.moveTo(node.x, node.y - 10);
+              ctx.lineTo(node.x + 10, node.y + 10);
+              ctx.lineTo(node.x - 10, node.y + 10);
+              ctx.closePath(); // Draw a triangle
+            } else {
+              ctx.fillStyle = '#4ade80';
+              ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI, false); // Draw a circle
+            }
+            ctx.fill();
+          }
+        }}
+        linkColor={() => '#e1e4e8'} // links color
+      />
     </div>
   );
 };
