@@ -15,9 +15,9 @@ const HomePage = () => {
           <NavLink to="features" spy={true} smooth={true} duration={500} className="hover:underline">
             Features
           </NavLink>
-          <NavLink to="demo" spy={true} smooth={true} duration={500} className="hover:underline">
+          {/* <NavLink to="demo" spy={true} smooth={true} duration={500} className="hover:underline">
             Demo
-          </NavLink>
+          </NavLink> */}
           <NavLink to="get-started" spy={true} smooth={true} duration={500} className="hover:underline">
             Get Started
           </NavLink>
@@ -115,17 +115,17 @@ const HomePage = () => {
       </section>
 
       {/* demo */}
-      <section id="demo" className="flex h-screen flex-col items-center justify-center">
+      {/* <section id="demo" className="flex h-screen flex-col items-center justify-center">
         <h1 className="pb-8 text-3xl font-bold">Demo</h1>
-      </section>
+      </section> */}
 
       {/* get started */}
       <section id="get-started" className="flex h-screen flex-col items-center justify-center">
         <h1 className="pb-8 text-3xl font-bold">Get Started</h1>
-        <p> Eisodos is easy to use!</p>
-        <p>
+        <p className="text-2xl"> Eisodos is easy to use!</p>
+        <p className="text-2xl">
           Follow the instructions listed under &quot;Installation&quot; on our{' '}
-          <a href="https://github.com/oslabs-beta/eisodos" className="underline">
+          <a href="https://github.com/oslabs-beta/eisodos" className="underline hover:text-blue-3">
             GitHub
           </a>{' '}
           page to get started quickly!
@@ -133,12 +133,12 @@ const HomePage = () => {
       </section>
 
       {/* team */}
-      <section id="team" className="flex h-screen flex-col items-center justify-center">
-        <h1 className="pb-8 text-center text-3xl font-bold">Meet the Team</h1>
-        <div className="mx-56 flex flex-row justify-around">
+      <section id="team" className="flex h-screen flex-col text-center">
+        <h1 className="mb-10 pb-8 text-center text-3xl font-bold">Meet the Team</h1>
+        <div className="mx-48 flex justify-evenly text-xl">
           <div>
-            <img src="./assets/photos/aalayah.png" className="h-36 w-36 rounded-full object-cover" />
-            <h1>Aalayah Olaes</h1>
+            <img src="./assets/photos/aalayah.png" className="h-44 w-44 rounded-full object-cover" />
+            <h1 className="mb-4 mt-6">Aalayah Olaes</h1>
             <div className="flex flex-row justify-evenly">
               <a href="https://github.com/AalayahOlaes" target="_blank" rel="noreferrer">
                 <img src="./assets/logos/github.png" className="h-6 w-6" />
@@ -150,8 +150,8 @@ const HomePage = () => {
           </div>
 
           <div>
-            <img src="./assets/photos/james.png" className="h-36 w-36 rounded-full object-cover" />
-            <h1>James Adler</h1>
+            <img src="./assets/photos/james.png" className="h-44 w-44 rounded-full object-cover" />
+            <h1 className="mb-4 mt-6">James Adler</h1>
             <div className="flex flex-row justify-evenly">
               <a href="https://github.com/jadler999" target="_blank" rel="noreferrer">
                 <img src="./assets/logos/github.png" className="h-6 w-6" />
@@ -163,8 +163,8 @@ const HomePage = () => {
           </div>
 
           <div>
-            <img src="./assets/photos/mahir.png" className="h-36 w-36 rounded-full object-cover" />
-            <h1>Mahir Mohtasin</h1>
+            <img src="./assets/photos/mahir.png" className="h-44 w-44 rounded-full object-cover" />
+            <h1 className="mb-4 mt-6">Mahir Mohtasin</h1>
             <div className="flex flex-row justify-evenly">
               <a href="https://github.com/viiewss" target="_blank" rel="noreferrer">
                 <img src="./assets/logos/github.png" className="h-6 w-6" />
@@ -176,8 +176,8 @@ const HomePage = () => {
           </div>
 
           <div>
-            <img src="./assets/photos/pearl.png" className="h-36 w-36 rounded-full object-cover" />
-            <h1>Pearl Chang</h1>
+            <img src="./assets/photos/pearl.png" className="h-44 w-44 rounded-full object-cover" />
+            <h1 className="mb-4 mt-6">Pearl Chang</h1>
             <div className="flex flex-row justify-evenly">
               <a href="https://github.com/pearlhchang" target="_blank" rel="noreferrer">
                 <img src="./assets/logos/github.png" className="h-6 w-6" />
@@ -189,8 +189,8 @@ const HomePage = () => {
           </div>
 
           <div>
-            <img src="./assets/photos/ron.png" className="h-36 w-36 rounded-full object-cover" />
-            <h1>Ron Liu</h1>
+            <img src="./assets/photos/ron.png" className="h-44 w-44 rounded-full object-cover" />
+            <h1 className="mb-4 mt-6">Ron Liu</h1>
             <div className="flex flex-row justify-evenly">
               <a href="https://github.com/ronliu" target="_blank" rel="noreferrer">
                 <img src="./assets/logos/github.png" className="h-6 w-6" />

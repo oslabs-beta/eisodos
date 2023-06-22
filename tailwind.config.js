@@ -22,7 +22,7 @@ module.exports = {
           DEFAULT: colors.blue,
           1: 'rgb(10, 77, 104)',
           2: 'rgb(0, 43, 91)',
-          3: 'rgb(0, 29, 110)'
+          3: 'rgb(11,173,214)'
         },
         highlight: '#1A8BBF',
         shadow: '#0D2F4F'
