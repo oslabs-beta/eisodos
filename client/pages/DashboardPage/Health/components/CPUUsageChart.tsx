@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import type { DataObj } from '../health.types';
 
@@ -7,6 +7,7 @@ interface CPUUsageChartProps {
 }
 
 const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
+
   return (
     <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
       <ResponsiveLine
@@ -15,8 +16,8 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
-          min: 'auto',
-          max: 0.005,
+          min: 0,
+          max: 4500,
           stacked: true,
           reverse: false
         }}

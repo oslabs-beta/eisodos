@@ -3,7 +3,7 @@ import { ResponsiveBar } from '@nivo/bar';
 
 const CPUResponsiveBar = () => {
   return (
-    <div className="h-48 w-1/2">
+    <div className="h-48 w-3/4">
       <ResponsiveBar
         data={[
           {

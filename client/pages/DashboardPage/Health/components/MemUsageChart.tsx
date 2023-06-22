@@ -8,15 +8,15 @@ interface MemChartProps {
 
 const MemChart = ({ chartData }: MemChartProps) => {
   return (
-    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10 ml-5">
+    <div className="ml-5 mt-10 h-96 max-w-full rounded-lg bg-black-3">
       <ResponsiveLine
         data={chartData}
         margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
-          min: 'auto',
-          max: 400000000,
+          min: 0,
+          max: 4000,
           stacked: true,
           reverse: false
         }}
@@ -36,7 +36,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
           tickPadding: 0,
           tickRotation: 0,
           legend: 'Memory Usage',
-          legendOffset: -80,
+          legendOffset: -60,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -78,15 +78,15 @@ const MemChart = ({ chartData }: MemChartProps) => {
             ticks: {
               text: {
                 fill: '#f5f5f5',
-                opacity: 0.75,
-              },
+                opacity: 0.75
+              }
             },
             legend: {
               text: {
-                fill: '#f5f5f5',
-              },
-            },
-          },
+                fill: '#f5f5f5'
+              }
+            }
+          }
         }}
         colors={['#1B9C85']}
       />

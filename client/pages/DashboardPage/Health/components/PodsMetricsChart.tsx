@@ -4,7 +4,7 @@ type MetricProps = {
   label: string;
 };
 
-const PodsMetricsTable: FC<MetricProps> = (props) => {
+const PodsMetricsTable = (props: MetricProps) => {
   const [metricDivs, setMetricDivs] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const PodsMetricsTable: FC<MetricProps> = (props) => {
           newMetricDivs.push(
             <div id="metric-box">
               <div id="metric-label">{prop}</div>
-              <div id="metric-value" className="rounded-lg border border-white">
+              <div id="metric-value" className="rounded-lg text-center">
                 {data[prop]}
               </div>
             </div>
@@ -33,7 +33,7 @@ const PodsMetricsTable: FC<MetricProps> = (props) => {
   }, []);
 
   return (
-    <div id="metrics-table" className="flex justify-evenly border border-white">
+    <div id="metrics-table" className="flex justify-evenly items-center">
       {metricDivs}
     </div>
   );
