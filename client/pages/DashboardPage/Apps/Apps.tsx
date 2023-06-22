@@ -17,6 +17,7 @@ const Apps = () => {
 
   return (
     <div className="mx-auto w-fit">
+    <div className="mx-auto w-fit px-14 py-16">
       {Object.entries(data).map(([namespace, apps]) => (
         <Namespace key={namespace} namespace={namespace} apps={apps} />
       ))}

@@ -49,7 +49,7 @@ const DashboardPage = () => {
         </ul>
       </nav>
       {/* active tab */}
-      <div className="flex-1 bg-black-1 px-14 py-16">
+      <div className="w-full flex-1 bg-black-1">
         <Outlet />
       </div>
     </div>

@@ -57,6 +57,7 @@ const Health = () => {
 
   return (
     <div>
+    <div className="px-14 py-16">
       <div>
         <CPUResponsiveBar />
         <PodsMetricsTable label="Pod Metrics" />

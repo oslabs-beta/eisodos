@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ForceGraph2D } from 'react-force-graph';
 import axios from 'axios';
+import { ForceGraph2D } from 'react-force-graph';
+import { SizeMe } from 'react-sizeme';
 import Legend from './Legend';
 
 interface Pod {
@@ -102,36 +103,39 @@ const Diagram = () => {
   }, [clusterData]);
 
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
+    <div className="relative">
       <Legend />
-      <ForceGraph2D
-        width={1376} //make responsive?
-        height={800} //make responsive?
-        graphData={{ nodes, links }} // Set nodes and links data for the graph ... we have to define custom rednerding for nodes
-        nodeCanvasObject={(node, ctx) => {
-          if (typeof node.x === 'number' && typeof node.y === 'number') {
-            // Make sure node has coords
-            ctx.beginPath(); //  Start path for drawing
-            if (node.type === 'namespace') {
-              // If node is namespace
-              ctx.fillStyle = '#2563eb'; // Set color
-              ctx.rect(node.x - 10, node.y - 10, 20, 20); // Draw a square
-            } else if (node.type === 'node') {
-              // If node is a node
-              ctx.fillStyle = '#22d3ee'; // Set color
-              ctx.moveTo(node.x, node.y - 10); // Start triangle path :(
-              ctx.lineTo(node.x + 10, node.y + 10); // Draw first line of tri
-              ctx.lineTo(node.x - 10, node.y + 10); // Draw second line of tri
-              ctx.closePath(); // Draw a triangle
-            } else {
-              ctx.fillStyle = '#4ade80'; // If pod set color and draw circle
-              ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI, false); // Draw a circle
-            }
-            ctx.fill();
-          }
-        }}
-        linkColor={() => '#e1e4e8'} // links color
-      />
+      <SizeMe>
+        {({ size }) => (
+          <ForceGraph2D
+            width={size.width ? size.width : undefined}
+            graphData={{ nodes, links }} // Set nodes and links data for the graph ... we have to define custom rednerding for nodes
+            nodeCanvasObject={(node, ctx) => {
+              if (typeof node.x === 'number' && typeof node.y === 'number') {
+                // Make sure node has coords
+                ctx.beginPath(); //  Start path for drawing
+                if (node.type === 'namespace') {
+                  // If node is namespace
+                  ctx.fillStyle = '#2563eb'; // Set color
+                  ctx.rect(node.x - 10, node.y - 10, 20, 20); // Draw a square
+                } else if (node.type === 'node') {
+                  // If node is a node
+                  ctx.fillStyle = '#22d3ee'; // Set color
+                  ctx.moveTo(node.x, node.y - 10); // Start triangle path :(
+                  ctx.lineTo(node.x + 10, node.y + 10); // Draw first line of tri
+                  ctx.lineTo(node.x - 10, node.y + 10); // Draw second line of tri
+                  ctx.closePath(); // Draw a triangle
+                } else {
+                  ctx.fillStyle = '#4ade80'; // If pod set color and draw circle
+                  ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI, false); // Draw a circle
+                }
+                ctx.fill();
+              }
+            }}
+            linkColor={() => '#e1e4e8'} // links color
+          />
+        )}
+      </SizeMe>
     </div>
   );
 };
