@@ -132,7 +132,7 @@ const HomePage = () => {
 
       <section id="team" className="text-center">
         <h1 className="pb-8 text-center text-3xl font-bold">Meet the Team</h1>
-        <div className="flex flex-row justify-around">
+        <div className="mx-56 flex flex-row justify-around">
           <div>
             <img src="./assets/photos/aalayah.png" className="h-36 w-36 rounded-full object-cover" />
             <h1>Aalayah Olaes</h1>
