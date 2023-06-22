@@ -11,7 +11,12 @@ const Namespace = (props: NamespaceProps) => {
 
   return (
     <section>
-      <label className="rounded-lg bg-white/20 px-3.5 py-2.5">{namespace}</label>
+      <div className="flex flex-wrap justify-start text-center">
+        <div className="rounded-lg border border-blue-600 px-4 py-2">
+          <span>Namespace: </span>
+          <label className="ml-2 font-bold">{namespace}</label>
+        </div>
+      </div>
       <div className="mb-10 mt-6 flex max-w-7xl flex-wrap gap-5">
         {apps.map((name) => (
           <App key={name} name={name} />
