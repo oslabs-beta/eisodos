@@ -105,6 +105,7 @@ const Diagram = () => {
   return (
     <div className="relative">
       <Legend />
+      {/* TODO: make this resize the canvas in real-time */}
       <SizeMe>
         {({ size }) => (
           <ForceGraph2D
