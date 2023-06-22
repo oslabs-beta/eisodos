@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 const navigation = [
   { name: 'Health', path: 'health' },
   { name: 'Apps', path: 'apps' },
-  { name: 'Nodes', path: 'nodes' }
+  { name: 'Diagram', path: 'diagram' }
 ];
 
 // this is used to highlight the active tab and gray out inactive ones
@@ -49,7 +49,7 @@ const DashboardPage = () => {
         </ul>
       </nav>
       {/* active tab */}
-      <div className="flex-1 bg-black-1 px-14 py-16">
+      <div className="w-full flex-1 bg-black-1">
         <Outlet />
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import type { DataObj } from '../charts.types';
+import type { DataObj } from '../health.types';
 
-interface MemChartProps {
+interface NetworkTransmitProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const MemChart = ({ chartData }: MemChartProps) => {
+const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
@@ -16,7 +16,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 400000000,
+          max: 'auto',
           stacked: true,
           reverse: false
         }}
@@ -36,7 +36,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
           tickPadding: 5,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -80,
+          legendOffset: -70,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -72,10 +72,10 @@ const MemChart = ({ chartData }: MemChartProps) => {
             ]
           }
         ]}
-        colors={['#1B9C85']}
+        colors={['#8EAC50']}
       />
     </div>
   );
 };
 
-export default MemChart;
+export default NetworkTransmitChart;
