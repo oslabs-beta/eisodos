@@ -6,10 +6,9 @@ const HomePage = () => {
   return (
     <>
       {/* navbar */}
-      <nav className="sticky top-0 z-50 flex h-24 justify-between backdrop-blur-sm">
+      <nav className="sticky top-0 z-50 flex h-24 justify-between px-10 backdrop-blur-sm">
         {/* left side */}
         <div className="flex items-center space-x-3 text-lg">
-          <img src="./assets/logos/eisodos.png" className="h-24 w-24" />
           <NavLink to="overview" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
             Overview
           </NavLink>
@@ -28,12 +27,12 @@ const HomePage = () => {
           <a href="https://github.com/oslabs-beta/eisodos" target="_blank" rel="noreferrer">
             <img src="./assets/logos/github.png" className="h-6 w-6" />
           </a>
-          <a href="https://www.linkedin.com/company/eisodos" target="_blank" rel="noreferrer">
+          <a href="https://linkedin.com/company/eisodos-app" target="_blank" rel="noreferrer">
             <img src="./assets/logos/linkedin.png" className="mt-1 h-6 w-6" />
           </a>
         </div>
         {/* right side */}
-        <div className="mr-10 flex items-center space-x-3">
+        <div className="flex items-center space-x-3">
           <Link to="/login" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-1 text-lg font-bold">
             Log In
           </Link>
@@ -46,13 +45,13 @@ const HomePage = () => {
       </nav>
 
       {/* overview */}
-      <section id="overview" className="h-screen">
-        <div>
-          <h1 className="text-3xl font-bold">Introducing Eisodos</h1>
-          <p>
-            Eisodos is a developer-friendly application to easily monitor and visualize key Kubernetes health metrics
-            and cluster data.
-          </p>
+      <section id="overview" className="relative flex h-screen justify-center">
+        <div className="absolute top-1/4 flex h-fit items-center gap-x-10">
+          <img src="./assets/logos/eisodos.png" className="h-80 w-80" />
+          <div>
+            <h1 className="text-6xl font-bold">Eisodos</h1>
+            <p>Monitor and visualize your key Kubernetes health metrics and cluster data</p>
+          </div>
         </div>
       </section>
 
