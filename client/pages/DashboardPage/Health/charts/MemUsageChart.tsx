@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import type { DataObj } from '../charts.types';
+import type { DataObj } from '../health.types';
 
 interface MemChartProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure

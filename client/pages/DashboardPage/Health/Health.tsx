@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { DataPoint, DataObj } from './charts.types';
+import { DataPoint, DataObj } from './health.types';
 
 // import chart components
 import CPUResponsiveBar from './charts/CPUBar';
