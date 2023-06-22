@@ -203,7 +203,7 @@ const dashboardController = {
               value: metric
             };
           } else {
-            cpuResult[i].value = (parseFloat(cpuResult[i].value) + parseFloat(metric)).toString();
+            cpuResult[i].value = (parseFloat(cpuResult[i].value) + parseFloat(metric)).toString().slice(0,8);
 
           }
         }
