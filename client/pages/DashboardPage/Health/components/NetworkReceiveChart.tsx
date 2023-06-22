@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import type { DataObj } from '../health.types';
 
@@ -7,10 +7,27 @@ interface NetworkReceiveProps {
 }
 
 const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
+  
+  const formatTime = (timestamp: number) => {
+    const date = new Date(timestamp * 1000); // Converting to milliseconds
+    return date.toLocaleTimeString('en-GB'); // You can use toLocaleDateString for dates
+  };
+
+   // Preprocessing the data to include formatted timestamps
+   const formattedData = useMemo(() => {
+    return chartData.map(series => ({
+      ...series,
+      data: series.data.map(point => ({
+        ...point,
+        x: formatTime(point.x)
+      }))
+    }));
+  }, [chartData]);
+
   return (
     <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
       <ResponsiveLine
-        data={chartData}
+        data={formattedData}
         margin={{ top: 50, right: 110, bottom: 90, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
@@ -28,7 +45,7 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
           tickPadding: 5,
           tickRotation: -45,
           legend: 'Time',
-          legendOffset: 85,
+          legendOffset: 58,
           legendPosition: 'middle'
         }}
         axisLeft={{

@@ -57,15 +57,15 @@ const Health = () => {
 
   return (
     <div className="px-14 py-16">
-      <div className="grid-cols-2 rounded-lg bg-black-2">
-        <div className="flex-col flex items-center justify-center rounded-lg">
-          <p className="justify-self-center">CPU Usage &#37;</p>
+      <div className="grid grid-cols-2 rounded-lg bg-black-2">
+        <div className="flex flex-col justify-center rounded-lg">
+          <p className="justify-self-start">CPU Usage &#37;</p>
           <CPUResponsiveBar />
         </div>
         <PodsMetricsTable label="Pod Metrics" />
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div className="flex flex-row gap-10">
         <div style={{ flexBasis: '50%' }}>
           <CPUUsageChart chartData={cpuData} />
         </div>

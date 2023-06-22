@@ -7,7 +7,7 @@ interface CPUUsageChartProps {
 }
 
 const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
-  
+
   const formatTime = (timestamp: number) => {
     const date = new Date(timestamp * 1000); // Converting to milliseconds
     return date.toLocaleTimeString('en-GB'); // You can use toLocaleDateString for dates
@@ -26,7 +26,8 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
  
 
   return (
-    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
+    <div className="h-96 max-w-full rounded-lg bg-black-2 mt-10">
+      <p className="justify-self-start">CPU Usage</p>
       <ResponsiveLine
         data={formattedData}
         margin={{ top: 50, right: 110, bottom: 100, left: 80 }}
@@ -34,7 +35,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         yScale={{
           type: 'linear',
           min: 0,
-          max: 4500,
+          max: 10000,
           stacked: true,
           reverse: false
         }}
@@ -46,7 +47,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
           tickPadding: 5,
           tickRotation: -45,
           legend: 'Time',
-          legendOffset: 85,
+          legendOffset: 58,
           legendPosition: 'middle'
         }}
         axisLeft={{
@@ -64,33 +65,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         pointLabelYOffset={-12}
         useMesh={true}
         enableArea={true}
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'column',
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: '#F5F5F5',
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemBackground: 'rgba(10, 2, 6, .51)',
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
+        legends={[]}
         theme={{
           axis: {
             ticks: {

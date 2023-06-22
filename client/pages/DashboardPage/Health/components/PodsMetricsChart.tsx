@@ -16,11 +16,11 @@ const PodsMetricsTable = (props: MetricProps) => {
         const newMetricDivs: JSX.Element[] = [];
         for (const prop in data) {
           newMetricDivs.push(
-            <div id="metric-box">
-              <div id="metric-label">{prop}</div>
-              <div id="metric-value" className="rounded-lg text-center">
+            <div id="metric-box" className="flex flex-col justify-center items-center">
+              <div id="metric-label" className="mb-2">{prop}</div>
+              <span id="metric-value" className="text-center border border-white rounded-lg px-2 py-1 w-14">
                 {data[prop]}
-              </div>
+              </span>
             </div>
           );
         }

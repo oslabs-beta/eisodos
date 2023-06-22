@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import type { DataObj } from '../health.types';
 
@@ -7,16 +7,34 @@ interface MemChartProps {
 }
 
 const MemChart = ({ chartData }: MemChartProps) => {
+  
+  const formatTime = (timestamp: number) => {
+    const date = new Date(timestamp * 1000); // Converting to milliseconds
+    return date.toLocaleTimeString('en-GB'); // You can use toLocaleDateString for dates
+  };
+
+   // Preprocessing the data to include formatted timestamps
+   const formattedData = useMemo(() => {
+    return chartData.map(series => ({
+      ...series,
+      data: series.data.map(point => ({
+        ...point,
+        x: formatTime(point.x)
+      }))
+    }));
+  }, [chartData]);
+  
   return (
-    <div className="ml-5 mt-10 h-96 max-w-full rounded-lg bg-black-3">
+    <div className="mt-10 h-96 max-w-full rounded-lg bg-black-2">
+      <p className="justify-self-start">Memory Usage</p>
       <ResponsiveLine
-        data={chartData}
+        data={formattedData}
         margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 0,
-          max: 4000,
+          max: 10000,
           stacked: true,
           reverse: false
         }}
@@ -28,7 +46,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
           tickPadding: 5,
           tickRotation: -45,
           legend: 'Time',
-          legendOffset: 85,
+          legendOffset: 58,
           legendPosition: 'middle'
         }}
         axisLeft={{
@@ -46,33 +64,6 @@ const MemChart = ({ chartData }: MemChartProps) => {
         pointLabelYOffset={-12}
         useMesh={true}
         enableArea={true}
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'column',
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: '#f5f5f5',
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemBackground: 'rgba(0, 0, 0, .03)',
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
         theme={{
           axis: {
             ticks: {
