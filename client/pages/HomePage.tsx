@@ -9,7 +9,7 @@ const HomePage = () => {
     <>
       <nav className="sticky top-0 z-50 flex h-24 justify-between backdrop-blur-sm">
         <div className="flex items-center space-x-3 text-lg">
-          <img src="./assets/logos/eisodos.png" className="ml-4 h-24 w-24" />
+          <img src="./assets/logos/eisodos.png" className="h-24 w-24" />
           <NavLink to="overview" spy={true} smooth={true} offset={50} duration={500} className="hover:underline">
             Overview
           </NavLink>
