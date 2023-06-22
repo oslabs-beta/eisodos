@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from 'react';
 
 type MetricProps = {
   label: string;
-}
+};
 
-const PodsMetricsTable: FC<MetricProps> = (props) => {
+const PodsMetricsTable = (props: MetricProps) => {
   const [metricDivs, setMetricDivs] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
@@ -16,11 +16,13 @@ const PodsMetricsTable: FC<MetricProps> = (props) => {
         const newMetricDivs: JSX.Element[] = [];
         for (const prop in data) {
           newMetricDivs.push(
-            <div id='metric-box'>
-              <div id='metric-label'>{prop}</div>
-              <div id='metric-value'>{data[prop]}</div>
+            <div id="metric-box" className="flex flex-col justify-center items-center">
+              <div id="metric-label" className="mb-2">{prop}</div>
+              <span id="metric-value" className="text-center border border-white rounded-lg px-2 py-1 w-14">
+                {data[prop]}
+              </span>
             </div>
-          )
+          );
         }
         setMetricDivs(newMetricDivs);
       } catch (error) {
@@ -31,10 +33,10 @@ const PodsMetricsTable: FC<MetricProps> = (props) => {
   }, []);
 
   return (
-    <div id="metrics-table">
+    <div id="metrics-table" className="grid grid-cols-5 px-10">
       {metricDivs}
     </div>
-  )
-}
+  );
+};
 
 export default PodsMetricsTable;

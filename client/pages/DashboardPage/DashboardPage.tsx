@@ -24,7 +24,7 @@ const DashboardPage = () => {
   return (
     <div className="flex h-max">
       {/* sidebar */}
-      <nav className="sticky top-0 flex h-screen flex-col gap-y-6 bg-black-2 px-6 pt-14">
+      <nav className="sticky top-0 flex h-screen flex-col gap-y-6 bg-black-2 px-6 pt-8">
         {/* current cluster */}
         {/* TODO: turn this into a dropdown */}
         <div className="flex items-center justify-start">
