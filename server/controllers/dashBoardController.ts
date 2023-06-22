@@ -203,7 +203,8 @@ const dashboardController = {
               value: metric
             };
           } else {
-            cpuResult[i].value = (parseFloat(cpuResult[i].value) + parseFloat(metric)).toString();
+            cpuResult[i].value = (parseFloat(cpuResult[i].value) + parseFloat(metric)).toString().slice(0,8);
+
           }
         }
       }
@@ -215,14 +216,20 @@ const dashboardController = {
 
         for (let i = 0; i < pod.metrics.memory.length; i++) {
           const [timestamp, metric] = pod.metrics.memory[i];
-
+          
+          //converting to gigabytes
+          const gigabytes = (parseFloat(metric) / 1000000000).toString()
+          
           if (!memResult[i]) {
             memResult[i] = {
               timestamp: timestamp,
-              value: metric
+              value: gigabytes
             };
           } else {
-            memResult[i].value = (parseFloat(memResult[i].value) + parseFloat(metric)).toString();
+            memResult[i].value = (parseFloat(memResult[i].value) + parseFloat(gigabytes)).toString().slice(0,6);
+            // while( memResult[i].value.length < 6){
+            //   memResult[i].value+='0'
+            // }
           }
         }
       }
@@ -256,25 +263,30 @@ const dashboardController = {
               receiveData.push(responseReceive.data.data.result[j].value);
             }
 
+
+            //converting to gigabytes
+            const transmitGigabytes = (parseFloat(transmitData[i][1])/1000000000).toString()
+
             //creating object for transmit data
-            
             if (!transmitResult[i]) {
               transmitResult[i] = {
                 timestamp: transmitData[i][0],
-                value: transmitData[i][1]
+                value: transmitGigabytes
               };
             } else {
-              transmitResult[i].value = (parseFloat(transmitResult[i].value) + parseFloat(transmitData[i][1])).toString();
+              transmitResult[i].value = (parseFloat(transmitResult[i].value) + parseFloat(transmitGigabytes)).toString().slice(0,6);
             }
-            
+
+            const receiveGigabytes = (parseFloat(receiveData[i][1])/1000000000).toString()
+
             //creating object for receive data
             if (!receiveResult[i]) {
               receiveResult[i] = {
                 timestamp: receiveData[i][0],
-                value: receiveData[i][1]
+                value: receiveGigabytes
               };
             } else {
-              receiveResult[i].value = (parseFloat(receiveResult[i].value) + parseFloat(receiveData[i][1])).toString();
+              receiveResult[i].value = (parseFloat(receiveResult[i].value) + parseFloat(receiveGigabytes)).toString().slice(0,6);
             }
           }
         }
