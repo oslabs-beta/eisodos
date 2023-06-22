@@ -30,8 +30,10 @@ interface DashboardData {
 }
 
 interface GlobalMetrics {
-  cpu: MetricData[]
-  memory: MetricData[]
+  cpu: MetricData[];
+  memory: MetricData[];
+  transmit: MetricData[];
+  receive: MetricData[];
 }
 interface MetricData {
   timestamp: number;
@@ -133,6 +135,8 @@ const dashboardController = {
     //querying for data
     try {
       //Retrieve CPU usage
+
+      //TODO REMOVE CONTAINER != "" FOR GLOBAL METRICS
       const responseCpuUsage = await axios.get<QueryResponse>(
         `http://localhost:9090/api/v1/query?query=container_cpu_usage_seconds_total{container!=""${namespace}}${time}`
       );
@@ -141,7 +145,17 @@ const dashboardController = {
         `http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{container!=""${namespace}}${time}`
       );
 
-      //Formatting Response from queries
+      // Retrieve network transmit
+      const responseTransmit = await axios.get<QueryResponse>(
+        `http://localhost:9090/api/v1/query?query=node_network_transmit_bytes_total{container!=""${namespace}}${time}`
+      );
+
+      // Retrieve network receive
+      const responseReceive = await axios.get<QueryResponse>(
+        `http://localhost:9090/api/v1/query?query=node_network_receive_bytes_total{container!=""${namespace}}${time}`
+      );
+
+      //Formatting Response from CPU and Mem response
       const formattedResponse: Pod[] = [];
       for (let i = 0; i < responseCpuUsage.data.data.result.length; i++) {
         //intialize data
@@ -175,7 +189,7 @@ const dashboardController = {
 
       const cpuResult: MetricData[] = [];
 
-      // looping through formatted responses for CPU data and aggregating data across all pods 
+      // looping through formatted responses for CPU data and aggregating data across all pods
       for (const pod of formattedResponse) {
         if (!pod.metrics.cpu) continue;
 
@@ -193,13 +207,13 @@ const dashboardController = {
         }
       }
 
-      // looping through formatted responses for memory data and aggregating data across all pods 
+      // looping through formatted responses for memory data and aggregating data across all pods
       const memResult: MetricData[] = [];
       for (const pod of formattedResponse) {
-        if (!pod.metrics.cpu) continue;
+        if (!pod.metrics.memory) continue;
 
-        for (let i = 0; i < pod.metrics.cpu.length; i++) {
-          const [timestamp, metric] = pod.metrics.cpu[i];
+        for (let i = 0; i < pod.metrics.memory.length; i++) {
+          const [timestamp, metric] = pod.metrics.memory[i];
 
           if (!memResult[i]) {
             memResult[i] = {
@@ -212,11 +226,70 @@ const dashboardController = {
         }
       }
 
-      //collecting CPU and Memory into one object to be returned to the front end
+      //getting transmit and receive data 
+      const transmitResult: MetricData[] = [];
+      const receiveResult: MetricData[] = [];
+
+      let transmitData: [number, string][] = [];
+      let receiveData: [number, string][] = [];
+      
+      //dealing with prometheus auto pluralization
+      let networkingLength = 0
+      if (responseTransmit.data.data.result[0].values){
+        networkingLength = responseTransmit.data.data.result[0].values.length
+      }
+      if (responseTransmit.data.data.result[0].value){
+        networkingLength = 1
+      }
+      
+        for (let i = 0; i < networkingLength; i++) {
+          
+          for (let j = 0 ; j < responseTransmit.data.data.result.length;j++ ){
+            //dealing with prometheus auto pluralization again
+            if (responseCpuUsage.data.data.result[j].values) {
+              transmitData = responseTransmit.data.data.result[j].values;
+              receiveData = responseReceive.data.data.result[j].values;
+            }
+            if (responseCpuUsage.data.data.result[j].value) {
+              transmitData.push(responseTransmit.data.data.result[j].value);
+              receiveData.push(responseReceive.data.data.result[j].value);
+            }
+
+            //creating object for transmit data
+            
+            if (!transmitResult[i]) {
+              transmitResult[i] = {
+                timestamp: transmitData[i][0],
+                value: transmitData[i][1]
+              };
+            } else {
+              transmitResult[i].value = (parseFloat(transmitResult[i].value) + parseFloat(transmitData[i][1])).toString();
+            }
+            
+            //creating object for receive data
+            if (!receiveResult[i]) {
+              receiveResult[i] = {
+                timestamp: receiveData[i][0],
+                value: receiveData[i][1]
+              };
+            } else {
+              receiveResult[i].value = (parseFloat(receiveResult[i].value) + parseFloat(receiveData[i][1])).toString();
+            }
+          }
+        }
+      
+      
+
+      //collecting CPU, Memory, Transmit, and Receive into one object to be returned to the front end
       const result: GlobalMetrics = {
         cpu: cpuResult,
-        memory: memResult
-      }
+        memory: memResult,
+        transmit: transmitResult,
+        receive: receiveResult
+      };
+
+      // console.log(result)
+
       res.locals.data = result;
       return next();
     } catch (error) {
@@ -297,8 +370,8 @@ export default dashboardController;
 // console.log(responseCpuUsage.data.data.result[0]);
 
 //TEST ZONE
-      // const test = await axios.get<QueryResponse>(
-      //   `http://localhost:9090/api/v1/query_range?query=sum(rate(container_memory_usage_bytes))&start=1687385963385&end=1687389573501&step=10m`
-      // );
-      // console.log(test)
-      //END OF TEST ZONE
+// const test = await axios.get<QueryResponse>(
+//   `http://localhost:9090/api/v1/query_range?query=sum(rate(container_memory_usage_bytes))&start=1687385963385&end=1687389573501&step=10m`
+// );
+// console.log(test)
+//END OF TEST ZONE
