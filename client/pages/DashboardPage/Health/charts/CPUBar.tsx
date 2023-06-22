@@ -7,7 +7,7 @@ const CPUResponsiveBar = () => {
       <ResponsiveBar
         data={[
           {
-            'CPU Usage': 100 // Replace 80 with the desired CPU usage value
+            'CPU Usage': 45 // Replace 80 with the desired CPU usage value
           }
         ]}
         keys={['CPU Usage']}
@@ -35,6 +35,7 @@ const CPUResponsiveBar = () => {
         axisRight={null}
         axisLeft={null}
         axisBottom={{
+          tickValues: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
           tickSize: 0,
           tickPadding: 5,
           tickRotation: 0,
