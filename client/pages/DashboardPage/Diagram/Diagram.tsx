@@ -33,7 +33,7 @@ interface ForceGraphLink {
   target: string;
 }
 
-const HierarchyPage: React.FC = () => {
+const Diagram = () => {
   const [clusterData, setClusterData] = useState<ClusterHierarchy | null>(null);
   const [nodes, setNodes] = useState<ForceGraphNode[]>([]);
   const [links, setLinks] = useState<ForceGraphLink[]>([]);
@@ -136,4 +136,4 @@ const HierarchyPage: React.FC = () => {
   );
 };
 
-export default HierarchyPage;
+export default Diagram;

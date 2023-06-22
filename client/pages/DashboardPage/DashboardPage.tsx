@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 const navigation = [
   { name: 'Health', path: 'health' },
   { name: 'Apps', path: 'apps' },
-  { name: 'Nodes', path: 'nodes' }
+  { name: 'Diagram', path: 'diagram' }
 ];
 
 // this is used to highlight the active tab and gray out inactive ones

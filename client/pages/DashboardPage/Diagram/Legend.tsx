@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Legend: React.FC = () => {
+const Legend = () => {
   return (
     // Legend container
     <div>
