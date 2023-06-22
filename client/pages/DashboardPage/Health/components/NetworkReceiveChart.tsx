@@ -1,22 +1,22 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import type { DataObj } from '../charts.types';
+import type { DataObj } from '../health.types';
 
-interface CPUUsageChartProps {
+interface NetworkReceiveProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
+const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
   return (
     <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 100, left: 80 }}
+        margin={{ top: 50, right: 110, bottom: 90, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 0.005,
+          max: 'auto',
           stacked: true,
           reverse: false
         }}
@@ -24,7 +24,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          tickSize: 5,
+          tickSize: 10,
           tickPadding: 5,
           tickRotation: -45,
           legend: 'Time',
@@ -36,7 +36,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
           tickPadding: 0,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -50,
+          legendOffset: -80,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -57,7 +57,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
             itemDirection: 'left-to-right',
             itemWidth: 80,
             itemHeight: 20,
-            itemTextColor: '#F5F5F5',
+            itemTextColor: '#f5f5f5',
             itemOpacity: 0.75,
             symbolSize: 12,
             symbolShape: 'circle',
@@ -66,7 +66,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
               {
                 on: 'hover',
                 style: {
-                  itemBackground: 'rgba(10, 2, 6, .51)',
+                  itemBackground: 'rgba(0, 0, 0, .03)',
                   itemOpacity: 1
                 }
               }
@@ -78,20 +78,20 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
             ticks: {
               text: {
                 fill: '#f5f5f5',
-                opacity: 0.75,
-              }
+              },
             },
             legend: {
               text: {
-                fill: '#f5f5f5'
-              }
-            }
-          }
+                fill: '#f5f5f5',
+                opacity: 0.75,
+              },
+            },
+          },
         }}
-        colors={['#2E8A99']}
+        colors={['#116A7B']}
       />
-      </div>
+    </div>
   );
 };
 
-export default CPUUsageChart;
+export default NetworkReceiveChart;

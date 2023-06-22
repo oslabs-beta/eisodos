@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { DataPoint, DataObj } from './charts.types';
+import { DataPoint, DataObj } from './health.types';
 
 // import chart components
-import CPUResponsiveBar from './charts/CPUBar';
-import PodsMetricsTable from './charts/PodsMetricsChart';
+import CPUResponsiveBar from './components/CPUBar';
+import PodsMetricsTable from './components/PodsMetricsChart';
 
 // TODO: rename these charts
-import CPUUsageChart from './charts/CPUUsageChart';
-import MemChart from './charts/MemUsageChart';
+import CPUUsageChart from './components/CPUUsageChart';
+import MemChart from './components/MemUsageChart';
 
 // TODO: add these charts to health tab
-import NetworkTransmitChart from './charts/NetworkTransmitChart';
-import NetworkReceiveChart from './charts/NetworkReceiveChart';
+import NetworkTransmitChart from './components/NetworkTransmitChart';
+import NetworkReceiveChart from './components/NetworkReceiveChart';
 
 // types for fetched data
 interface Metrics {
@@ -56,7 +56,7 @@ const Health = () => {
   }
 
   return (
-    <div>
+    <div className="px-14 py-16">
       <div className="border border-white grid-cols-2">
         <div className="border border-white rounded-lg text-center">
           <p>CPU Usage &#37;</p>

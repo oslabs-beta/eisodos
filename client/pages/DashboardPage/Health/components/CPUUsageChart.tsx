@@ -1,22 +1,22 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import type { DataObj } from '../charts.types';
+import type { DataObj } from '../health.types';
 
-interface NetworkTransmitProps {
+interface CPUUsageChartProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
+const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
   return (
-    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10 ml-5">
+    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
+        margin={{ top: 50, right: 110, bottom: 100, left: 80 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 'auto',
+          max: 0.005,
           stacked: true,
           reverse: false
         }}
@@ -24,7 +24,7 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          tickSize: 10,
+          tickSize: 5,
           tickPadding: 5,
           tickRotation: -45,
           legend: 'Time',
@@ -36,8 +36,8 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
           tickPadding: 0,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -80,
-          legendPosition: 'middle',
+          legendOffset: -50,
+          legendPosition: 'middle'
         }}
         pointSize={2}
         pointColor={{ theme: 'background' }}
@@ -57,7 +57,7 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
             itemDirection: 'left-to-right',
             itemWidth: 80,
             itemHeight: 20,
-            itemTextColor: '#f5f5f5',
+            itemTextColor: '#F5F5F5',
             itemOpacity: 0.75,
             symbolSize: 12,
             symbolShape: 'circle',
@@ -66,7 +66,7 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
               {
                 on: 'hover',
                 style: {
-                  itemBackground: 'rgba(0, 0, 0, .03)',
+                  itemBackground: 'rgba(10, 2, 6, .51)',
                   itemOpacity: 1
                 }
               }
@@ -78,20 +78,20 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
             ticks: {
               text: {
                 fill: '#f5f5f5',
-              },
+                opacity: 0.75,
+              }
             },
             legend: {
               text: {
-                fill: '#f5f5f5',
-                opacity: 0.75,
-              },
-            },
-          },
+                fill: '#f5f5f5'
+              }
+            }
+          }
         }}
-        colors={['#8EAC50']}
+        colors={['#2E8A99']}
       />
-    </div>
+      </div>
   );
 };
 
-export default NetworkTransmitChart;
+export default CPUUsageChart;

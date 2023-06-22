@@ -1,17 +1,17 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import type { DataObj } from '../charts.types';
+import type { DataObj } from '../health.types';
 
-interface NetworkReceiveProps {
+interface NetworkTransmitProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
+const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
   return (
-    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
+    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10 ml-5">
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 90, left: 100 }}
+        margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -37,7 +37,7 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
           tickRotation: 0,
           legend: 'CPU Usage',
           legendOffset: -80,
-          legendPosition: 'middle'
+          legendPosition: 'middle',
         }}
         pointSize={2}
         pointColor={{ theme: 'background' }}
@@ -88,10 +88,10 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
             },
           },
         }}
-        colors={['#116A7B']}
+        colors={['#8EAC50']}
       />
     </div>
   );
 };
 
-export default NetworkReceiveChart;
+export default NetworkTransmitChart;
