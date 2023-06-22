@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
 import { CustomError } from './CustomError';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Import routers
 import usersRouter from './routes/users';
@@ -14,7 +16,10 @@ import appsRouter from './routes/apps';
 // Assign constants
 export const app = express();
 const PORT = 3010;
-const mongoURI = 'mongodb+srv://mmohtasin93:ospproject1@cluster0.7yyq5ou.mongodb.net/?retryWrites=true&w=majority';
+const mongoURI = process.env.MONGODB_URI;
+if (!mongoURI) {
+  throw new Error('Please set the MONGODB_URI environment variable');
+}
 
 // Connect to mongo database
 mongoose.connect(mongoURI, { dbName: 'test' });
@@ -43,7 +48,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/hierarchy', hierarchyRouter);
 app.use('/api/cluster', appsRouter);
-
 
 // Unknown route handler
 app.use('*', (req, res) => {
