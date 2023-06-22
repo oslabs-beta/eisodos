@@ -1,4 +1,6 @@
 # EISODOS
+<img src="./rtran.png" width="200" height="200">
+
 
 ### What is Eisodos? 
 
