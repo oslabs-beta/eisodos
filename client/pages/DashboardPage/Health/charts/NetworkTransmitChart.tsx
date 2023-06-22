@@ -8,10 +8,10 @@ interface NetworkTransmitProps {
 
 const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
   return (
-    <div style={{ height: 420, maxWidth: '100%' }}>
+    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10 ml-5">
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 100 }}
+        margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -24,20 +24,20 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-          tickSize: 5,
+          tickSize: 10,
           tickPadding: 5,
-          tickRotation: 0,
+          tickRotation: -45,
           legend: 'Time',
-          legendOffset: 36,
+          legendOffset: 85,
           legendPosition: 'middle'
         }}
         axisLeft={{
           tickSize: 5,
-          tickPadding: 5,
+          tickPadding: 0,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -70,
-          legendPosition: 'middle'
+          legendOffset: -80,
+          legendPosition: 'middle',
         }}
         pointSize={2}
         pointColor={{ theme: 'background' }}
@@ -57,6 +57,7 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
             itemDirection: 'left-to-right',
             itemWidth: 80,
             itemHeight: 20,
+            itemTextColor: '#f5f5f5',
             itemOpacity: 0.75,
             symbolSize: 12,
             symbolShape: 'circle',
@@ -72,6 +73,21 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
             ]
           }
         ]}
+        theme={{
+          axis: {
+            ticks: {
+              text: {
+                fill: '#f5f5f5',
+              },
+            },
+            legend: {
+              text: {
+                fill: '#f5f5f5',
+                opacity: 0.75,
+              },
+            },
+          },
+        }}
         colors={['#8EAC50']}
       />
     </div>

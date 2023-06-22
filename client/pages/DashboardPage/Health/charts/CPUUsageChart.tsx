@@ -8,10 +8,10 @@ interface CPUUsageChartProps {
 
 const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
   return (
-    <div style={{ height: 420, maxWidth: '100%' }}>
+    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 80 }}
+        margin={{ top: 50, right: 110, bottom: 100, left: 80 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -26,14 +26,14 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
+          tickRotation: -45,
           legend: 'Time',
-          legendOffset: 36,
+          legendOffset: 85,
           legendPosition: 'middle'
         }}
         axisLeft={{
           tickSize: 5,
-          tickPadding: -10,
+          tickPadding: 0,
           tickRotation: 0,
           legend: 'CPU Usage',
           legendOffset: -50,
@@ -57,6 +57,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
             itemDirection: 'left-to-right',
             itemWidth: 80,
             itemHeight: 20,
+            itemTextColor: '#F5F5F5',
             itemOpacity: 0.75,
             symbolSize: 12,
             symbolShape: 'circle',
@@ -72,9 +73,24 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
             ]
           }
         ]}
-        colors={['#002B5B']}
+        theme={{
+          axis: {
+            ticks: {
+              text: {
+                fill: '#f5f5f5',
+                opacity: 0.75,
+              }
+            },
+            legend: {
+              text: {
+                fill: '#f5f5f5'
+              }
+            }
+          }
+        }}
+        colors={['#2E8A99']}
       />
-    </div>
+      </div>
   );
 };
 

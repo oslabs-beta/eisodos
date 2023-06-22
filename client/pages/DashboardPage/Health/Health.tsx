@@ -57,9 +57,12 @@ const Health = () => {
 
   return (
     <div>
-      <div>
-        <CPUResponsiveBar />
-        <PodsMetricsTable label="Pod Metrics" />
+      <div className="border border-white grid-cols-2">
+        <div className="border border-white rounded-lg text-center">
+          <p>CPU Usage &#37;</p>
+          <CPUResponsiveBar />
+        </div>
+        <PodsMetricsTable label="Pod Metrics"/>
       </div>
 
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>

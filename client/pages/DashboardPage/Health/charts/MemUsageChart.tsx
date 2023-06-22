@@ -8,10 +8,10 @@ interface MemChartProps {
 
 const MemChart = ({ chartData }: MemChartProps) => {
   return (
-    <div style={{ height: 420, maxWidth: '100%' }}>
+    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10 ml-5">
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 100 }}
+        margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -26,16 +26,16 @@ const MemChart = ({ chartData }: MemChartProps) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
+          tickRotation: -45,
           legend: 'Time',
-          legendOffset: 36,
+          legendOffset: 85,
           legendPosition: 'middle'
         }}
         axisLeft={{
           tickSize: 5,
-          tickPadding: 5,
+          tickPadding: 0,
           tickRotation: 0,
-          legend: 'CPU Usage',
+          legend: 'Memory Usage',
           legendOffset: -80,
           legendPosition: 'middle'
         }}
@@ -57,6 +57,7 @@ const MemChart = ({ chartData }: MemChartProps) => {
             itemDirection: 'left-to-right',
             itemWidth: 80,
             itemHeight: 20,
+            itemTextColor: '#f5f5f5',
             itemOpacity: 0.75,
             symbolSize: 12,
             symbolShape: 'circle',
@@ -72,6 +73,21 @@ const MemChart = ({ chartData }: MemChartProps) => {
             ]
           }
         ]}
+        theme={{
+          axis: {
+            ticks: {
+              text: {
+                fill: '#f5f5f5',
+                opacity: 0.75,
+              },
+            },
+            legend: {
+              text: {
+                fill: '#f5f5f5',
+              },
+            },
+          },
+        }}
         colors={['#1B9C85']}
       />
     </div>
