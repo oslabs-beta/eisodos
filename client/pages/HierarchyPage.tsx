@@ -52,26 +52,33 @@ const HierarchyPage: React.FC = () => {
 
   // Convert data to format required by graph
   const convertData = (data: ClusterHierarchy) => {
+    // Initilizatze empty arrays to store nodes , and links
     const nodes: ForceGraphNode[] = [];
     const links: ForceGraphLink[] = [];
-    // Loop through the namespaces
+    // Loop through the namespaces in data
     data.namespaces.forEach((namespace) => {
+      // Add the namespace as a node
       nodes.push({ id: namespace.name, type: 'namespace' });
       // Loop through the nodes within the namespace
       namespace.nodes.forEach((node) => {
+        // Add node as a node
         nodes.push({ id: node.name, type: 'node' });
+        // Add a link between the namespace and node
         links.push({ source: namespace.name, target: node.name });
         // Loop through the pods within the node
         node.pods.forEach((pod) => {
+          // Add the pod as a node
           nodes.push({ id: pod.name, type: 'pod' });
+          // Add a link between the node and pod
           links.push({ source: node.name, target: pod.name });
+          // Add a link between the node and pod
         });
       });
     });
-
+    // REturn the nodes and links
     return { nodes, links };
   };
-
+  // Update nodes and links if clusterData change
   useEffect(() => {
     if (clusterData) {
       const { nodes, links } = convertData(clusterData);
@@ -84,21 +91,24 @@ const HierarchyPage: React.FC = () => {
     <div style={{ width: '100%', height: '100vh' }}>
       <Legend />
       <ForceGraph2D
-        graphData={{ nodes, links }}
+        graphData={{ nodes, links }} // Set nodes and links data for the graph ... we have to define custom rednerding for nodes
         nodeCanvasObject={(node, ctx) => {
           if (typeof node.x === 'number' && typeof node.y === 'number') {
-            ctx.beginPath();
+            // Make sure node has coords
+            ctx.beginPath(); //  Start path for drawing
             if (node.type === 'namespace') {
-              ctx.fillStyle = '#2563eb';
+              // If node is namespace
+              ctx.fillStyle = '#2563eb'; // Set color
               ctx.rect(node.x - 10, node.y - 10, 20, 20); // Draw a square
             } else if (node.type === 'node') {
-              ctx.fillStyle = '#22d3ee';
-              ctx.moveTo(node.x, node.y - 10);
-              ctx.lineTo(node.x + 10, node.y + 10);
-              ctx.lineTo(node.x - 10, node.y + 10);
+              // If node is a node
+              ctx.fillStyle = '#22d3ee'; // Set color
+              ctx.moveTo(node.x, node.y - 10); // Start triangle path :(
+              ctx.lineTo(node.x + 10, node.y + 10); // Draw first line of tri
+              ctx.lineTo(node.x - 10, node.y + 10); // Draw second line of tri
               ctx.closePath(); // Draw a triangle
             } else {
-              ctx.fillStyle = '#4ade80';
+              ctx.fillStyle = '#4ade80'; // If pod set color and draw circle
               ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI, false); // Draw a circle
             }
             ctx.fill();
