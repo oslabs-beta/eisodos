@@ -35,7 +35,7 @@ interface GlobalMetrics {
 }
 interface MetricData {
   timestamp: number;
-  cpu: string;
+  value: string;
 }
 
 interface PodMetrics {
@@ -185,10 +185,10 @@ const dashboardController = {
           if (!cpuResult[i]) {
             cpuResult[i] = {
               timestamp: timestamp,
-              cpu: metric
+              value: metric
             };
           } else {
-            cpuResult[i].cpu = (parseFloat(cpuResult[i].cpu) + parseFloat(metric)).toString();
+            cpuResult[i].value = (parseFloat(cpuResult[i].value) + parseFloat(metric)).toString();
           }
         }
       }
@@ -204,10 +204,10 @@ const dashboardController = {
           if (!memResult[i]) {
             memResult[i] = {
               timestamp: timestamp,
-              cpu: metric
+              value: metric
             };
           } else {
-            memResult[i].cpu = (parseFloat(memResult[i].cpu) + parseFloat(metric)).toString();
+            memResult[i].value = (parseFloat(memResult[i].value) + parseFloat(metric)).toString();
           }
         }
       }
