@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { DataPoint, DataObj } from './charts.types';
 import CPUUsageChart from './charts/CPUUsageChart';
 import MemChart from './charts/MemUsageChart';
 import NetworkTransmitChart from './charts/NetworkTransmitChart';
 import NetworkReceiveChart from './charts/NetworkReceiveChart';
-import { DataPoint, DataObj } from './charts/charts.types';
 import PodsMetricsTable from './charts/PodsMetricsChart';
 import CPUResponsiveBar from './charts/CPUBar';
 
