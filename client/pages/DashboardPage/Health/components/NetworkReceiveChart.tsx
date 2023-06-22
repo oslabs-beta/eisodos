@@ -25,10 +25,11 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
   }, [chartData]);
 
   return (
-    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10">
+    <div className="relative mt-10 h-96 max-w-full rounded-lg bg-black-2">
+      <p className="absolute ml-10 mt-5">Network Received</p>
       <ResponsiveLine
         data={formattedData}
-        margin={{ top: 50, right: 110, bottom: 90, left: 100 }}
+        margin={{ top: 70, right: 30, bottom: 80, left: 110 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -43,16 +44,16 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
         axisBottom={{
           tickSize: 10,
           tickPadding: 5,
-          tickRotation: -45,
+          tickRotation: -43,
           legend: 'Time',
-          legendOffset: 58,
+          legendOffset: 54,
           legendPosition: 'middle'
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 0,
           tickRotation: 0,
-          legend: 'CPU Usage',
+          legend: 'Gigabytes',
           legendOffset: -80,
           legendPosition: 'middle'
         }}
@@ -62,50 +63,47 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
-        enableArea={true}
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'column',
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: '#f5f5f5',
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemBackground: 'rgba(0, 0, 0, .03)',
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
+        // enableArea={true}
         theme={{
+          grid: {
+            line: {
+              stroke: '#cbd5e1',
+              opacity: 0.25
+            }
+          },
           axis: {
             ticks: {
               text: {
-                fill: '#f5f5f5',
+                fill: '#e5e7eb',
+                opacity: 0.75,
               },
             },
             legend: {
               text: {
-                fill: '#f5f5f5',
-                opacity: 0.75,
+                fill: '#f3f4f6',
               },
             },
           },
+          tooltip: {
+            container: {
+              background: '#22d3ee',
+              opacity: 0.75,
+            },
+            basic: {
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center',
+            },
+            tableCell: {
+              fontWeight: 'normal',
+            },
+            tableCellValue: {
+              fontWeight: 'bold',
+              color: 'black'
+            }
+          }
         }}
-        colors={['#116A7B']}
+        colors={['#22d3ee']}
       />
     </div>
   );

@@ -7,35 +7,33 @@ interface CPUUsageChartProps {
 }
 
 const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
-
   const formatTime = (timestamp: number) => {
     const date = new Date(timestamp * 1000); // Converting to milliseconds
     return date.toLocaleTimeString('en-GB'); // You can use toLocaleDateString for dates
   };
 
-   // Preprocessing the data to include formatted timestamps
-   const formattedData = useMemo(() => {
-    return chartData.map(series => ({
+  // Preprocessing the data to include formatted timestamps
+  const formattedData = useMemo(() => {
+    return chartData.map((series) => ({
       ...series,
-      data: series.data.map(point => ({
+      data: series.data.map((point) => ({
         ...point,
         x: formatTime(point.x)
       }))
     }));
   }, [chartData]);
- 
 
   return (
-    <div className="h-96 max-w-full rounded-lg bg-black-2 mt-10">
-      <p className="justify-self-start">CPU Usage</p>
+    <div className="mt-10 h-96 max-w-full rounded-lg bg-black-2">
+      <p className="absolute ml-10 mt-5 justify-self-start">CPU Usage</p>
       <ResponsiveLine
         data={formattedData}
-        margin={{ top: 50, right: 110, bottom: 100, left: 80 }}
+        margin={{ top: 70, right: 30, bottom: 80, left: 75 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
-          min: 0,
-          max: 10000,
+          min: 'auto',
+          max: 'auto',
           stacked: true,
           reverse: false
         }}
@@ -54,7 +52,7 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
           tickSize: 5,
           tickPadding: 0,
           tickRotation: 0,
-          legend: 'CPU Usage',
+          legend: 'Seconds',
           legendOffset: -50,
           legendPosition: 'middle'
         }}
@@ -64,26 +62,50 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
-        enableArea={true}
+        // enableArea={true}
         legends={[]}
         theme={{
+          grid: {
+            line: {
+              stroke: '#cbd5e1',
+              opacity: 0.25
+            }
+          },
           axis: {
             ticks: {
               text: {
-                fill: '#f5f5f5',
-                opacity: 0.75,
+                fill: '#e5e7eb',
+                opacity: 0.75
               }
             },
             legend: {
               text: {
-                fill: '#f5f5f5'
+                fill: '#f3f4f6'
               }
+            }
+          },
+          tooltip: {
+            container: {
+              background: '#3b82f6',
+              opacity: 0.75
+            },
+            basic: {
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center'
+            },
+            tableCell: {
+              fontWeight: 'normal'
+            },
+            tableCellValue: {
+              fontWeight: 'bold',
+              color: 'black'
             }
           }
         }}
-        colors={['#2E8A99']}
+        colors={['#3b82f6']}
       />
-      </div>
+    </div>
   );
 };
 

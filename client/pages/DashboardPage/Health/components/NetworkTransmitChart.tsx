@@ -7,17 +7,16 @@ interface NetworkTransmitProps {
 }
 
 const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
-  
   const formatTime = (timestamp: number) => {
     const date = new Date(timestamp * 1000); // Converting to milliseconds
     return date.toLocaleTimeString('en-GB'); // You can use toLocaleDateString for dates
   };
 
-   // Preprocessing the data to include formatted timestamps
-   const formattedData = useMemo(() => {
-    return chartData.map(series => ({
+  // Preprocessing the data to include formatted timestamps
+  const formattedData = useMemo(() => {
+    return chartData.map((series) => ({
       ...series,
-      data: series.data.map(point => ({
+      data: series.data.map((point) => ({
         ...point,
         x: formatTime(point.x)
       }))
@@ -25,10 +24,11 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
   }, [chartData]);
 
   return (
-    <div className="h-96 max-w-full rounded-lg bg-black-3 mt-10 ml-5">
+    <div className="relative mt-10 h-96 max-w-full rounded-lg bg-black-2">
+      <p className="absolute ml-10 mt-5 justify-self-start">Network Transmitted</p>
       <ResponsiveLine
         data={formattedData}
-        margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
+        margin={{ top: 70, right: 30, bottom: 80, left: 110 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -52,9 +52,9 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
           tickSize: 5,
           tickPadding: 0,
           tickRotation: 0,
-          legend: 'CPU Usage',
+          legend: 'Gigabytes',
           legendOffset: -80,
-          legendPosition: 'middle',
+          legendPosition: 'middle'
         }}
         pointSize={2}
         pointColor={{ theme: 'background' }}
@@ -62,50 +62,48 @@ const NetworkTransmitChart = ({ chartData }: NetworkTransmitProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
-        enableArea={true}
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'column',
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
-            itemHeight: 20,
-            itemTextColor: '#f5f5f5',
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemBackground: 'rgba(0, 0, 0, .03)',
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
-        ]}
+        // enableArea={true}
         theme={{
+          grid: {
+            line: {
+              stroke: '#cbd5e1',
+              opacity: 0.25
+            }
+          },
           axis: {
             ticks: {
               text: {
-                fill: '#f5f5f5',
-              },
+                fill: '#e5e7eb',
+                opacity: 0.75
+              }
             },
             legend: {
               text: {
-                fill: '#f5f5f5',
-                opacity: 0.75,
-              },
-            },
+                fill: '#f3f4f6'
+              }
+            }
           },
+          //TODO: change margin
+          tooltip: {
+            container: {
+              background: '#34d399',
+              opacity: 0.75
+            },
+            basic: {
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center'
+            },
+            tableCell: {
+              fontWeight: 'normal'
+            },
+            tableCellValue: {
+              fontWeight: 'bold',
+              color: 'black'
+            }
+          }
         }}
-        colors={['#8EAC50']}
+        colors={['#34d399']}
       />
     </div>
   );

@@ -25,15 +25,15 @@ const MemChart = ({ chartData }: MemChartProps) => {
   }, [chartData]);
   
   return (
-    <div className="mt-10 h-96 max-w-full rounded-lg bg-black-2">
-      <p className="justify-self-start">Memory Usage</p>
+    <div className="relative mt-10 h-96 max-w-full rounded-lg bg-black-2">
+      <p className="absolute ml-10 mt-5 justify-self-start">Memory Usage</p>
       <ResponsiveLine
         data={formattedData}
-        margin={{ top: 50, right: 110, bottom: 100, left: 100 }}
+        margin={{ top: 70, right: 30, bottom: 80, left: 110 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
-          min: 0,
+          min: 'auto',
           max: 'auto',
           stacked: true,
           reverse: false
@@ -53,8 +53,8 @@ const MemChart = ({ chartData }: MemChartProps) => {
           tickSize: 5,
           tickPadding: 0,
           tickRotation: 0,
-          legend: 'Memory Usage',
-          legendOffset: -60,
+          legend: 'Gigabytes',
+          legendOffset: -80,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -63,23 +63,47 @@ const MemChart = ({ chartData }: MemChartProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
-        enableArea={true}
+        // enableArea={true}
         theme={{
+          grid: {
+            line: {
+              stroke: '#cbd5e1',
+              opacity: 0.25
+            }
+          },
           axis: {
             ticks: {
               text: {
-                fill: '#f5f5f5',
-                opacity: 0.75
+                fill: '#e5e7eb',
+                opacity: 0.75,
               }
             },
             legend: {
               text: {
-                fill: '#f5f5f5'
+                fill: '#f3f4f6',
               }
+            }
+          },
+          tooltip: {
+            container: {
+              background: '#14b8a6',
+              opacity: 0.75,
+            },
+            basic: {
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center',
+            },
+            tableCell: {
+              fontWeight: 'normal',
+            },
+            tableCellValue: {
+              fontWeight: 'bold',
+              color: 'black'
             }
           }
         }}
-        colors={['#1B9C85']}
+        colors={['#14b8a6']}
       />
     </div>
   );

@@ -33,7 +33,7 @@ const PodsMetricsTable = (props: MetricProps) => {
   }, []);
 
   return (
-    <div id="metrics-table" className="flex justify-evenly items-center">
+    <div id="metrics-table" className="grid grid-cols-5 px-10">
       {metricDivs}
     </div>
   );
