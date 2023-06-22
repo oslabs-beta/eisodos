@@ -37,7 +37,7 @@ const RegisterPage = () => {
   return (
     <div>
       <Link to="/">
-        <img src="./assets/logos/eisodos.png" className="h-24 w-24" />
+        <img src="./assets/logos/eisodos.png" className="h-24 w-24 mt-4 ml-4" />
       </Link>
       <div className="flex flex-col items-center justify-center">
         <div className="mt-36 h-2/4 w-1/4 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
