@@ -105,6 +105,8 @@ const HierarchyPage: React.FC = () => {
     <div style={{ width: '100%', height: '100vh' }}>
       <Legend />
       <ForceGraph2D
+        width={1376} //make responsive?
+        height={800} //make responsive?
         graphData={{ nodes, links }} // Set nodes and links data for the graph ... we have to define custom rednerding for nodes
         nodeCanvasObject={(node, ctx) => {
           if (typeof node.x === 'number' && typeof node.y === 'number') {
