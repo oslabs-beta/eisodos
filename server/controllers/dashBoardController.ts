@@ -8,8 +8,9 @@ interface PromResult {
   metric: Record<string, string>;
 
   //TODO: MAKE SURE THIS WORKS FOR BOTH TYPES OF RESPONSES
-  values: [number, string][];
   value: [number, string];
+  values: [number, string][];
+  
 }
 
 interface QueryResult {
@@ -297,6 +298,7 @@ const dashboardController = {
     }
   },
 
+
   getNumberOf: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       // Create a new KubeConfig
@@ -334,44 +336,33 @@ const dashboardController = {
     } catch (error) {
       return next({ log: `Error in getNumberOf: ${error}` });
     }
+  },
+  getGlobalMetricPercentages: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+
+      const cpuUtilization = await axios.get<QueryResponse>(
+        `http://localhost:9090/api/v1/query?query=1 - sum(avg by (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal"}[10m])))`
+      );
+      const memUtilization = await axios.get<QueryResponse>(
+        `http://localhost:9090/api/v1/query?query= 1 - sum(:node_memory_MemAvailable_bytes:sum) / sum(node_memory_MemTotal_bytes{job="node-exporter"})`
+      );
+      
+      const cpuPercent = cpuUtilization.data.data.result[0].value[1]
+      const memPercent = memUtilization.data.data.result[0].value[1]
+      
+      const result = {
+        cpuPercent:cpuPercent ,
+        memPercent:memPercent
+      }
+     
+      res.locals.data = result;
+      return next();
+    } catch (error) {
+      return next({ log: `Error in getGlobalMetricPercentages: ${error}` });
+    }
   }
 };
 
 export default dashboardController;
 
-//DELETE IF UNNEEDED
 
-// // Extract data from API reqs
-// const cpuUsage = responseCpuUsage.data.data.result.map((item: PromResult) => item.value);
-// const memUsage = responseMemUsage.data.data.result.map((item: PromResult) => item.value);
-// const networkTransmitUsage = responseTransmit.data.data.result.map((item: PromResult) => item.value);
-// const networkReceiveUsage = responseReceive.data.data.result.map((item: PromResult) => item.value);
-// // Format the extracted data
-// const formattedData = {
-//   cpuTimestamps: cpuUsage.map((item: any[]) => item[0]),
-//   cpuValues: cpuUsage.map((item: any[]) => item[1]),
-//   memTimestamps: memUsage.map((item: any[]) => item[0]),
-//   memValues: memUsage.map((item: any[]) => item[1]),
-//   networkTransmitTimestamps: networkTransmitUsage.map((item: any[]) => item[0]),
-//   networkTransmitValues: networkTransmitUsage.map((item: any[]) => item[1]),
-//   networkReceiveTimestamps: networkReceiveUsage.map((item: any[]) => item[0]),
-//   networkReceiveValues: networkReceiveUsage.map((item: any[]) => item[1])
-// };
-// // Return the formattedData
-//TESTING
-// const test = await axios.get<QueryResponse>(
-//   `http://localhost:9090/api/v1/query?query=container_cpu_usage_seconds_total{container!=""${namespace}}[1m]`
-// );
-
-// test.data.data.result.map((item: PromResult) => console.log(item));
-// console.log(test.data.data.result)
-// console.log(test.data.data.result[0]);
-
-// console.log(responseCpuUsage.data.data.result[0]);
-
-//TEST ZONE
-// const test = await axios.get<QueryResponse>(
-//   `http://localhost:9090/api/v1/query_range?query=sum(rate(container_memory_usage_bytes))&start=1687385963385&end=1687389573501&step=10m`
-// );
-// console.log(test)
-//END OF TEST ZONE
