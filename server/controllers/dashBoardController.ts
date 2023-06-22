@@ -29,7 +29,7 @@ interface DashboardData {
   services: number;
 }
 
-interface GlobalMetrics{
+interface GlobalMetrics {
   cpu: MetricData[]
   memory: MetricData[]
 }
@@ -121,7 +121,7 @@ const dashboardController = {
   },
 
   getGlobalMetrics: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    
+    // example request: http://localhost:8080/api/dashboard/global-metrics?time=10m
     //destructuring query parameters (no paramaters will get instant metrics)
     let { time, namespace }: { time?: string | undefined; namespace?: string | undefined } = req.query;
     if (!time) time = '';
@@ -140,7 +140,7 @@ const dashboardController = {
       const responseMemUsage = await axios.get<QueryResponse>(
         `http://localhost:9090/api/v1/query?query=container_memory_usage_bytes{container!=""${namespace}}${time}`
       );
-      
+
       //Formatting Response from queries
       const formattedResponse: Pod[] = [];
       for (let i = 0; i < responseCpuUsage.data.data.result.length; i++) {
@@ -192,7 +192,7 @@ const dashboardController = {
           }
         }
       }
-      
+
       // looping through formatted responses for memory data and aggregating data across all pods 
       const memResult: MetricData[] = [];
       for (const pod of formattedResponse) {
@@ -211,7 +211,7 @@ const dashboardController = {
           }
         }
       }
-    
+
       //collecting CPU and Memory into one object to be returned to the front end
       const result: GlobalMetrics = {
         cpu: cpuResult,
