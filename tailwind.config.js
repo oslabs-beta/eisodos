@@ -8,7 +8,7 @@ module.exports = {
       colors: {
         black: {
           DEFAULT: colors.black,
-          1: 'rgb(30,30,35)',
+          1: 'rgb(15,15,20)',
           2: 'rgb(35,35,40)',
           3: 'rgb(50,50,50)'
         },
