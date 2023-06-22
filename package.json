@@ -23,6 +23,7 @@
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "mongodb": "^5.5.0",
@@ -37,7 +38,8 @@
     "react-modal": "^3.16.1",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",
-    "react-scroll": "^1.8.9"
+    "react-scroll": "^1.8.9",
+    "react-sizeme": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
