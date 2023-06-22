@@ -50,7 +50,7 @@ const RegisterPage = () => {
                   id="loginUsername"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="mb-3 w-full rounded border border-black px-2 py-1"
+                  className="mb-3 w-full rounded border border-black px-2 py-1 text-black"
                 />
               </div>
               <div className="w-full">
@@ -60,7 +60,7 @@ const RegisterPage = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mb-4 w-full rounded border border-black px-2 py-1"
+                  className="mb-4 w-full rounded border border-black px-2 py-1 text-black"
                 />
               </div>
 
