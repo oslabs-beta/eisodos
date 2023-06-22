@@ -56,10 +56,10 @@ const dashboardController = {
 
     let { time, namespace }: { time?: string | undefined; namespace?: string | undefined } = req.query;
     if (!time) time = '';
-    else time = '[' + time + ']';
+    else time = `[${time}]`;
 
     if (!namespace) namespace = '';
-    else namespace = ',namespace ="' + namespace + '"';
+    else namespace = `,namespace ="${namespace}"`;
 
     try {
       // Retrieve CPU usage data
