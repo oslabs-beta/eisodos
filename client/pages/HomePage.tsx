@@ -45,8 +45,8 @@ const HomePage = () => {
       </nav>
 
       {/* overview */}
-      <section id="overview" className="relative flex h-screen justify-center">
-        <div className="absolute top-1/4 flex h-fit items-center gap-x-10">
+      <section id="overview" className="flex h-screen items-center justify-center">
+        <div className="flex h-fit items-center gap-x-10">
           <img src="./assets/logos/eisodos.png" className="h-80 w-80" />
           <div>
             <h1 className="text-6xl font-bold">Eisodos</h1>
@@ -56,62 +56,58 @@ const HomePage = () => {
       </section>
 
       {/* features */}
-      <section id="features" className="h-screen justify-center">
+      <section id="features" className="mx-4 flex h-screen flex-col items-center justify-center">
         <h1 className="pb-8 text-center text-3xl font-bold">Features</h1>
-
-        <div className="flex flex-row justify-center gap-4">
-          <div className="h-80 w-72 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
-            <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
-              <h3 className="pb-5 text-xl font-bold">Pod Metrics</h3>
-              <img className="h-16 w-16" src="./assets/icons/container.png" />
-              <p className=" px-3 pt-3 text-center text-gray-400">
-                View Kubternetes container-related metrics on a user-friendly dashboard that&apos;s includes
-                visualizations for easy interpretation.
-              </p>
-            </div>
-          </div>
-
+        <div className="flex max-w-[60rem] flex-wrap justify-center gap-4">
+          {/* cluster metrics */}
           <div className="h-80 w-72 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
             <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
               <h3 className="pb-5 text-xl font-bold">Cluster Metrics</h3>
               <img className="h-16 w-16" src="./assets/icons/chart.png" />
               <p className=" px-3 pt-3 text-center text-gray-400">
-                Monitor cluster-wide metrics with user-friendly graphs providing clear insights into the cluster&apos;s
-                performance.
+                Monitor cluster-wide metrics with user-friendly graphs providing clear insights into overall cluster
+                health.
               </p>
             </div>
           </div>
-
+          {/* pod metrics */}
           <div className="h-80 w-72 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
             <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
-              <h3 className="pb-5 text-xl font-bold">Secure Authentication</h3>
-              <img className="h-16 w-16" src="./assets/icons/shield.png" />
-              <p className="px-3 pt-3 text-center text-gray-400">
-                Uphold trust in Eisodos by utilizing robust encryption and hashing techniques to ensure secure
-                authentication.
+              <h3 className="pb-5 text-xl font-bold">Pod Metrics</h3>
+              <img className="h-16 w-16" src="./assets/icons/container.png" />
+              <p className=" px-3 pt-3 text-center text-gray-400">
+                Keep updated on each pod in your cluster with easily-accessible status and metrics at the pod level.
               </p>
             </div>
           </div>
-        </div>
-
-        <div className="mt-4 flex flex-row justify-center gap-4">
+          {/* node hierarchy */}
           <div className="h-80 w-72 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
             <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
               <h3 className="pb-5 text-xl font-bold">Node Hierarchy</h3>
               <img className="h-16 w-16" src="./assets/icons/node.png" />
               <p className=" px-3 pt-3 text-center text-gray-400">
-                Gain a comprehensive understanding of your cluster&apos;s structure by visualizing the hierarchical
-                relationship between nodes.
+                Understand the overall structure of your cluster with a visual diagram of your namespaces, nodes, and
+                pods.
               </p>
             </div>
           </div>
-
+          {/* secure authentication */}
+          <div className="h-80 w-72 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
+            <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
+              <h3 className="pb-5 text-xl font-bold">Secure Authentication</h3>
+              <img className="h-16 w-16" src="./assets/icons/shield.png" />
+              <p className="px-3 pt-3 text-center text-gray-400">
+                Robust encryption and hashing techniques to ensure secure authentication.
+              </p>
+            </div>
+          </div>
+          {/* sessions */}
           <div className="h-80 w-72 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
             <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
               <h3 className="pb-5 text-xl font-bold">Sessions</h3>
               <img className="h-16 w-16" src="./assets/icons/cookies.png" />
               <p className="mt-3 px-3 text-center text-gray-400">
-                Enjoy uninterrupted access to Eisodos by leveraging its efficient session and cookie management system.
+                Enjoy uninterrupted access to your dashboard with an efficient session management system.
               </p>
             </div>
           </div>
