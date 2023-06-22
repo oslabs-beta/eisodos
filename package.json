@@ -38,7 +38,8 @@
     "react-modal": "^3.16.1",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",
-    "react-scroll": "^1.8.9"
+    "react-scroll": "^1.8.9",
+    "react-sizeme": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",

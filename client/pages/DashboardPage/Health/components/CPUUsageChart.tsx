@@ -1,22 +1,22 @@
 import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import type { DataObj } from '../charts.types';
+import type { DataObj } from '../health.types';
 
-interface NetworkReceiveProps {
+interface CPUUsageChartProps {
   chartData: DataObj[]; // Update the type of chartData according to your data structure
 }
 
-const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
+const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
   return (
     <div style={{ height: 420, maxWidth: '100%' }}>
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 90 }}
+        margin={{ top: 50, right: 110, bottom: 50, left: 80 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 'auto',
+          max: 0.005,
           stacked: true,
           reverse: false
         }}
@@ -33,10 +33,10 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
         }}
         axisLeft={{
           tickSize: 5,
-          tickPadding: 5,
+          tickPadding: -10,
           tickRotation: 0,
           legend: 'CPU Usage',
-          legendOffset: -60,
+          legendOffset: -50,
           legendPosition: 'middle'
         }}
         pointSize={2}
@@ -65,17 +65,17 @@ const NetworkReceiveChart = ({ chartData }: NetworkReceiveProps) => {
               {
                 on: 'hover',
                 style: {
-                  itemBackground: 'rgba(0, 0, 0, .03)',
+                  itemBackground: 'rgba(10, 2, 6, .51)',
                   itemOpacity: 1
                 }
               }
             ]
           }
         ]}
-        colors={['#116A7B']}
+        colors={['#002B5B']}
       />
     </div>
   );
 };
 
-export default NetworkReceiveChart;
+export default CPUUsageChart;
