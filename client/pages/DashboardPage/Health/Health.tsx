@@ -3,14 +3,11 @@ import axios from 'axios';
 import { DataPoint, DataObj } from './health.types';
 
 // import chart components
+// TODO: rename these charts
 import CPUResponsiveBar from './components/CPUBar';
 import PodsMetricsTable from './components/PodsMetricsChart';
-
-// TODO: rename these charts
 import CPUUsageChart from './components/CPUUsageChart';
 import MemChart from './components/MemUsageChart';
-
-// TODO: add these charts to health tab
 import NetworkTransmitChart from './components/NetworkTransmitChart';
 import NetworkReceiveChart from './components/NetworkReceiveChart';
 
@@ -18,6 +15,8 @@ import NetworkReceiveChart from './components/NetworkReceiveChart';
 interface Metrics {
   cpu: Metric[];
   memory: Metric[];
+  receive: Metric[];
+  transmit: Metric[];
 }
 
 interface Metric {
@@ -28,6 +27,8 @@ interface Metric {
 const Health = () => {
   const [cpuData, setCpuData] = useState<DataObj[]>([]);
   const [memData, setMemData] = useState<DataObj[]>([]);
+  const [netTransmitData, setNetTransmitData] = useState<DataObj[]>([]);
+  const [netReceiveData, setNetReceiveData] = useState<DataObj[]>([]);
 
   useEffect(() => {
     getData();
@@ -40,6 +41,8 @@ const Health = () => {
     // format metrics for nivo charts
     setCpuData(processChartData(metrics.cpu, 'cpuUsage'));
     setMemData(processChartData(metrics.memory, 'memUsage'));
+    setNetTransmitData(processChartData(metrics.transmit, 'netTransmit'));
+    setNetReceiveData(processChartData(metrics.transmit, 'netReceive'));
   }
 
   function processChartData(metrics: Metric[], id: string): DataObj[] {
@@ -57,17 +60,26 @@ const Health = () => {
 
   return (
     <div className="px-14 py-16">
-      <div>
+      <div className="grid grid-cols-2 rounded-lg bg-black-2">
         <CPUResponsiveBar />
         <PodsMetricsTable label="Pod Metrics" />
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <div style={{ flexBasis: '50%' }}>
+      <div className="flex flex-row gap-10">
+        <div className="basis-1/2">
           <CPUUsageChart chartData={cpuData} />
         </div>
-        <div style={{ flexBasis: '50%' }}>
+        <div className="basis-1/2">
           <MemChart chartData={memData} />
+        </div>
+      </div>
+
+      <div className="flex flex-row gap-10">
+        <div className="basis-1/2">
+          <NetworkTransmitChart chartData={netTransmitData} />
+        </div>
+        <div className="basis-1/2">
+          <NetworkReceiveChart chartData={netReceiveData} />
         </div>
       </div>
     </div>

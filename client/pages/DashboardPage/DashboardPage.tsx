@@ -24,12 +24,12 @@ const DashboardPage = () => {
   return (
     <div className="flex h-max">
       {/* sidebar */}
-      <nav className="sticky top-0 flex h-screen flex-col gap-y-6 bg-black-2 px-6 pt-14">
+      <nav className="sticky top-0 flex h-screen flex-col gap-y-6 bg-black-2 px-6 pt-8">
         {/* current cluster */}
         {/* TODO: turn this into a dropdown */}
         <div className="flex items-center justify-start">
-          <img src="../assets/logos/eisodos.png" className="h-16 w-16" />
-          <span className="text-2xl">EISODOS</span>
+          <img src="../assets/logos/eisodos.png" className="h-10 w-10 ml-2" />
+          <span className="pl-2 text-2xl">Eisodos</span>
         </div>
         <Menu as="div">
           <Menu.Button className="inline-flex w-48 items-center justify-between rounded-lg bg-black-3 px-4 py-3 shadow-sm hover:bg-indigo-300/30">

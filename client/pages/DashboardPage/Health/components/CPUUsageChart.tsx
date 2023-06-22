@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import type { DataObj } from '../health.types';
 
@@ -7,16 +7,33 @@ interface CPUUsageChartProps {
 }
 
 const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
+  const formatTime = (timestamp: number) => {
+    const date = new Date(timestamp * 1000); // Converting to milliseconds
+    return date.toLocaleTimeString('en-GB'); // You can use toLocaleDateString for dates
+  };
+
+  // Preprocessing the data to include formatted timestamps
+  const formattedData = useMemo(() => {
+    return chartData.map((series) => ({
+      ...series,
+      data: series.data.map((point) => ({
+        ...point,
+        x: formatTime(point.x)
+      }))
+    }));
+  }, [chartData]);
+
   return (
-    <div style={{ height: 420, maxWidth: '100%' }}>
+    <div className="mt-10 h-96 max-w-full rounded-lg bg-black-2">
+      <p className="absolute ml-10 mt-5 justify-self-start">CPU Usage</p>
       <ResponsiveLine
-        data={chartData}
-        margin={{ top: 50, right: 110, bottom: 50, left: 80 }}
+        data={formattedData}
+        margin={{ top: 70, right: 30, bottom: 80, left: 75 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
           min: 'auto',
-          max: 0.005,
+          max: 'auto',
           stacked: true,
           reverse: false
         }}
@@ -26,16 +43,16 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
+          tickRotation: -45,
           legend: 'Time',
-          legendOffset: 36,
+          legendOffset: 58,
           legendPosition: 'middle'
         }}
         axisLeft={{
           tickSize: 5,
-          tickPadding: -10,
+          tickPadding: 0,
           tickRotation: 0,
-          legend: 'CPU Usage',
+          legend: 'Seconds',
           legendOffset: -50,
           legendPosition: 'middle'
         }}
@@ -45,34 +62,48 @@ const CPUUsageChart = ({ chartData }: CPUUsageChartProps) => {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
-        enableArea={true}
-        legends={[
-          {
-            anchor: 'bottom-right',
-            direction: 'column',
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: 'left-to-right',
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: 'circle',
-            symbolBorderColor: 'rgba(0, 0, 0, .5)',
-            effects: [
-              {
-                on: 'hover',
-                style: {
-                  itemBackground: 'rgba(10, 2, 6, .51)',
-                  itemOpacity: 1
-                }
+        // enableArea={true}
+        legends={[]}
+        theme={{
+          grid: {
+            line: {
+              stroke: '#cbd5e1',
+              opacity: 0.25
+            }
+          },
+          axis: {
+            ticks: {
+              text: {
+                fill: '#e5e7eb',
+                opacity: 0.75
               }
-            ]
+            },
+            legend: {
+              text: {
+                fill: '#f3f4f6'
+              }
+            }
+          },
+          tooltip: {
+            container: {
+              background: '#3b82f6',
+              opacity: 0.75
+            },
+            basic: {
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center'
+            },
+            tableCell: {
+              fontWeight: 'normal'
+            },
+            tableCellValue: {
+              fontWeight: 'bold',
+              color: 'black'
+            }
           }
-        ]}
-        colors={['#002B5B']}
+        }}
+        colors={['#3b82f6']}
       />
     </div>
   );
