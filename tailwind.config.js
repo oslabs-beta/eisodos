@@ -32,7 +32,8 @@ module.exports = {
         lato: ['Lato', 'sans-serif']
       },
       boxShadow: {
-        card: '1px 1px 5px 5px rgba(0, 0, 0, 0.3)'
+        card: '1px 1px 5px 5px rgba(0, 0, 0, 0.3)',
+        namespace: '1px 1px 10px #9ab4fb70'
       }
     }
   },

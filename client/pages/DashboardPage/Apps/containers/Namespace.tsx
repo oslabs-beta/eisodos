@@ -12,9 +12,11 @@ const Namespace = (props: NamespaceProps) => {
   return (
     <section>
       <div className="flex flex-wrap justify-start text-center">
-        <div className="rounded-lg border border-blue-600 px-4 py-2">
-          <span>Namespace: </span>
-          <label className="ml-2 font-bold">{namespace}</label>
+        {/* <div className="rounded-lg px-4 py-2 shadow-namespace"> */}
+        <div className="rounded-lg bg-blue-200/30 px-4 py-2">
+          {/* <div className="rounded-lg border border-blue-600 px-4 py-2"> */}
+          {/* <span>Namespace: </span> */}
+          <label>{namespace}</label>
         </div>
       </div>
       <div className="mb-10 mt-6 flex max-w-7xl flex-wrap gap-5">
