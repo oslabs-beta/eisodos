@@ -24,11 +24,15 @@ const DashboardPage = () => {
   return (
     <div className="flex h-max">
       {/* sidebar */}
-      <nav className="sticky top-0 flex h-screen flex-col gap-y-10 px-6 pt-16">
+      <nav className="sticky top-0 flex h-screen flex-col gap-y-6 bg-black-2 px-6 pt-14">
         {/* current cluster */}
         {/* TODO: turn this into a dropdown */}
+        <div className="flex items-center justify-start">
+          <img src="../assets/logos/eisodos.png" className="h-16 w-16" />
+          <span className="text-2xl">EISODOS</span>
+        </div>
         <Menu as="div">
-          <Menu.Button className="inline-flex w-48 items-center justify-between rounded-lg bg-white/10 px-4 py-3 shadow-sm hover:bg-white/20">
+          <Menu.Button className="inline-flex w-48 items-center justify-between rounded-lg bg-black-3 px-4 py-3 shadow-sm hover:bg-indigo-300/30">
             my-cluster
             <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5 text-white-1" aria-hidden="true" />
           </Menu.Button>
@@ -45,7 +49,7 @@ const DashboardPage = () => {
         </ul>
       </nav>
       {/* active tab */}
-      <div className="flex-1 bg-black-2 px-14 py-16">
+      <div className="flex-1 bg-black-1 px-14 py-16">
         <Outlet />
       </div>
     </div>
