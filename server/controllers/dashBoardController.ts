@@ -210,10 +210,10 @@ const dashboardController = {
       // looping through formatted responses for memory data and aggregating data across all pods
       const memResult: MetricData[] = [];
       for (const pod of formattedResponse) {
-        if (!pod.metrics.cpu) continue;
+        if (!pod.metrics.memory) continue;
 
-        for (let i = 0; i < pod.metrics.cpu.length; i++) {
-          const [timestamp, metric] = pod.metrics.cpu[i];
+        for (let i = 0; i < pod.metrics.memory.length; i++) {
+          const [timestamp, metric] = pod.metrics.memory[i];
 
           if (!memResult[i]) {
             memResult[i] = {
@@ -226,47 +226,15 @@ const dashboardController = {
         }
       }
 
+      //getting transmit and receive data 
       const transmitResult: MetricData[] = [];
       const receiveResult: MetricData[] = [];
+
       let transmitData: [number, string][] = [];
       let receiveData: [number, string][] = [];
-
-      // for (let i = 0; i < responseTransmit.data.data.result.length; i++) {
-      //   if (responseTransmit.data.data.result[i].values) {
-      //     transmitData = responseTransmit.data.data.result[i].values;
-      //     receiveData = responseReceive.data.data.result[i].values;
-      //   }
-      //   if (responseCpuUsage.data.data.result[i].value) {
-      //     transmitData.push(responseTransmit.data.data.result[i].value);
-      //     receiveData.push(responseReceive.data.data.result[i].value);
-      //     console.log(transmitData)
-      //   }
-      //   for (let j = 0; j < transmitData.length; j++) {
-      //     if (!transmitResult[i]) {
-      //       transmitResult[i] = {
-      //         timestamp: transmitData[j][0],
-      //         value: transmitData[j][1]
-      //       };
-      //       // console.log(transmitResult[i]);
-      //     } else {
-      //       transmitResult[i].value = (parseFloat(transmitResult[i].value) + parseFloat(transmitData[j][1])).toString();
-      //     }
-
-      //     if (!receiveResult[i]) {
-      //       receiveResult[i] = {
-      //         timestamp: receiveData[j][0],
-      //         value: receiveData[j][1]
-      //       };
-      //     } else {
-      //       receiveResult[i].value = (parseFloat(receiveResult[i].value) + parseFloat(receiveData[j][1])).toString();
-      //     }
-      //   }
-      //   // console.log(transmitResult)
-      //   // console.log(receiveResult)
-      // }
-
+      
+      //dealing with prometheus auto pluralization
       let networkingLength = 0
-
       if (responseTransmit.data.data.result[0].values){
         networkingLength = responseTransmit.data.data.result[0].values.length
       }
@@ -275,36 +243,44 @@ const dashboardController = {
       }
       
         for (let i = 0; i < networkingLength; i++) {
-          // let transmitData = responseTransmit.data.data.result[i]
-          // receiveData = 
+          
           for (let j = 0 ; j < responseTransmit.data.data.result.length;j++ ){
-            const timestamp = responseTransmit.data.data.result[j][i][0]
-            const value = responseTransmit.data.data.result[j][i][1]
+            //dealing with prometheus auto pluralization again
+            if (responseCpuUsage.data.data.result[j].values) {
+              transmitData = responseTransmit.data.data.result[j].values;
+              receiveData = responseReceive.data.data.result[j].values;
+            }
+            if (responseCpuUsage.data.data.result[j].value) {
+              transmitData.push(responseTransmit.data.data.result[j].value);
+              receiveData.push(responseReceive.data.data.result[j].value);
+            }
+
+            //creating object for transmit data
             
             if (!transmitResult[i]) {
               transmitResult[i] = {
-                timestamp: timestamp,
-                value: value
+                timestamp: transmitData[i][0],
+                value: transmitData[i][1]
               };
-              // console.log(transmitResult[i]);
             } else {
-              transmitResult[i].value = (parseFloat(transmitResult[i].value) + parseFloat(value)).toString();
+              transmitResult[i].value = (parseFloat(transmitResult[i].value) + parseFloat(transmitData[i][1])).toString();
             }
-  
+            
+            //creating object for receive data
             if (!receiveResult[i]) {
               receiveResult[i] = {
-                timestamp: receiveData[j][0],
-                value: receiveData[j][1]
+                timestamp: receiveData[i][0],
+                value: receiveData[i][1]
               };
             } else {
-              receiveResult[i].value = (parseFloat(receiveResult[i].value) + parseFloat(receiveData[j][1])).toString();
+              receiveResult[i].value = (parseFloat(receiveResult[i].value) + parseFloat(receiveData[i][1])).toString();
             }
           }
         }
       
       
 
-      //collecting CPU and Memory into one object to be returned to the front end
+      //collecting CPU, Memory, Transmit, and Receive into one object to be returned to the front end
       const result: GlobalMetrics = {
         cpu: cpuResult,
         memory: memResult,
