@@ -115,12 +115,12 @@ const HomePage = () => {
       </section>
 
       {/* demo */}
-      <section id="demo" className="h-screen text-center">
+      <section id="demo" className="flex h-screen flex-col items-center justify-center">
         <h1 className="pb-8 text-3xl font-bold">Demo</h1>
       </section>
 
       {/* get started */}
-      <section id="get-started" className="h-screen text-center">
+      <section id="get-started" className="flex h-screen flex-col items-center justify-center">
         <h1 className="pb-8 text-3xl font-bold">Get Started</h1>
         <p> Eisodos is easy to use!</p>
         <p>
@@ -133,7 +133,7 @@ const HomePage = () => {
       </section>
 
       {/* team */}
-      <section id="team" className="h-screen text-center">
+      <section id="team" className="flex h-screen flex-col items-center justify-center">
         <h1 className="pb-8 text-center text-3xl font-bold">Meet the Team</h1>
         <div className="mx-56 flex flex-row justify-around">
           <div>
