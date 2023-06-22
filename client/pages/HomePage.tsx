@@ -33,10 +33,12 @@ const HomePage = () => {
           </a>
         </div>
         <div className="mr-10 flex items-center space-x-3">
-          <Link to="/login" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-2 font-bold">
+          <Link to="/login" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-1 text-lg font-bold">
             Log In
           </Link>
-          <Link to="/register" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 font-bold">
+          <Link
+            to="/register"
+            className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1 text-lg font-bold">
             Sign Up
           </Link>
         </div>
@@ -45,7 +47,7 @@ const HomePage = () => {
       <section id="#overview" className="text-center">
         <h1 className="pb-8 text-3xl font-bold">Introducing Eisodos</h1>
         <p>
-          Eisodos is a developer-friendly tool that allows users to easily montior and visualize key Kubernetes health
+          Eisodos is a developer-friendly tool that allows users to easily monitor and visualize key Kubernetes health
           metrics and cluster metrics.
         </p>
       </section>
@@ -59,7 +61,8 @@ const HomePage = () => {
               <h3 className="pb-5 text-xl font-bold">Pod Metrics</h3>
               <img className="h-16 w-16" src="./assets/icons/container.png" />
               <p className=" px-3 pt-3 text-center text-gray-400">
-                View container-related metrics on a dashboard, presented with visualizations for easy interpretation.
+                View Kubternetes container-related metrics on a user-friendly dashboard that&apos;s includes
+                visualizations for easy interpretation.
               </p>
             </div>
           </div>
@@ -121,7 +124,7 @@ const HomePage = () => {
         <p>
           Follow the instructions listed under &quot;Installation&quot; on our{' '}
           <a href="https://github.com/oslabs-beta/eisodos" className="underline">
-            Github
+            GitHub
           </a>{' '}
           page to get started quickly!
         </p>
