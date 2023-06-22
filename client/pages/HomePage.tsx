@@ -1,28 +1,28 @@
 import React from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Link as NavLink } from 'react-scroll';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
 
 const HomePage = () => {
   return (
     <>
+      {/* navbar */}
       <nav className="sticky top-0 z-50 flex h-24 justify-between backdrop-blur-sm">
+        {/* left side */}
         <div className="flex items-center space-x-3 text-lg">
           <img src="./assets/logos/eisodos.png" className="h-24 w-24" />
-          <NavLink to="overview" spy={true} smooth={true} offset={50} duration={500} className="hover:underline">
+          <NavLink to="overview" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
             Overview
           </NavLink>
           <NavLink to="features" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
             Features
           </NavLink>
-          <NavLink to="demo" spy={true} smooth={true} offset={50} duration={500} className="hover:underline">
+          <NavLink to="demo" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
             Demo
           </NavLink>
-          <NavLink to="get-started" spy={true} smooth={true} offset={50} duration={500} className="hover:underline">
+          <NavLink to="get-started" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
             Get Started
           </NavLink>
-          <NavLink to="team" spy={true} smooth={true} offset={50} duration={500} className="hover:underline">
+          <NavLink to="team" spy={true} smooth={true} offset={-100} duration={500} className="hover:underline">
             Team
           </NavLink>
           <a href="https://github.com/oslabs-beta/eisodos" target="_blank" rel="noreferrer">
@@ -32,6 +32,7 @@ const HomePage = () => {
             <img src="./assets/logos/linkedin.png" className="mt-1 h-6 w-6" />
           </a>
         </div>
+        {/* right side */}
         <div className="mr-10 flex items-center space-x-3">
           <Link to="/login" className="rounded bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-1 text-lg font-bold">
             Log In
@@ -44,15 +45,19 @@ const HomePage = () => {
         </div>
       </nav>
 
-      <section id="#overview" className="text-center">
-        <h1 className="pb-8 text-3xl font-bold">Introducing Eisodos</h1>
-        <p>
-          Eisodos is a developer-friendly tool that allows users to easily monitor and visualize key Kubernetes health
-          metrics and cluster metrics.
-        </p>
+      {/* overview */}
+      <section id="overview" className="h-screen">
+        <div>
+          <h1 className="text-3xl font-bold">Introducing Eisodos</h1>
+          <p>
+            Eisodos is a developer-friendly application to easily monitor and visualize key Kubernetes health metrics
+            and cluster data.
+          </p>
+        </div>
       </section>
 
-      <section id="features" className="justify-center">
+      {/* features */}
+      <section id="features" className="h-screen justify-center">
         <h1 className="pb-8 text-center text-3xl font-bold">Features</h1>
 
         <div className="flex flex-row justify-center gap-4">
@@ -114,11 +119,13 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section id="#demo" className="text-center">
+      {/* demo */}
+      <section id="demo" className="h-screen text-center">
         <h1 className="pb-8 text-3xl font-bold">Demo</h1>
       </section>
 
-      <section id="get-started" className="text-center">
+      {/* get started */}
+      <section id="get-started" className="h-screen text-center">
         <h1 className="pb-8 text-3xl font-bold">Get Started</h1>
         <p> Eisodos is easy to use!</p>
         <p>
@@ -130,7 +137,8 @@ const HomePage = () => {
         </p>
       </section>
 
-      <section id="team" className="text-center">
+      {/* team */}
+      <section id="team" className="h-screen text-center">
         <h1 className="pb-8 text-center text-3xl font-bold">Meet the Team</h1>
         <div className="mx-56 flex flex-row justify-around">
           <div>
@@ -200,12 +208,8 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* footer */}
       <footer className="py-4 text-center"> &#169; Eisodos 2023 | MIT License</footer>
-
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Routes>
     </>
   );
 };
