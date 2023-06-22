@@ -16,7 +16,9 @@ Eisodos is an open source product that simplifies Kubernetes metric visualizatio
 - Install Docker Desktop on your machine: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
 - Enable Kubernetes in Docker Desktop settings
 
-Instructions:
+Application Instructions:
+
+This application requires you to run your kubernetes cluster locally. We suggest you use the tool [kind](https://kind.sigs.k8s.io/) to do this. 
 
 1. Install Kind:
    - For Mac: `brew install kind`
@@ -25,11 +27,60 @@ Instructions:
    - Run `kubectl --help` to check if you have access to it.
    - If not, follow the instructions [here](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/) to install `kubectl`.
 
-3. Delete any existing cluster:
+3. Delete any existing kind cluster:
    - List the clusters to delete: `kind get clusters`
    - Delete a cluster: `kind delete cluster --name <cluster-name>`
 
 4. Ensure Docker is running.
+
+5. Create your cluster
+   - Create a cluster with default settings `kind create cluster`
+   - if you wish to create a custom cluster please visist the quick start kind [guide](https://kind.sigs.k8s.io/docs/user/quick-start/#creating-a-cluster)
+
+
+Now that we have our default cluster running you can set up prometheus. This guide will set up the version of prometheus that it works best with but you are free to try others as well. If you follow our guide note that you are working with [release .10](https://github.com/prometheus-operator/kube-prometheus/tree/release-0.10) of the kube prometheus repository for version 1.23 of kubernetes. 
+
+
+6. Run your docker container
+    
+    `docker run -it -v ${PWD}:/work -w /work alpine sh`
+    
+7. Adding git to opened container
+    
+    `apk add git`
+    
+8. Shallow cloning file into container
+    
+    ```
+    # clone
+    git clone --depth 1 https://github.com/prometheus-operator/kube-prometheus.git -b release-0.10 /tmp/
+    
+    # view the files
+    ls /tmp/ -l
+    
+    # we are interested in the "manifests" folder
+    ls /tmp/manifests -l
+    
+    # let's grab it by copying it out the container
+    cp -R /tmp/manifests .
+    ```
+    
+9. Exiting
+    
+    `exit`
+
+10. Apply Manifests
+   - `kubectl create -f ./manifests/setup/`
+   - `kubectl create -f ./manifests`
+
+   Please wait for all pods to be in a ready state before continuing (to check this run `kubectl -n monitoring get pods`)
+
+11. Finally with your CRDs created from the manifests you gathered you can configure Prometheus with a yaml file. We have provided a template for doing so with the correct versions but you can make changes if you would like.
+
+12. Now that prometheus is set up, you can deploy your application to this cluster using kubectl to do so. Don't forget to add service monitors so that prometheus can scrape metrics for you! 
+
+
+
 
 
 
