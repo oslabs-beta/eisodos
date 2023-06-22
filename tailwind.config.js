@@ -8,9 +8,9 @@ module.exports = {
       colors: {
         black: {
           DEFAULT: colors.black,
-          1: 'rgb(30,30,30)',
-          2: 'rgb(35,35,35)',
-          3: 'rgb(50,50,50)'
+          1: 'rgb(15,15,20)',
+          2: 'rgb(25,25,40)',
+          3: 'rgb(40,40,60)'
         },
         white: {
           DEFAULT: colors.white,
@@ -18,10 +18,21 @@ module.exports = {
           2: 'rgb(215,215,215)',
           3: 'rgb(130,130,130)'
         },
-        highlight: '#1A8BBF'
+        blue: {
+          DEFAULT: colors.blue,
+          1: 'rgb(10, 77, 104)',
+          2: 'rgb(0, 43, 91)',
+          3: 'rgb(0, 29, 110)'
+        },
+        highlight: '#1A8BBF',
+        shadow: '#0D2F4F'
       },
       fontFamily: {
+        inter: ['Inter var', 'sans-serif'],
         lato: ['Lato', 'sans-serif']
+      },
+      boxShadow: {
+        card: '1px 1px 5px 5px rgba(0, 0, 0, 0.3)'
       }
     }
   },

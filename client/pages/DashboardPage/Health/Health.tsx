@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import CPUUsageChart from './CPUUsageChart';
-import MemChart from './MemUsageChart';
-import NetworkTransmitChart from './NetworkTransmitChart';
-import NetworkReceiveChart from './NetworkReceiveChart';
-import { DataPoint, DataObj } from './charts';
-import PodsMetricsTable from './PodsMetricsChart';
-import CPUResponsiveBar from './CPUBar';
+import CPUUsageChart from './charts/CPUUsageChart';
+import MemChart from './charts/MemUsageChart';
+import NetworkTransmitChart from './charts/NetworkTransmitChart';
+import NetworkReceiveChart from './charts/NetworkReceiveChart';
+import { DataPoint, DataObj } from './charts/charts.types';
+import PodsMetricsTable from './charts/PodsMetricsChart';
+import CPUResponsiveBar from './charts/CPUBar';
 
-const HealthPage = () => {
+const Health = () => {
   interface Metrics {
     cpuValues: string[];
     memValues: string[];
@@ -58,24 +58,22 @@ const HealthPage = () => {
         <PodsMetricsTable label="Pod Metrics" />
       </div>
 
-      <div style={{display: 'flex', flexWrap: 'wrap'}}>
-        
-        <div style={{flexBasis: '50%'}}> 
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{ flexBasis: '50%' }}>
           <CPUUsageChart chartData={cpuData} />
         </div>
-        <div style={{flexBasis: '50%'}}> 
+        <div style={{ flexBasis: '50%' }}>
           <MemChart chartData={memData} />
         </div>
-        <div style={{flexBasis: '50%'}}> 
+        <div style={{ flexBasis: '50%' }}>
           <NetworkTransmitChart chartData={networkTransmitData} />
         </div>
-        <div style={{flexBasis: '50%'}}> 
+        <div style={{ flexBasis: '50%' }}>
           <NetworkReceiveChart chartData={networkReceiveData} />
         </div>
-
       </div>
     </div>
   );
 };
 
-export default HealthPage;
+export default Health;

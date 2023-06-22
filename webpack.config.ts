@@ -7,6 +7,7 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
+    publicPath: '/',
     clean: true
   },
   // generate source map
@@ -24,7 +25,12 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:3010'
     },
-    historyApiFallback: true
+    historyApiFallback: true,
+    // serves static files
+    static: {
+      directory: path.resolve(__dirname, './client/assets'),
+      publicPath: '/assets'
+    }
   },
   resolve: {
     // add ts and tsx as resolvable extensions
