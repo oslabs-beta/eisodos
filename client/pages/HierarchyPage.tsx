@@ -52,32 +52,46 @@ const HierarchyPage: React.FC = () => {
 
   // Convert data to format required by graph
   const convertData = (data: ClusterHierarchy) => {
-    // Initilizatze empty arrays to store nodes , and links
+    // Initialize empty arrays to store nodes, and links
     const nodes: ForceGraphNode[] = [];
     const links: ForceGraphLink[] = [];
+    const nodeNames = new Set(); // add a set
+
     // Loop through the namespaces in data
     data.namespaces.forEach((namespace) => {
       // Add the namespace as a node
-      nodes.push({ id: namespace.name, type: 'namespace' });
+      if (!nodeNames.has(namespace.name)) {
+        // Check if node name already exists
+        nodes.push({ id: namespace.name, type: 'namespace' });
+        nodeNames.add(namespace.name); // Add node name to Set
+      }
       // Loop through the nodes within the namespace
       namespace.nodes.forEach((node) => {
         // Add node as a node
-        nodes.push({ id: node.name, type: 'node' });
+        if (!nodeNames.has(node.name)) {
+          // Check if node name already exists
+          nodes.push({ id: node.name, type: 'node' });
+          nodeNames.add(node.name); // Add node name to Set
+        }
         // Add a link between the namespace and node
         links.push({ source: namespace.name, target: node.name });
         // Loop through the pods within the node
         node.pods.forEach((pod) => {
           // Add the pod as a node
-          nodes.push({ id: pod.name, type: 'pod' });
+          if (!nodeNames.has(pod.name)) {
+            // Check if node name already exists
+            nodes.push({ id: pod.name, type: 'pod' });
+            nodeNames.add(pod.name); // Add node name to Set
+          }
           // Add a link between the node and pod
           links.push({ source: node.name, target: pod.name });
-          // Add a link between the node and pod
         });
       });
     });
-    // REturn the nodes and links
+    // Return the nodes and links
     return { nodes, links };
   };
+
   // Update nodes and links if clusterData change
   useEffect(() => {
     if (clusterData) {
