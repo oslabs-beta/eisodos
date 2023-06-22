@@ -10,9 +10,7 @@ const Apps = () => {
   const [data, setData] = useState<AppsData>({});
 
   useEffect(() => {
-    // TODO: fetch data from server
     axios.get('/api/cluster/apps').then((res) => {
-      console.log(res.data);
       setData(res.data);
     });
   }, []);
