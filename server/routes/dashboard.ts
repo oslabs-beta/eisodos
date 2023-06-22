@@ -21,4 +21,8 @@ router.get(
   }
 );
 
+router.get('/global-metrics-percent', isAuthenticated, dashboardController.getGlobalMetricPercentages, (req, res) => {
+  return res.status(200).json(res.locals.data);
+});
+
 export default router;
