@@ -8,6 +8,10 @@ router.get('/metrics', isAuthenticated, dashboardController.getClusterData, (req
   return res.status(200).json(res.locals.data);
 });
 
+router.get('/global-metrics', isAuthenticated, dashboardController.getGlobalMetrics, (req, res) => {
+  return res.status(200).json(res.locals.data);
+});
+
 router.get(
   '/count',
   isAuthenticated,
