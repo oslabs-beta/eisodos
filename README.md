@@ -88,6 +88,7 @@ Now that we have our default cluster running you can set up prometheus. This gui
 
 
 ### Eisodos Setup Guide 
+- clone this repository to your machine 
 - `npm install` to install dependencies
 - Set project name, description, and authors in `package.json`
 - Add your MongoDB connection string to `mongoURI` in `server.js`
