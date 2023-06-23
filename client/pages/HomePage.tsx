@@ -118,7 +118,7 @@ const HomePage = () => {
       <section id="demo" className="flex min-h-screen flex-col items-center justify-center pt-20">
         <h1 className="mb-10 pt-10 text-4xl font-bold">Demo</h1>
         {/* dashboard */}
-        <div className="flex flex-row items-center justify-center rounded-lg px-10">
+        <div className="flex flex-row items-center justify-center rounded-lg px-40">
           <img src="./assets/photos/Health.png" className="mx-auto h-2/4 w-2/4 rounded-lg" />
           <div className="flex flex-col items-center justify-center">
             <h3 className="mb-4 text-center text-3xl font-bold">Dashboard</h3>
@@ -129,7 +129,7 @@ const HomePage = () => {
           </div>
         </div>
         {/* Applications and Pods */}
-        <div className="mb-20 mt-14 flex flex-row-reverse items-center justify-center rounded-lg px-10">
+        <div className="mb-36 mt-32 flex flex-row-reverse items-center justify-center rounded-lg px-40">
           <img src="./assets/photos/Apps.png" className="mx-auto h-2/4 w-2/4 rounded-lg" />
           <div className="mr-10 flex flex-col items-center justify-center">
             <h3 className="mb-4 text-center text-3xl font-bold">Applications and Pods</h3>
@@ -140,7 +140,7 @@ const HomePage = () => {
           </div>
         </div>
         {/* Hierarchy Graph */}
-        <div className="flex flex-row items-center justify-center rounded-lg px-10">
+        <div className="flex flex-row items-center justify-center rounded-lg px-40">
           <img src="./assets/photos/Diagram.png" className="mx-auto h-2/4 w-2/4 rounded-lg" />
           <div className="flex flex-col items-center justify-center">
             <h3 className="mb-4 text-center text-3xl font-bold">Hierarchy Graph</h3>
@@ -167,7 +167,7 @@ const HomePage = () => {
 
       {/* team */}
       <section id="team" className="flex h-screen flex-col text-center">
-        <h1 className="mb-10 pb-8 text-center text-4xl font-bold">Meet the Team</h1>
+        <h1 className="mb-16 pb-8 text-center text-4xl font-bold">Meet the Team</h1>
         <div className="mx-48 flex justify-evenly text-xl">
           <div>
             <img src="./assets/photos/aalayah.png" className="h-44 w-44 rounded-full object-cover" />
