@@ -9,14 +9,11 @@ const HomePage = () => {
       <nav className="fixed top-0 z-50 flex h-24 w-screen justify-between px-10 backdrop-blur-sm">
         {/* left side */}
         <div className="flex items-center space-x-3 text-lg">
-          <NavLink to="overview" spy={true} smooth={true} duration={500} className="hover:underline">
-            Overview
-          </NavLink>
           <NavLink to="features" spy={true} smooth={true} duration={500} className="hover:underline">
             Features
           </NavLink>
           <NavLink to="demo" spy={true} smooth={true} duration={500} className="hover:underline">
-            Demo
+            Overview
           </NavLink>
           <NavLink to="get-started" spy={true} smooth={true} duration={500} className="hover:underline">
             Get Started
@@ -56,7 +53,7 @@ const HomePage = () => {
       </section>
 
       {/* features */}
-      <section id="features" className="mx-4 flex h-screen flex-col items-center justify-center">
+      <section id="features" className="mx-4 flex min-h-screen flex-col items-center justify-center">
         <h1 className="pb-8 text-center text-3xl font-bold">Features</h1>
         <div className="flex max-w-[60rem] flex-wrap justify-center gap-4">
           {/* cluster metrics */}
@@ -115,8 +112,27 @@ const HomePage = () => {
       </section>
 
       {/* demo */}
-      <section id="demo" className="flex h-screen flex-col items-center justify-center">
-        <h1 className="pb-8 text-3xl font-bold">Demo</h1>
+      <section id="demo" className="flex min-h-screen flex-col items-center justify-center pt-20 space-y-10">
+        <h1 className="pt-10 pb-8 text-3xl font-bold">Overview</h1>
+        
+        <div className="">
+          <img src="./assets/photos/Health.png" className="rounded h-2/4 w-2/4 justify-center mx-auto"/> 
+          <h3 className='text-center px-10 text-2xl font-bold underline'>Dashboard</h3>
+          <p className="mb-20 text-center">Once logged in, you'll see the dashboard. This is where live metrics from your Kubernetes cluster are shown in a clear and easy-to-understand format.
+</p>
+        </div>
+        
+        <div className="">
+          <img src="./assets/photos/Apps.png" className="rounded h-2/4 w-2/4 justify-center mx-auto"/>
+          <h3 className='text-center px-10 text-2xl font-bold underline'>Applications and Pods</h3>
+        <p className="mb-20 text-center">Check out which applications and pods are running. You can see if everything is working fine or if there are any issues that need your attention.
+</p>
+        </div>
+        <div className="">
+          <img src="./assets/photos/Diagram.png" className="rounded h-2/4 w-2/4 justify-center mx-auto"/>
+          <h3 className='text-center px-10 text-2xl text-bold underline'>Hierarchy Graph</h3>
+        <p className="mb-20 text-center">Explore the hierarchy graph to understand the relationships within your cluster, including how namespaces, nodes, and pods connect with each other.</p>
+        </div>
       </section>
 
       {/* get started */}
