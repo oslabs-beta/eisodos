@@ -54,13 +54,32 @@ const CPUResponsiveBar = () => {
           axis: {
             ticks: {
               text: {
-                fill: '#ffffff'
+                fill: '#e5e7eb',
+                opacity: 0.75
               }
             },
             legend: {
               text: {
-                fill: '#ffffff'
+                fill: '#f3f4f6'
               }
+            }
+          },
+          tooltip: {
+            container: {
+              background: '#3b82f6',
+              opacity: 0.75
+            },
+            basic: {
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center'
+            },
+            tableCell: {
+              fontWeight: 'normal'
+            },
+            tableCellValue: {
+              fontWeight: 'bold',
+              color: 'black'
             }
           }
         }}

@@ -9,16 +9,19 @@ const HomePage = () => {
       <nav className="fixed top-0 z-50 flex h-24 w-screen justify-between px-10 backdrop-blur-sm">
         {/* left side */}
         <div className="flex items-center space-x-3 text-lg">
+          <NavLink to="overview" spy={true} smooth={true} duration={500} className="hover:underline">
+            Overview
+          </NavLink>
           <NavLink to="features" spy={true} smooth={true} duration={500} className="hover:underline">
             Features
           </NavLink>
           <NavLink to="demo" spy={true} smooth={true} duration={500} className="hover:underline">
-            Overview
+            Demo
           </NavLink>
           <NavLink to="get-started" spy={true} smooth={true} duration={500} className="hover:underline">
             Get Started
           </NavLink>
-          <NavLink to="team" spy={true} smooth={true} duration={500} className="hover:underline">
+          <NavLink to="team" spy={true} smooth={true} offset={-200} duration={500} className="hover:underline">
             Team
           </NavLink>
           <a href="https://github.com/oslabs-beta/eisodos" target="_blank" rel="noreferrer">
@@ -54,8 +57,8 @@ const HomePage = () => {
 
       {/* features */}
       <section id="features" className="mx-4 flex min-h-screen flex-col items-center justify-center">
-        <h1 className="pb-8 text-center text-3xl font-bold">Features</h1>
-        <div className="flex max-w-[60rem] flex-wrap justify-center gap-4">
+        <h1 className="pb-8 text-center text-4xl font-bold">Features</h1>
+        <div className="flex max-w-[60rem] flex-wrap justify-center gap-6">
           {/* cluster metrics */}
           <div className="h-80 w-72 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 p-0.5">
             <div className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-black-1 py-16">
@@ -112,32 +115,46 @@ const HomePage = () => {
       </section>
 
       {/* demo */}
-      <section id="demo" className="flex min-h-screen flex-col items-center justify-center pt-20 space-y-10">
-        <h1 className="pt-10 pb-8 text-3xl font-bold">Overview</h1>
-        
-        <div className="">
-          <img src="./assets/photos/Health.png" className="rounded h-2/4 w-2/4 justify-center mx-auto"/> 
-          <h3 className='text-center px-10 text-2xl font-bold underline'>Dashboard</h3>
-          <p className="mb-20 text-center text-lg">Once logged in, you'll see the dashboard. This is where live metrics from your Kubernetes cluster are shown in a clear and easy-to-understand format.
-</p>
+      <section id="demo" className="flex min-h-screen flex-col items-center justify-center pt-20">
+        <h1 className="mb-10 pt-10 text-4xl font-bold">Demo</h1>
+        {/* dashboard */}
+        <div className="flex flex-row items-center justify-center rounded-lg px-10">
+          <img src="./assets/photos/Health.png" className="mx-auto h-2/4 w-2/4 rounded-lg" />
+          <div className="flex flex-col items-center justify-center">
+            <h3 className="mb-4 text-center text-3xl font-bold">Dashboard</h3>
+            <p className="mb-20 text-center text-xl">
+              Once logged in, you'll see the dashboard. This is where live metrics from your Kubernetes cluster are
+              shown in a clear and easy-to-understand format.
+            </p>
+          </div>
         </div>
-        
-        <div className="">
-          <img src="./assets/photos/Apps.png" className="rounded h-2/4 w-2/4 justify-center mx-auto"/>
-          <h3 className='text-center px-10 text-2xl font-bold underline'>Applications and Pods</h3>
-        <p className="mb-20 text-center text-lg">Check out which applications and pods are running. You can see if everything is working fine or if there are any issues that need your attention.
-</p>
+        {/* Applications and Pods */}
+        <div className="mb-20 mt-14 flex flex-row-reverse items-center justify-center rounded-lg px-10">
+          <img src="./assets/photos/Apps.png" className="mx-auto h-2/4 w-2/4 rounded-lg" />
+          <div className="mr-10 flex flex-col items-center justify-center">
+            <h3 className="mb-4 text-center text-3xl font-bold">Applications and Pods</h3>
+            <p className="mb-20 text-center text-xl">
+              Check out which applications and pods are running. You can see if everything is working fine or if there
+              are any issues that need your attention.
+            </p>
+          </div>
         </div>
-        <div className="">
-          <img src="./assets/photos/Diagram.png" className="rounded h-2/4 w-2/4 justify-center mx-auto"/>
-          <h3 className='text-center px-10 text-2xl text-bold underline'>Hierarchy Graph</h3>
-        <p className="mb-20 text-center text-lg">Explore the hierarchy graph to understand the relationships within your cluster, including how namespaces, nodes, and pods connect with each other.</p>
+        {/* Hierarchy Graph */}
+        <div className="flex flex-row items-center justify-center rounded-lg px-10">
+          <img src="./assets/photos/Diagram.png" className="mx-auto h-2/4 w-2/4 rounded-lg" />
+          <div className="flex flex-col items-center justify-center">
+            <h3 className="mb-4 text-center text-3xl font-bold">Hierarchy Graph</h3>
+            <p className="mb-20 text-center text-xl">
+              Explore the hierarchy graph to understand the relationships within your cluster, including how namespaces,
+              nodes, and pods connect with each other.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* get started */}
       <section id="get-started" className="flex h-screen flex-col items-center justify-center">
-        <h1 className="pb-8 text-3xl font-bold">Get Started</h1>
+        <h1 className="pb-8 text-4xl font-bold">Get Started</h1>
         <p className="text-2xl"> Eisodos is easy to use!</p>
         <p className="text-2xl">
           Follow the instructions listed under &quot;Installation&quot; on our{' '}
@@ -150,7 +167,7 @@ const HomePage = () => {
 
       {/* team */}
       <section id="team" className="flex h-screen flex-col text-center">
-        <h1 className="mb-10 pb-8 text-center text-3xl font-bold">Meet the Team</h1>
+        <h1 className="mb-10 pb-8 text-center text-4xl font-bold">Meet the Team</h1>
         <div className="mx-48 flex justify-evenly text-xl">
           <div>
             <img src="./assets/photos/aalayah.png" className="h-44 w-44 rounded-full object-cover" />
